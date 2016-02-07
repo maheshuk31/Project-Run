@@ -4,35 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lee.projectrun.MainActivity"
-    tools:showIn="@layout/activity_main">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.lee.projectrun.RegisterActivity"
+    tools:showIn="@layout/activity_register">
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="TITLE"
-        android:id="@+id/txtTitle"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/txtFirstName"
+        android:hint="First Name"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:capitalize="words" />
 
-    <ImageView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageApp"
-        android:layout_below="@+id/txtTitle"
-        android:layout_centerHorizontal="true" />
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/txtLastName"
+        android:layout_below="@+id/txtFirstName"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:hint="Last Name"
+        android:capitalize="words" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/txtEmailLogin"
-        android:layout_below="@+id/imageApp"
+        android:id="@+id/txtEmailAddress"
+        android:hint="Email"
+        android:layout_below="@+id/txtLastName"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:hint="Email Address" />
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -40,25 +49,20 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/txtPassword"
-        android:layout_below="@+id/txtEmailLogin"
+        android:layout_below="@+id/txtEmailAddress"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:hint="Password" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Need to Register?"
-        android:id="@+id/btnRegister"
-        android:layout_below="@+id/txtPassword"
-        android:layout_alignParentEnd="true" />
+
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log in"
-        android:id="@+id/btnLogin"
-        android:layout_below="@+id/txtPassword"
+        android:text="Register"
+        android:id="@+id/btnRegister"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>
