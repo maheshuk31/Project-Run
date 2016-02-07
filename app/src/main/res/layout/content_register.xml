@@ -9,60 +9,72 @@
     tools:showIn="@layout/activity_register">
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/txtFirstName"
-        android:hint="First Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:capitalize="words" />
+        android:capitalize="words"
+        android:ems="10"
+        android:hint="First Name"
+        android:inputType="textPersonName" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/txtLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/txtFirstName"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:capitalize="words"
+        android:ems="10"
         android:hint="Last Name"
-        android:capitalize="words" />
+        android:inputType="textPersonName" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
         android:id="@+id/txtEmailAddress"
-        android:hint="Email"
-        android:layout_below="@+id/txtLastName"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
-
-    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/txtPassword"
-        android:layout_below="@+id/txtEmailAddress"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:hint="Password" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtLastName"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
 
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtEmailAddress"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword" />
 
+    <EditText
+        android:id="@+id/txtConfirmPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtPassword"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword" />
 
 
     <Button
+        android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:id="@+id/btnRegister"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:text="Register" />
+
 
 </RelativeLayout>
