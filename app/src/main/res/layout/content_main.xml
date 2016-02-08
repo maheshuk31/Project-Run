@@ -5,21 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.lee.projectrun.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp">
+    <!--android:background="@drawable/bgred"-->
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="TITLE"
+        android:text="Tandem Learning App"
         android:id="@+id/txtTitle"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="50sp"
+        android:textAlignment="center" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageApp"
+        android:src="@drawable/kinglogo"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         android:layout_below="@+id/txtTitle"
         android:layout_centerHorizontal="true" />
 
@@ -30,9 +39,16 @@
         android:ems="10"
         android:id="@+id/txtEmailLogin"
         android:layout_below="@+id/imageApp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:hint="Email Address" />
+        android:hint="Email Address"
+        android:background="@drawable/edittextstyle"
+        android:layout_alignRight="@+id/txtTitle"
+        android:layout_alignEnd="@+id/txtTitle"
+        android:layout_alignLeft="@+id/txtTitle"
+        android:layout_alignStart="@+id/txtTitle"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:layout_marginBottom="15dp"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -41,24 +57,52 @@
         android:ems="10"
         android:id="@+id/txtPassword"
         android:layout_below="@+id/txtEmailLogin"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:hint="Password" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Need to Register?"
-        android:id="@+id/btnRegister"
-        android:layout_below="@+id/txtPassword"
-        android:layout_alignParentEnd="true" />
+        android:hint="Password"
+        android:layout_alignLeft="@+id/txtEmailLogin"
+        android:layout_alignStart="@+id/txtEmailLogin"
+        android:layout_alignRight="@+id/txtEmailLogin"
+        android:layout_alignEnd="@+id/txtEmailLogin"
+        android:background="@drawable/edittextstyle"
+        android:paddingTop="10dp"
+        android:paddingLeft="5dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="15dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log in"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
         android:id="@+id/btnLogin"
+        android:background="@drawable/buttonstyle"
+        android:shadowColor="#2655D4"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:layout_below="@+id/txtPassword"
-        android:layout_alignParentStart="true" />
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Need to Register?"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:id="@+id/btnRegister"
+        android:background="@drawable/buttonstyle"
+        android:shadowColor="#2655D4"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_below="@+id/btnLogin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

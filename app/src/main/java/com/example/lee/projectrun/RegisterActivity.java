@@ -24,6 +24,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText txtPassword;
     private EditText txtConfirmPassword;
     private String stringFirstName, stringLastName, stringEmail, stringPassword, stringConfirmPassword;
+    private String codeHolder;
     private Button btnRegister;
     private Boolean booleanFirstName = true;
     private Boolean booleanLastName = true;
@@ -55,16 +56,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void emailSend() {
         stringFirstName = txtFirstName.getText().toString().trim();
         stringLastName = txtLastName.getText().toString().trim();
-        String email = txtEmailAddress.getText().toString().trim();
+        stringEmail = txtEmailAddress.getText().toString().trim();
+        //codeHolder = codeGenerator(4);
+
         String subject = "One Final Step, Please Register";
         String message = "Welcome " + stringFirstName + " " + stringLastName + "\n"
-                + "Please use this code " + codeGenerator(4) + " to complete your registration." + "\n"
+                + "Please use this code " + setCodeHolder() + " to complete your registration." + "\n"
                 + "This is a automated email please do not reply to it.";
 
         /*if statement to check to see if there is a code in the system and resend the same code OR
         create a new random code*/
 
-        EmailSender sendEmail = new EmailSender(this, email, subject, message);
+        EmailSender sendEmail = new EmailSender(this, stringEmail, subject, message);
 
         sendEmail.execute();
     }
@@ -143,6 +146,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return matcher.matches();
     }
 
+    public boolean getIsValidEmail(String emailHolder){
+        if(isValidPassword(emailHolder)==true){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
+     * A seperate boolean method to check if the correct password inputted has at least 1 Number
+     * and minimum 6 characters
+     * @param passwordString
+     * @return
+     */
     private boolean isValidPassword(String passwordString) {
         String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$";
 
@@ -151,17 +169,34 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return matcher.matches();
     }
 
+    public boolean getIsValidPassword(String passwordHolder){
+        if(isValidPassword(passwordHolder)==true){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     /**
      * A random code generator that will be used for generating a code that will be assosciated
      * with a user's account to validate their account
      * @param codeLength
      * @return
      */
-    String codeGenerator(int codeLength){
+    private String codeGenerator(int codeLength){
         StringBuilder codeBuilder = new StringBuilder(codeLength);
         for(int i=0; i<codeLength; i++)
             codeBuilder.append(letterList.charAt(random.nextInt(letterList.length())));
         return codeBuilder.toString();
+    }
+
+    public String setCodeHolder(){
+        return codeGenerator(4);
+    }
+
+    public String getCodeHolder(){
+        return codeHolder;
     }
 
 }

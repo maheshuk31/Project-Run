@@ -26,6 +26,7 @@ public class EmailSender extends AsyncTask<Void,Void,Void> {
     private String message;
     private String EMAIL = "teamvoidprojectrun@gmail.com";
     private String PASSWORD = "projectrun2016";
+    public boolean booleanSend = false;
 
     /**
      * Constcutor used for sending an email in the RegisterActivity class.
@@ -84,10 +85,15 @@ public class EmailSender extends AsyncTask<Void,Void,Void> {
             mimeMessage.setText(message);
 
             Transport.send(mimeMessage);
+            booleanSend = true;
 
         } catch (MessagingException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean didItSend(){
+        return booleanSend;
     }
 }
