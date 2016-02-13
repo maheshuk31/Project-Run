@@ -24,7 +24,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText txtPassword;
     private EditText txtConfirmPassword;
     private String stringFirstName, stringLastName, stringEmail, stringPassword, stringConfirmPassword;
-    private String codeHolder;
     private Button btnRegister;
     private Boolean booleanFirstName = true;
     private Boolean booleanLastName = true;
@@ -57,7 +56,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         stringFirstName = txtFirstName.getText().toString().trim();
         stringLastName = txtLastName.getText().toString().trim();
         stringEmail = txtEmailAddress.getText().toString().trim();
-        //codeHolder = codeGenerator(4);
 
         String subject = "One Final Step, Please Register";
         String message = "Welcome " + stringFirstName + " " + stringLastName + "\n"
@@ -148,7 +146,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public boolean getIsValidEmail(String emailHolder){
-        if(isValidPassword(emailHolder)==true){
+        if(isValidEmail(emailHolder)==true){
             return true;
         }
         else{
@@ -194,10 +192,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     public String setCodeHolder(){
         return codeGenerator(4);
-    }
-
-    public String getCodeHolder(){
-        return codeHolder;
     }
 
 }
