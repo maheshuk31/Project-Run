@@ -11,21 +11,42 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnRegister;
+    private Button btnRegister, btnLogin;
     private TextView txtTitle;
+    private EditText txtLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        txtLogin = (EditText) findViewById(R.id.txtKingsLogin);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
         Typeface custom = Typeface.createFromAsset(getAssets(), "fonts/liberationserif.regular.ttf");
         txtTitle.setTypeface(custom);
+
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String stringLogin = txtLogin.getText().toString().trim();
+                if(!isValidLogin(stringLogin)) {
+                    txtLogin.setError("Please enter a valid King's ID (e.g. K1234567");
+                }
+                else{
+                    //Code for moving to picture page
+                }
+            }
+        });
+
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private boolean isValidLogin(String loginString) {
+        String loginPattern = "^[Kk]{1}[0-9]{7}$";
+
+        Pattern pattern = Pattern.compile(loginPattern);
+        Matcher matcher = pattern.matcher(loginString);
+        return matcher.matches();
     }
 
     @Override

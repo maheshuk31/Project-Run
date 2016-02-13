@@ -126,7 +126,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             booleanConfirmPassword = true;
         }
 
-        if(booleanFirstName == true && booleanLastName == true && booleanEmail == true && booleanPassword == true && booleanConfirmPassword == true) {
+        if(booleanFirstName == true && booleanLastName == true && booleanEmail == true &&
+                booleanPassword == true && booleanConfirmPassword == true) {
             emailSend();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
