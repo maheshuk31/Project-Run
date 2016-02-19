@@ -9,51 +9,67 @@
     tools:showIn="@layout/activity_register">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/linLay1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/linLay1"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="2dp">
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="2dp"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/txtFirstName"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/linLay1"
+            android:layout_toStartOf="@+id/linLay1"
+            android:layout_weight="1"
+            android:background="@drawable/edittextregisterstyle"
             android:capitalize="words"
             android:ems="10"
             android:hint="First Name"
             android:inputType="textPersonName"
-            android:background="@drawable/edittextregisterstyle"
-            android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:paddingLeft="5dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/linLay1"
-            android:layout_toLeftOf="@+id/linLay1"/>
+            android:paddingTop="10dp" />
 
         <EditText
             android:id="@+id/txtLastName"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/txtFirstName"
+            android:layout_weight="1"
+            android:background="@drawable/edittextregisterstyle"
             android:capitalize="words"
             android:ems="10"
             android:hint="Last Name"
             android:inputType="textPersonName"
-            android:background="@drawable/edittextregisterstyle"
-            android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:paddingLeft="5dp" />
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp" />
 
     </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/txtRegisterKingsID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linLay1"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/edittextregisterstyle"
+        android:ems="10"
+        android:hint="King's ID"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp" />
 
     <EditText
         android:id="@+id/txtEmailAddress"
@@ -61,66 +77,63 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/linLay1"
+        android:layout_below="@+id/txtRegisterKingsID"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/edittextregisterstyle"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:background="@drawable/edittextregisterstyle"
-        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
-        android:layout_marginBottom="2dp"/>
+        android:paddingTop="10dp" />
 
     <EditText
-        android:id="@+id/txtPassword"
+        android:id="@+id/txtRegisterPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/txtEmailAddress"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/edittextregisterstyle"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:background="@drawable/edittextregisterstyle"
-        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
-        android:layout_marginBottom="2dp"/>
+        android:paddingTop="10dp" />
 
     <EditText
-        android:id="@+id/txtConfirmPassword"
+        android:id="@+id/txtRegisterConfirmPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtPassword"
+        android:layout_below="@+id/txtRegisterPassword"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/edittextregisterstyle"
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword"
-        android:background="@drawable/edittextregisterstyle"
-        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
-        android:layout_marginBottom="2dp"/>
+        android:paddingTop="10dp" />
 
 
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnConfirmRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:text="Register"
         android:background="@drawable/buttonstyle"
         android:shadowColor="#2655D4"
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="5"
-        android:textColor="#FFFFFF"/>
-
-
-
+        android:text="Register"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>
