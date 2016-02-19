@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     Boolean position = false;
     ChatAdapter chatAdapter;
     Context ctxt = this;
-//Testing
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
