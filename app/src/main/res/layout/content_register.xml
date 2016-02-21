@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,133 +8,274 @@
     tools:context="com.example.lee.projectrun.RegisterActivity"
     tools:showIn="@layout/activity_register">
 
-    <LinearLayout
-        android:id="@+id/linLay1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="2dp"
-        android:orientation="horizontal">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/txtFirstName"
+        <LinearLayout
+            android:id="@+id/linLay1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/linLay1"
-            android:layout_toStartOf="@+id/linLay1"
-            android:layout_weight="1"
-            android:background="@drawable/edittextregisterstyle"
-            android:capitalize="words"
-            android:ems="10"
-            android:hint="First Name"
-            android:inputType="textPersonName"
-            android:paddingBottom="10dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="10dp" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="2dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txtFirstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="0.1dp"
+                android:layout_toLeftOf="@+id/linLay1"
+                android:layout_toStartOf="@+id/linLay1"
+                android:layout_weight="1"
+                android:background="@drawable/edittextregisterstyle"
+                android:capitalize="words"
+                android:ems="10"
+                android:hint="First Name"
+                android:inputType="textPersonName"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp" />
+
+            <EditText
+                android:id="@+id/txtLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txtFirstName"
+                android:layout_marginLeft="0.1dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittextregisterstyle"
+                android:capitalize="words"
+                android:ems="10"
+                android:hint="Last Name"
+                android:inputType="textPersonName"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp" />
+
+        </LinearLayout>
+
 
         <EditText
-            android:id="@+id/txtLastName"
+            android:id="@+id/txtRegisterKingsID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/txtFirstName"
-            android:layout_weight="1"
+            android:layout_below="@+id/linLay1"
+            android:layout_marginBottom="2dp"
             android:background="@drawable/edittextregisterstyle"
-            android:capitalize="words"
             android:ems="10"
-            android:hint="Last Name"
-            android:inputType="textPersonName"
+            android:hint="King's ID"
+            android:maxLength="8"
             android:paddingBottom="10dp"
             android:paddingLeft="5dp"
             android:paddingTop="10dp" />
 
-    </LinearLayout>
+        <EditText
+            android:id="@+id/txtEmailAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtRegisterKingsID"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edittextregisterstyle"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp" />
+
+        <EditText
+            android:id="@+id/txtRegisterPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtEmailAddress"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edittextregisterstyle"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp" />
+
+        <EditText
+            android:id="@+id/txtRegisterConfirmPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtRegisterPassword"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edittextregisterstyle"
+            android:ems="10"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp" />
+
+        <LinearLayout
+            android:id="@+id/linLay2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/txtRegisterConfirmPassword"
+            android:layout_marginBottom="1dp"
+            android:orientation="horizontal">
 
 
-    <EditText
-        android:id="@+id/txtRegisterKingsID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linLay1"
-        android:layout_marginBottom="2dp"
-        android:background="@drawable/edittextregisterstyle"
-        android:ems="10"
-        android:maxLength="8"
-        android:hint="King's ID"
-        android:paddingBottom="10dp"
-        android:paddingLeft="5dp"
-        android:paddingTop="10dp" />
+            <LinearLayout
+                android:id="@+id/linLayGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextregisterstyle"
+                android:orientation="horizontal"
+                android:paddingBottom="6dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="3dp"
+                android:paddingTop="5dp">
 
-    <EditText
-        android:id="@+id/txtEmailAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtRegisterKingsID"
-        android:layout_marginBottom="2dp"
-        android:background="@drawable/edittextregisterstyle"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:paddingBottom="10dp"
-        android:paddingLeft="5dp"
-        android:paddingTop="10dp" />
+                <TextView
+                    android:id="@+id/txtGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="3dp"
+                    android:text="Gender"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#000000" />
 
-    <EditText
-        android:id="@+id/txtRegisterPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtEmailAddress"
-        android:layout_marginBottom="2dp"
-        android:background="@drawable/edittextregisterstyle"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingBottom="10dp"
-        android:paddingLeft="5dp"
-        android:paddingTop="10dp" />
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/radioGroupGender">
 
-    <EditText
-        android:id="@+id/txtRegisterConfirmPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtRegisterPassword"
-        android:layout_marginBottom="2dp"
-        android:background="@drawable/edittextregisterstyle"
-        android:ems="10"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
-        android:paddingBottom="10dp"
-        android:paddingLeft="5dp"
-        android:paddingTop="10dp" />
+                    <RadioButton
+                        android:id="@+id/radioBtnFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Female" />
 
+                    <RadioButton
+                        android:id="@+id/radioBtnMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Male" />
+                </RadioGroup>
 
-    <Button
-        android:id="@+id/btnConfirmRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="@drawable/buttonstyle"
-        android:shadowColor="#2655D4"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:text="Register"
-        android:textColor="#FFFFFF" />
+            </LinearLayout>
 
-</RelativeLayout>
+            <EditText
+                android:id="@+id/txtDOB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/radioGroupGender"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="0.1dp"
+                android:layout_toEndOf="@+id/radioGroupGender"
+                android:layout_toRightOf="@+id/radioGroupGender"
+                android:background="@drawable/edittextregisterstyle"
+                android:ems="10"
+                android:hint="Date Of Birth"
+                android:inputType="date"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:textColor="#030303" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/txtTeachingLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linLay2"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edittextregisterstyle"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="Teaching Language"
+            android:inputType="textMultiLine"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:scrollbars="vertical" />
+
+        <EditText
+            android:id="@+id/txtPracticeLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtTeachingLanguage"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edittextregisterstyle"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="Practice Language"
+            android:inputType="textMultiLine"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:scrollbars="vertical" />
+
+        <EditText
+            android:id="@+id/txtPersonalInterests"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtPracticeLanguage"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edittextregisterstyle"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="Personal Interests"
+            android:inputType="textMultiLine"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:scrollbars="vertical" />
+
+        <Button
+            android:id="@+id/btnConfirmRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtPersonalInterests"
+            android:background="@drawable/buttonstyle"
+            android:shadowColor="#2655D4"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="Register"
+            android:textColor="#FFFFFF" />
+
+    </RelativeLayout>
+
+</ScrollView>
