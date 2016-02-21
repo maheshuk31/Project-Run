@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 // he
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnRegister, btnLogin;
+    private Button btnRegister, btnLogin, btnTest;
     private TextView txtTitle;
     private EditText txtLogin;
 
@@ -57,6 +57,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+        btnTest = (Button) findViewById(R.id.btntest);
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Tester.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
     }
 
     private boolean isValidLogin(String loginString) {
