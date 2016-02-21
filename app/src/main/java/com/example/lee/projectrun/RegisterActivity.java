@@ -16,13 +16,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private EditText txtFirstName;
     private EditText txtLastName;
+    private EditText txtRegisterKingsID;
     private EditText txtEmailAddress;
     private EditText txtRegisterPassword;
     private EditText txtRegisterConfirmPassword;
-    private String stringFirstName, stringLastName, stringEmail, stringPassword, stringConfirmPassword;
+    private String stringFirstName, stringLastName, stringKingsID, stringEmail, stringPassword,
+            stringConfirmPassword;
     private Button btnConfirmRegister;
     private Boolean booleanFirstName = true;
     private Boolean booleanLastName = true;
+    private Boolean booleanKingsID = true;
     private Boolean booleanEmail = true;
     private Boolean booleanPassword = true;
     private Boolean booleanConfirmPassword = true;
@@ -36,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         txtFirstName = (EditText) findViewById(R.id.txtFirstName);
         txtLastName = (EditText) findViewById(R.id.txtLastName);
+        txtRegisterKingsID = (EditText) findViewById(R.id.txtRegisterKingsID);
         txtEmailAddress = (EditText) findViewById(R.id.txtEmailAddress);
         txtRegisterPassword = (EditText) findViewById(R.id.txtRegisterPassword);
         txtRegisterConfirmPassword = (EditText) findViewById(R.id.txtRegisterConfirmPassword);
@@ -55,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         String subject = "One Final Step, Please Register";
         String message = "Welcome " + stringFirstName + " " + stringLastName + "\n"
-                + "Please use this code " + setCodeHolder() + " to complete your registration." + "\n"
+                + "Please use this code " + setCodeHolder(6) + " to complete your registration." + "\n"
                 + "This is a automated email please do not reply to it.";
 
         /*if statement to check to see if there is a code in the system and resend the same code OR
@@ -71,7 +75,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      * If statements to check there is no empty fields, if all passed then email is sent and returns
      * user to main page.
      * If any are false then a message will be displayed as to why it has failed.
-     *
      * @param v
      */
     @Override
@@ -79,45 +82,58 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         stringFirstName = txtFirstName.getText().toString();
         stringLastName = txtLastName.getText().toString();
+        stringKingsID = txtRegisterKingsID.getText().toString();
         stringEmail = txtEmailAddress.getText().toString();
         stringPassword = txtRegisterPassword.getText().toString();
         stringConfirmPassword = txtRegisterConfirmPassword.getText().toString();
-        if (TextUtils.isEmpty(stringFirstName)) {
+        if(TextUtils.isEmpty(stringFirstName)) {
             booleanFirstName = false;
             txtFirstName.setError("Please Enter Your First Name");
             return;
-        } else {
+        }
+        else{
             booleanFirstName = true;
         }
-        if (TextUtils.isEmpty(stringLastName)) {
+        if(TextUtils.isEmpty(stringLastName)) {
             booleanLastName = false;
             txtLastName.setError("Please enter Your Last Name");
             return;
-        } else {
+        }
+        else{
             booleanLastName = true;
         }
-        if (!isValidEmail(stringEmail)) {
+        if(!isValidLogin(stringKingsID)) {
+            booleanKingsID = false;
+            txtRegisterKingsID.setError("Please enter a valid King's ID (e.g. K1234567");
+        }
+        else{
+            booleanKingsID = true;
+        }
+        if(!isValidEmail(stringEmail)) {
             booleanEmail = false;
             txtEmailAddress.setError("Please enter a valid KCL Email");
-        } else {
+        }
+        else{
             booleanEmail = true;
         }
-        if (!isValidPassword(stringPassword)) {
+        if(!isValidPassword(stringPassword)){
             booleanPassword = false;
             txtRegisterPassword.setError("Please enter a valid Password, MIN 6 characters and at least 1 number");
-        } else {
+        }
+        else{
             booleanPassword = true;
         }
 
-        if (!stringConfirmPassword.equals(stringPassword)) {
+        if(!stringConfirmPassword.equals(stringPassword)){
             booleanConfirmPassword = false;
             txtRegisterConfirmPassword.setError("The passwords do not match");
-        } else {
+        }
+        else{
             booleanConfirmPassword = true;
         }
 
-        if (booleanFirstName == true && booleanLastName == true && booleanEmail == true &&
-                booleanPassword == true && booleanConfirmPassword == true) {
+        if(booleanFirstName == true && booleanLastName == true && booleanKingsID == true &&
+                booleanEmail == true && booleanPassword == true && booleanConfirmPassword == true) {
             emailSend();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
@@ -125,8 +141,34 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     /**
-     * A seperate boolean method to check if the correct email patter for a KCL person is valid
-     *
+     * Checks to see if what the user has inputted to register is a valid set of characters that matches
+     * a King's student User ID.
+     * @param loginString
+     * @return
+     */
+    private boolean isValidLogin(String loginString) {
+        String loginPattern = "^[Kk]{1}[0-9]{7}$";
+
+        Pattern pattern = Pattern.compile(loginPattern);
+        Matcher matcher = pattern.matcher(loginString);
+        return matcher.matches();
+    }
+    /**
+     * To test any inputted king's ID to see if it passes
+     * @param kingsIDHolder
+     * @return
+     */
+    public boolean getIsValidKingsID(String kingsIDHolder){
+        if(isValidLogin(kingsIDHolder)==true){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
+     * Checking to see if the correct email pattern for a KCL person is valid
      * @param emailString
      * @return
      */
@@ -138,18 +180,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return matcher.matches();
     }
 
-    public boolean getIsValidEmail(String emailHolder) {
-        if (isValidEmail(emailHolder) == true) {
+    /**
+     * To test any inputted email address to see if it passes
+     * @param emailHolder
+     * @return
+     */
+    public boolean getIsValidEmail(String emailHolder){
+        if(isValidEmail(emailHolder)==true){
             return true;
-        } else {
+        }
+        else{
             return false;
         }
     }
 
     /**
-     * A seperate boolean method to check if the correct password inputted has at least 1 Number
-     * and minimum 6 characters
-     *
+     * Checking to see if the correct password inputted has at least 1 Number and minimum 6 characters
      * @param passwordString
      * @return
      */
@@ -161,30 +207,40 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return matcher.matches();
     }
 
-    public boolean getIsValidPassword(String passwordHolder) {
-        if (isValidPassword(passwordHolder) == true) {
+    /**
+     * To test any inputted password to see if it passes
+     * @param passwordHolder
+     * @return
+     */
+    public boolean getIsValidPassword(String passwordHolder){
+        if(isValidPassword(passwordHolder)==true){
             return true;
-        } else {
+        }
+        else{
             return false;
         }
     }
 
     /**
-     * A random code generator that will be used for generating a code that will be assosciated
-     * with a user's account to validate their account
-     *
-     * @param codeLength
-     * @return
+     * Random code generator that will be used for generating a code that will be associated with a
+     * user's account to validate their account
+     * @param codeLength generates a code of a length given
+     * @return code generated into a String
      */
-    private String codeGenerator(int codeLength) {
+    private String codeGenerator(int codeLength){
         StringBuilder codeBuilder = new StringBuilder(codeLength);
-        for (int i = 0; i < codeLength; i++)
+        for(int i=0; i<codeLength; i++)
             codeBuilder.append(letterList.charAt(random.nextInt(letterList.length())));
         return codeBuilder.toString();
     }
 
-    public String setCodeHolder() {
-        return codeGenerator(4);
+    /**
+     * Setting a randomised code, can be used to test to see if it works too.
+     * Can changed the code length by changing the parameter
+     * @return code generated in a String
+     */
+    public String setCodeHolder(int length){
+        return codeGenerator(length);
     }
 
 }

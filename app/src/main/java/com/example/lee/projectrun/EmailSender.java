@@ -14,7 +14,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- * Email sender class
+ * Enables te application to send emails by taking parameters of who it needs to send and what the
+ * message/subject entails.
  * Created by maheshuk31 on 06/02/2016.
  */
 public class EmailSender extends AsyncTask<Void,Void,Void> {
@@ -24,12 +25,18 @@ public class EmailSender extends AsyncTask<Void,Void,Void> {
     private String email;
     private String subject;
     private String message;
-    private String EMAIL = "teamvoidprojectrun@gmail.com";
+    /*If you do decide to change the email then if it is another GMAIL then remember to allow for
+      less secure apps.
+      Any other email client that you prefer(e.g. Outlook) then be sure to change the properties in
+      the doInBackground method(i.e Port numbers and Host), and anything similar to GMAIL's restrictive
+      settings.
+     */
+    private String EMAIL = "noreplytandom@gmail.com";
     private String PASSWORD = "projectrun2016";
     public boolean booleanSend = false;
 
     /**
-     * Constcutor used for sending an email in the RegisterActivity class.
+     * Constructor used for sending an email in the RegisterActivity class.
      * @param context
      * @param email
      * @param subject
@@ -54,7 +61,7 @@ public class EmailSender extends AsyncTask<Void,Void,Void> {
 
     /**
      * In the background the email will be sent, it is currently set to a GMAIL account and has SSL
-     * associated. It takes all the necessary paremeters for a email to be sent.
+     * associated. It takes all the necessary parameters for a email to be sent.
      * This is associated with the constructor will take what is in the fields in the RegisterActivity
      * and send an email to that person as well as a predefined message and subject line.
      * @param params
@@ -71,10 +78,10 @@ public class EmailSender extends AsyncTask<Void,Void,Void> {
         property.put("mail.smtp.port", "465");
 
         session = Session.getDefaultInstance(property, new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(EMAIL, PASSWORD);
-                    }
-                });
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(EMAIL, PASSWORD);
+            }
+        });
 
         try {
             MimeMessage mimeMessage = new MimeMessage(session);

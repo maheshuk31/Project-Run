@@ -13,19 +13,62 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
+    /*--------------------------------RegisterActivity Class Tests---------------------------------*/
     @Test
     public void testCodeGeneration(){
         RegisterActivity registerActivity = new RegisterActivity();
-        String holder = registerActivity.setCodeHolder();
-        assertNotNull("A code is not generating", holder);
+        String holder = registerActivity.setCodeHolder(4);
+        assertNotNull("Random code is not generating", holder);
     }
 
     @Test
     public void testCodeGenerationStoring(){
         RegisterActivity registerActivity = new RegisterActivity();
-        String holder = registerActivity.setCodeHolder();
+        String holder = registerActivity.setCodeHolder(4);
         String storingCode = holder;
-        assertNotNull("A code is not storing", storingCode);
+        assertNotNull("Random code is not storing", storingCode);
+    }
+
+    @Test
+    public void testKingsIDScenario1BeginningWithAnyOtherLetterButK(){
+        RegisterActivity registerActivity = new RegisterActivity();
+        boolean holder = registerActivity.getIsValidKingsID("s1234567");
+        assertFalse("The King's ID allows a person to to begin with another letter rather then only k", holder);
+    }
+
+    @Test
+    public void testKingsIDScenario2BeginningWithSmallK(){
+        RegisterActivity registerActivity = new RegisterActivity();
+        boolean holder = registerActivity.getIsValidKingsID("k1234567");
+        assertTrue("The King's ID does not allow small case k's", holder);
+    }
+
+    @Test
+    public void testKingsIDScenario3BeginningWithBigK(){
+        RegisterActivity registerActivity = new RegisterActivity();
+        boolean holder = registerActivity.getIsValidKingsID("K1234567");
+        assertTrue("The King's ID does not allow capital K's", holder);
+    }
+
+    @Test
+    public void testKingsIDScenario4LettersAfterK(){
+        RegisterActivity registerActivity = new RegisterActivity();
+        boolean holder = registerActivity.getIsValidKingsID("K1234j67");
+        assertFalse("The King's ID allows letters after the K", holder);
+    }
+
+    @Test
+    public void testKingsIDNumberOfCharactersLessThan8(){
+        RegisterActivity registerActivity = new RegisterActivity();
+        boolean holder = registerActivity.getIsValidKingsID("K123456");
+        assertFalse("The King's ID allows letters then 8 characters", holder);
+    }
+
+    @Test
+    public void testKingsIDNumberOfCharactersGreaterThan8(){
+        RegisterActivity registerActivity = new RegisterActivity();
+        boolean holder = registerActivity.getIsValidKingsID("K12345678");
+        assertFalse("The King's ID allows more then 8 characters", holder);
     }
 
     @Test
@@ -53,7 +96,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     }
 
     @Test
-     public void testPasswordRegexScenario1NumberOfCharacters(){
+    public void testPasswordRegexScenario1NumberOfCharacters(){
         RegisterActivity registerActivity = new RegisterActivity();
         boolean holder = registerActivity.getIsValidPassword("test1");
         assertFalse("The password allows less then 6 characters", holder);
@@ -72,6 +115,8 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         boolean holder = registerActivity.getIsValidPassword("TestinG123");
         assertTrue("The password doesn't allow a assortment of letters and numbers", holder);
     }
+
+    /*---------------------------------RegisterActivity Class Ends---------------------------------*/
 
 //    @Test
 //    public void testEmailSending(){
