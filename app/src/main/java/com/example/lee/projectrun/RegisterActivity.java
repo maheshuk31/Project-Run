@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.widget.RadioButton;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,6 +20,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText txtEmailAddress;
     private EditText txtRegisterPassword;
     private EditText txtRegisterConfirmPassword;
+    private RadioButton radioBtnMale, radioBtnFemale;
     private String stringFirstName, stringLastName, stringKingsID, stringEmail, stringPassword,
             stringConfirmPassword;
     private Button btnConfirmRegister;
@@ -29,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Boolean booleanEmail = true;
     private Boolean booleanPassword = true;
     private Boolean booleanConfirmPassword = true;
+    private Boolean booleanGenderSelected = true;
     private static String letterList = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static Random random = new Random();
 
@@ -44,6 +46,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         txtRegisterPassword = (EditText) findViewById(R.id.txtRegisterPassword);
         txtRegisterConfirmPassword = (EditText) findViewById(R.id.txtRegisterConfirmPassword);
         btnConfirmRegister = (Button) findViewById(R.id.btnConfirmRegister);
+        radioBtnMale = (RadioButton) findViewById(R.id.radioBtnMale);
+        radioBtnFemale = (RadioButton) findViewById(R.id.radioBtnFemale);
 
         btnConfirmRegister.setOnClickListener(this);
     }
@@ -56,11 +60,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         stringFirstName = txtFirstName.getText().toString().trim();
         stringLastName = txtLastName.getText().toString().trim();
         stringEmail = txtEmailAddress.getText().toString().trim();
-
         String subject = "One Final Step, Please Register";
-        String message = "Welcome " + stringFirstName + " " + stringLastName + "\n"
-                + "Please use this code " + setCodeHolder(6) + " to complete your registration." + "\n"
-                + "This is a automated email please do not reply to it.";
+        String message =
+                "Welcome " + stringFirstName + " " + stringLastName + "," + "\n" + "\n"
+                + "Thank you for registering for the Tandem Learning App to complete your registration please use the following code " + "\n" + "\n"
+                + setCodeHolder(6)  + "\n" + "\n"
+                + "in the application to complete your account verification to be able to use the app" + "\n" + "\n" + "\n"
+                + "This is a automated email please do not reply to it. "
+                + "If you have received this email in error please notify the sender immediately. The email is intended for the exclusive use of the addressee only. " + "\n"
+                + "Copyright, Team Void©. All rights reserved.";
 
         /*if statement to check to see if there is a code in the system and resend the same code OR
         create a new random code*/
@@ -123,7 +131,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         else{
             booleanPassword = true;
         }
-
         if(!stringConfirmPassword.equals(stringPassword)){
             booleanConfirmPassword = false;
             txtRegisterConfirmPassword.setError("The passwords do not match");
@@ -131,9 +138,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         else{
             booleanConfirmPassword = true;
         }
+        if(!radioBtnMale.isChecked() && !radioBtnFemale.isChecked()){
+            booleanGenderSelected = false;
+            radioBtnMale.setError("Please select a gender");
+        }
+        else{
+            booleanGenderSelected = true;
+        }
 
         if(booleanFirstName == true && booleanLastName == true && booleanKingsID == true &&
-                booleanEmail == true && booleanPassword == true && booleanConfirmPassword == true) {
+                booleanEmail == true && booleanPassword == true && booleanConfirmPassword == true &&
+                booleanGenderSelected == true) {
             emailSend();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
@@ -153,6 +168,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Matcher matcher = pattern.matcher(loginString);
         return matcher.matches();
     }
+
     /**
      * To test any inputted king's ID to see if it passes
      * @param kingsIDHolder
