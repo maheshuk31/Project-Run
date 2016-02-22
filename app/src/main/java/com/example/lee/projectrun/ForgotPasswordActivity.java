@@ -75,4 +75,18 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         return userMatcher.matches() || emailMatcher.matches();
     }
+
+    /**
+     * To test any inputted email or King's ID Username to reset your password
+     * @param forgotStringHolder
+     * @return
+     */
+    public boolean getIsValidForgotString(String forgotStringHolder){
+        if(isValidForgotString(forgotStringHolder)==true){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

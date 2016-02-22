@@ -21,16 +21,10 @@ public class RegisterActivityInstrumentationTests extends ActivityInstrumentatio
         assertNotNull(registerActivity);
     }
 
-    public void testFirstNameEditTextExists(){
+    public void testFullNameEditTextExists(){
         RegisterActivity registerActivity = getActivity();
-        EditText txtFirstName = (EditText) registerActivity.findViewById(R.id.txtFirstName);
-        assertNotNull(txtFirstName);
-    }
-
-    public void testLastNameEditTextExists(){
-        RegisterActivity registerActivity = getActivity();
-        EditText txtLastName = (EditText) registerActivity.findViewById(R.id.txtLastName);
-        assertNotNull(txtLastName);
+        EditText txtFullName = (EditText) registerActivity.findViewById(R.id.txtFullName);
+        assertNotNull(txtFullName);
     }
 
     public void testRegisterKingsIDEditTextExists(){
@@ -107,8 +101,7 @@ public class RegisterActivityInstrumentationTests extends ActivityInstrumentatio
 
     public void testRegisteringAUser(){
         RegisterActivity registerActivity = getActivity();
-        final EditText txtFirstName = (EditText) registerActivity.findViewById(R.id.txtFirstName);
-        final EditText txtLastName = (EditText) registerActivity.findViewById(R.id.txtLastName);
+        final EditText txtFullName = (EditText) registerActivity.findViewById(R.id.txtFullName);
         final EditText txtRegisterKingsID = (EditText) registerActivity.findViewById(R.id.txtRegisterKingsID);
         final EditText txtEmailAddress = (EditText) registerActivity.findViewById(R.id.txtEmailAddress);
         final EditText txtRegisterPassword = (EditText) registerActivity.findViewById(R.id.txtRegisterPassword);
@@ -121,19 +114,11 @@ public class RegisterActivityInstrumentationTests extends ActivityInstrumentatio
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override
             public void run() {
-                txtFirstName.requestFocus();
+                txtFullName.requestFocus();
             }
         });
         getInstrumentation().waitForIdleSync();
-        getInstrumentation().sendStringSync("John");
-        getInstrumentation().runOnMainSync(new Runnable() {
-            @Override
-            public void run() {
-                txtLastName.requestFocus();
-            }
-        });
-        getInstrumentation().waitForIdleSync();
-        getInstrumentation().sendStringSync("Doe");
+        getInstrumentation().sendStringSync("John Doe");
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override
             public void run() {

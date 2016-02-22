@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,10 +37,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String stringLogin = txtLogin.getText().toString().trim();
-                if(!isValidLogin(stringLogin)) {
+                if (!isValidLogin(stringLogin)) {
                     txtLogin.setError("Please enter a valid King's ID (e.g. K1234567");
-                }
-                else{
+                } else {
                     //Code for moving to picture page
                 }
             }
@@ -53,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         txtForgotPassword = (TextView) findViewById(R.id.txtForgotPassword);
+        SpannableString spannableString = new SpannableString("Forgot Your Password?");
+        spannableString.setSpan(new UnderlineSpan(), 0, spannableString.length(), 0);
+        txtForgotPassword.setText(spannableString);
         txtForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +78,20 @@ public class MainActivity extends AppCompatActivity {
         Pattern pattern = Pattern.compile(loginPattern);
         Matcher matcher = pattern.matcher(loginString);
         return matcher.matches();
+    }
+
+    /**
+     * To test any inputted king's ID in the login to see if it passes
+     * @param kingsIDHolder
+     * @return
+     */
+    public boolean getIsValidKingsID(String kingsIDHolder){
+        if(isValidLogin(kingsIDHolder)==true){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     @Override
