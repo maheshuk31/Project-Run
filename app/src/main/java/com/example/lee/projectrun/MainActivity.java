@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class MainActivity extends AppCompatActivity {
 
     private Button btnRegister, btnLogin;
-    private TextView txtTitle;
+    private TextView txtTitle, txtForgotPassword;
     private EditText txtLogin;
 
     @Override
@@ -49,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+        txtForgotPassword = (TextView) findViewById(R.id.txtForgotPassword);
+        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });

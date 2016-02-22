@@ -2,4 +2,6 @@
     <string name="app_name">Project Run</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_data_to_server">DataToServer</string>
+    <string name="title_activity_forgot_password_acitivty">ForgotPasswordAcitivty</string>
 </resources>
