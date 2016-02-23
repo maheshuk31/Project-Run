@@ -13,23 +13,64 @@
         android:layout_height="match_parent">
 
 
-        <EditText
-            android:id="@+id/txtFullName"
-            android:layout_width="wrap_content"
+        <!--<EditText-->
+            <!--android:id="@+id/txtFullName"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_marginBottom="2dp"-->
+            <!--android:background="@drawable/edittextregisterstyle"-->
+            <!--android:ems="10"-->
+            <!--android:hint="Full Name"-->
+            <!--android:inputType="textPersonName"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:paddingLeft="5dp"-->
+            <!--android:paddingTop="10dp" />-->
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/NameHolder"
+            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="2dp"
-            android:background="@drawable/edittextregisterstyle"
-            android:ems="10"
-            android:hint="Full Name"
-            android:inputType="textPersonName"
-            android:paddingBottom="10dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="10dp" />
+            android:layout_alignParentStart="true">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="First Name"
+                android:id="@+id/txtFirstName"
+                android:background="@drawable/edittextregisterstyle"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:layout_marginRight="0.2dp"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Last Name"
+                android:id="@+id/txtLastName"
+                android:background="@drawable/edittextregisterstyle"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:layout_marginLeft="0.2dp"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:layout_toRightOf="@id/txtFirstName"/>
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/txtRegisterKingsID"
@@ -37,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/txtFullName"
+            android:layout_below="@+id/NameHolder"
             android:layout_marginBottom="2dp"
             android:background="@drawable/edittextregisterstyle"
             android:ems="10"

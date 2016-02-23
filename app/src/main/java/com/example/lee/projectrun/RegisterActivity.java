@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText txtFullName;
+    private EditText txtFullName, txtFirstName, txtLastName;
     private EditText txtRegisterKingsID;
     private EditText txtEmailAddress;
     private EditText txtRegisterPassword;
@@ -22,7 +22,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private RadioButton radioBtnMale, radioBtnFemale;
     private String stringFullName, stringKingsID, stringEmail, stringPassword,
             stringConfirmPassword;
+    private String stringFirstName, stringLastName;
     private Button btnConfirmRegister;
+    private Boolean booleanFirstName = true;
+    private Boolean booleanLastName = true;
     private Boolean booleanFullName = true;
     private Boolean booleanKingsID = true;
     private Boolean booleanEmail = true;
@@ -37,7 +40,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        txtFullName = (EditText) findViewById(R.id.txtFullName);
+        //txtFullName = (EditText) findViewById(R.id.txtFullName);
+        txtFirstName = (EditText) findViewById(R.id.txtFirstName);
+        txtLastName = (EditText) findViewById(R.id.txtLastName);
         txtRegisterKingsID = (EditText) findViewById(R.id.txtRegisterKingsID);
         txtEmailAddress = (EditText) findViewById(R.id.txtEmailAddress);
         txtRegisterPassword = (EditText) findViewById(R.id.txtRegisterPassword);
@@ -54,11 +59,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      * Code generator method is used, any amount of letters that the code has to have can be changed.
      */
     private void emailSend() {
-        stringFullName = txtFullName.getText().toString().trim();
+        //stringFullName = txtFullName.getText().toString().trim();
+        stringFirstName = txtFirstName.getText().toString().trim();
+        stringLastName = txtLastName.getText().toString().trim();
         stringEmail = txtEmailAddress.getText().toString().trim();
         String subject = "One Final Step, Please Register";
         String message =
-                "Welcome " + stringFullName + "," + "\n" + "\n"
+                "Welcome " + stringFirstName + " " + stringLastName + "," + "\n" + "\n"
                 + "Thank you for registering for the Tandem Learning App to complete your registration please use the following code " + "\n" + "\n"
                 + setCodeHolder(6)  + "\n" + "\n"
                 + "in the application to complete your account verification to be able to use the app" + "\n" + "\n" + "\n"
@@ -84,19 +91,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
 
-        stringFullName = txtFullName.getText().toString();
+        //stringFullName = txtFullName.getText().toString();
+        stringFirstName = txtFirstName.getText().toString();
+        stringLastName = txtLastName.getText().toString();
         stringKingsID = txtRegisterKingsID.getText().toString();
         stringEmail = txtEmailAddress.getText().toString();
         stringPassword = txtRegisterPassword.getText().toString();
         stringConfirmPassword = txtRegisterConfirmPassword.getText().toString();
-        if(TextUtils.isEmpty(stringFullName)) {
-            booleanFullName = false;
-            txtFullName.setError("Please Enter Your Full Name");
-            return;
-        }
-        else{
-            booleanFullName = true;
-        }
+//        if(TextUtils.isEmpty(stringFullName)) {
+//            booleanFullName = false;
+//            txtFullName.setError("Please Enter Your Full Name");
+//            return;
+//        }
+//        else{
+//            booleanFullName = true;
+//        }
         if(!isValidLogin(stringKingsID)) {
             booleanKingsID = false;
             txtRegisterKingsID.setError("Please enter a valid King's ID (e.g. K1234567");
@@ -133,7 +142,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             booleanGenderSelected = true;
         }
 
-        if(booleanFullName == true && booleanKingsID == true && booleanEmail == true &&
+        if(booleanKingsID == true && booleanEmail == true &&
                 booleanPassword == true && booleanConfirmPassword == true &&
                 booleanGenderSelected == true) {
             emailSend();
