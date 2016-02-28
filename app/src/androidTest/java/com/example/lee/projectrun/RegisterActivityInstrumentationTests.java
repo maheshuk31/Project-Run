@@ -16,109 +16,111 @@ public class RegisterActivityInstrumentationTests extends ActivityInstrumentatio
         super(RegisterActivity.class);
     }
 
-    public void testRegisterActivityExists(){
+    public void testRegisterActivityExists() {
         RegisterActivity registerActivity = getActivity();
         assertNotNull(registerActivity);
     }
 
-    public void testFullNameEditTextExists(){
+    public void testFirstNameEditTextExists() {
         RegisterActivity registerActivity = getActivity();
-        EditText txtFullName = (EditText) registerActivity.findViewById(R.id.txtFullName);
-        assertNotNull(txtFullName);
+        EditText txtFirstName = (EditText) registerActivity.findViewById(R.id.txtFirstName);
+        assertNotNull(txtFirstName);
     }
 
-    public void testRegisterKingsIDEditTextExists(){
+    public void testLastNameEditTextExists() {
+        RegisterActivity registerActivity = getActivity();
+        EditText txtLastName = (EditText) registerActivity.findViewById(R.id.txtLastName);
+        assertNotNull(txtLastName);
+    }
+
+    public void testRegisterKingsIDEditTextExists() {
         RegisterActivity registerActivity = getActivity();
         EditText txtRegisterKingsID = (EditText) registerActivity.findViewById(R.id.txtRegisterKingsID);
         assertNotNull(txtRegisterKingsID);
     }
 
-    public void testEmailEditTextExists(){
+    public void testEmailEditTextExists() {
         RegisterActivity registerActivity = getActivity();
         EditText txtEmailAddress = (EditText) registerActivity.findViewById(R.id.txtEmailAddress);
         assertNotNull(txtEmailAddress);
     }
 
-    public void testRegisterPasswordEditTextExists(){
+    public void testRegisterPasswordEditTextExists() {
         RegisterActivity registerActivity = getActivity();
         EditText txtRegisterPassword = (EditText) registerActivity.findViewById(R.id.txtRegisterPassword);
         assertNotNull(txtRegisterPassword);
     }
 
-    public void testRegisterConfirmPasswordEditTextExists(){
+    public void testRegisterConfirmPasswordEditTextExists() {
         RegisterActivity registerActivity = getActivity();
-        EditText txtRegisterConfirmPassword= (EditText) registerActivity.findViewById(R.id.txtRegisterConfirmPassword);
+        EditText txtRegisterConfirmPassword = (EditText) registerActivity.findViewById(R.id.txtRegisterConfirmPassword);
         assertNotNull(txtRegisterConfirmPassword);
     }
 
-    public void testRegisterGenderTextViewExists(){
+    public void testRegisterGenderTextViewExists() {
         RegisterActivity registerActivity = getActivity();
         TextView txtGender = (TextView) registerActivity.findViewById(R.id.txtGender);
         assertNotNull(txtGender);
     }
 
-    public void testRegisterGenderRadioGroupExists(){
+    public void testRegisterGenderRadioGroupExists() {
         RegisterActivity registerActivity = getActivity();
         RadioGroup radioGroupGender = (RadioGroup) registerActivity.findViewById(R.id.radioGroupGender);
         assertNotNull(radioGroupGender);
     }
 
-    public void testRegisterFemaleGenderRadioButtonExists(){
+    public void testRegisterFemaleGenderRadioButtonExists() {
         RegisterActivity registerActivity = getActivity();
         RadioButton radioBtnFemale = (RadioButton) registerActivity.findViewById(R.id.radioBtnFemale);
         assertNotNull(radioBtnFemale);
     }
 
-    public void testRegisterMaleGenderRadioButtonExists(){
+    public void testRegisterMaleGenderRadioButtonExists() {
         RegisterActivity registerActivity = getActivity();
         RadioButton radioBtnMale = (RadioButton) registerActivity.findViewById(R.id.radioBtnMale);
         assertNotNull(radioBtnMale);
     }
 
-    public void testRegisterTeachingLanguageEditTextExists(){
-        RegisterActivity registerActivity = getActivity();
-        EditText txtTeachingLanguage = (EditText) registerActivity.findViewById(R.id.txtTeachingLanguage);
-        assertNotNull(txtTeachingLanguage);
-    }
-
-    public void testRegisterPracticeLanguageEditTextExists(){
-        RegisterActivity registerActivity = getActivity();
-        EditText txtPracticeLanguage = (EditText) registerActivity.findViewById(R.id.txtPracticeLanguage);
-        assertNotNull(txtPracticeLanguage);
-    }
-
-    public void testRegisterPersonalInterestsEditTextExists(){
+    public void testRegisterPersonalInterestsEditTextExists() {
         RegisterActivity registerActivity = getActivity();
         EditText txtPersonalInterests = (EditText) registerActivity.findViewById(R.id.txtPersonalInterests);
         assertNotNull(txtPersonalInterests);
     }
 
-    public void testConfirmRegisterButtonExists(){
+    public void testConfirmRegisterButtonExists() {
         RegisterActivity registerActivity = getActivity();
         Button btnConfirmRegister = (Button) registerActivity.findViewById(R.id.btnConfirmRegister);
         assertNotNull(btnConfirmRegister);
     }
 
-    public void testRegisteringAUser(){
+    public void testRegisteringAUser() {
         RegisterActivity registerActivity = getActivity();
-        final EditText txtFullName = (EditText) registerActivity.findViewById(R.id.txtFullName);
+        final EditText txtFirstName = (EditText) registerActivity.findViewById(R.id.txtFirstName);
+        final EditText txtLastName = (EditText) registerActivity.findViewById(R.id.txtLastName);
         final EditText txtRegisterKingsID = (EditText) registerActivity.findViewById(R.id.txtRegisterKingsID);
         final EditText txtEmailAddress = (EditText) registerActivity.findViewById(R.id.txtEmailAddress);
         final EditText txtRegisterPassword = (EditText) registerActivity.findViewById(R.id.txtRegisterPassword);
-        final EditText txtRegisterConfirmPassword= (EditText) registerActivity.findViewById(R.id.txtRegisterConfirmPassword);
+        final EditText txtRegisterConfirmPassword = (EditText) registerActivity.findViewById(R.id.txtRegisterConfirmPassword);
         final RadioButton radioBtnMale = (RadioButton) registerActivity.findViewById(R.id.radioBtnMale);
-        final EditText txtTeachingLanguage = (EditText) registerActivity.findViewById(R.id.txtTeachingLanguage);
-        final EditText txtPracticeLanguage = (EditText) registerActivity.findViewById(R.id.txtPracticeLanguage);
         final EditText txtPersonalInterests = (EditText) registerActivity.findViewById(R.id.txtPersonalInterests);
         final Button btnConfirmRegister = (Button) registerActivity.findViewById(R.id.btnConfirmRegister);
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override
             public void run() {
-                txtFullName.requestFocus();
+                txtFirstName.requestFocus();
             }
         });
         getInstrumentation().waitForIdleSync();
-        getInstrumentation().sendStringSync("John Doe");
+        getInstrumentation().sendStringSync("John");
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                txtLastName.requestFocus();
+            }
+        });
+
+        getInstrumentation().waitForIdleSync();
+        getInstrumentation().sendStringSync("Doe");
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override
             public void run() {
@@ -159,22 +161,9 @@ public class RegisterActivityInstrumentationTests extends ActivityInstrumentatio
         });
         getInstrumentation().waitForIdleSync();
         getInstrumentation().sendCharacterSync(KeyEvent.KEYCODE_ENTER);
-        getInstrumentation().runOnMainSync(new Runnable() {
-            @Override
-            public void run() {
-                txtTeachingLanguage.requestFocus();
-            }
-        });
-        getInstrumentation().waitForIdleSync();
-        getInstrumentation().sendStringSync("English");
-        getInstrumentation().runOnMainSync(new Runnable() {
-            @Override
-            public void run() {
-                txtPracticeLanguage.requestFocus();
-            }
-        });
-        getInstrumentation().waitForIdleSync();
-        getInstrumentation().sendStringSync("French");
+
+        //spinner selecting
+
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override
             public void run() {

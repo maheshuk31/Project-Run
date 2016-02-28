@@ -12,63 +12,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <!--<EditText-->
-            <!--android:id="@+id/txtFullName"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_marginBottom="2dp"-->
-            <!--android:background="@drawable/edittextregisterstyle"-->
-            <!--android:ems="10"-->
-            <!--android:hint="Full Name"-->
-            <!--android:inputType="textPersonName"-->
-            <!--android:paddingBottom="10dp"-->
-            <!--android:paddingLeft="5dp"-->
-            <!--android:paddingTop="10dp" />-->
-
         <LinearLayout
+            android:id="@+id/NameHolder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/NameHolder"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/txtFirstName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="First Name"
-                android:id="@+id/txtFirstName"
-                android:background="@drawable/edittextregisterstyle"
-                android:paddingBottom="10dp"
-                android:paddingLeft="5dp"
-                android:paddingTop="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginRight="0.2dp"
                 android:layout_weight="1"
-                android:inputType="textPersonName"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"/>
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Last Name"
-                android:id="@+id/txtLastName"
                 android:background="@drawable/edittextregisterstyle"
+                android:hint="First Name"
+                android:inputType="textPersonName"
                 android:paddingBottom="10dp"
                 android:paddingLeft="5dp"
-                android:paddingTop="10dp"
+                android:paddingTop="10dp" />
+
+            <EditText
+                android:id="@+id/txtLastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="0.2dp"
+                android:layout_toRightOf="@id/txtFirstName"
                 android:layout_weight="1"
+                android:background="@drawable/edittextregisterstyle"
+                android:hint="Last Name"
                 android:inputType="textPersonName"
-                android:layout_toRightOf="@id/txtFirstName"/>
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp" />
 
         </LinearLayout>
 
@@ -145,7 +126,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@id/txtRegisterConfirmPassword"
-            android:layout_marginBottom="1dp"
+            android:layout_marginBottom="2dp"
             android:orientation="horizontal">
 
 
@@ -197,7 +178,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/radioGroupGender"
-                android:layout_marginBottom="2dp"
                 android:layout_marginLeft="0.1dp"
                 android:layout_toEndOf="@+id/radioGroupGender"
                 android:layout_toRightOf="@+id/radioGroupGender"
@@ -211,45 +191,181 @@
                 android:textColor="#030303" />
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/txtTeachingLanguage"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/linLay2"
-            android:layout_marginBottom="2dp"
+        <LinearLayout
+            android:id="@+id/linLayTeachingLanguages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linLay2"
             android:background="@drawable/edittextregisterstyle"
-            android:ems="10"
-            android:gravity="top"
-            android:hint="Teaching Language"
-            android:inputType="textMultiLine"
-            android:paddingBottom="10dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="10dp"
-            android:scrollbars="vertical" />
+            android:orientation="vertical"
+            android:layout_marginBottom="2dp">
 
-        <EditText
-            android:id="@+id/txtPracticeLanguage"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/txtTeachingLanguage"
-            android:layout_marginBottom="2dp"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Spinner
+                android:id="@+id/spinnerTeaching1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6" />
+
+                <Spinner
+                android:id="@+id/spinnerTeaching1Level"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/spinnerTeaching2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+
+                <Spinner
+                    android:id="@+id/spinnerTeaching2Level"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/spinnerTeaching3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+
+                <Spinner
+                    android:id="@+id/spinnerTeaching3Level"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/spinnerTeaching4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+
+                <Spinner
+                    android:id="@+id/spinnerTeaching4Level"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linLayPracticeLanguages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linLayTeachingLanguages"
             android:background="@drawable/edittextregisterstyle"
-            android:ems="10"
-            android:gravity="top"
-            android:hint="Practice Language"
-            android:inputType="textMultiLine"
-            android:paddingBottom="10dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="10dp"
-            android:scrollbars="vertical" />
+            android:orientation="vertical"
+            android:layout_marginBottom="2dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/spinnerPractice1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+
+                <Spinner
+                    android:id="@+id/spinnerPractice1Level"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/spinnerPractice2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+
+                <Spinner
+                    android:id="@+id/spinnerPractice2Level"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/spinnerPractice3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+
+                <Spinner
+                    android:id="@+id/spinnerPractice3Level"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/spinnerPractice4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+
+                <Spinner
+                    android:id="@+id/spinnerPractice4Level"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/txtPersonalInterests"
@@ -259,7 +375,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/txtPracticeLanguage"
+            android:layout_below="@+id/linLayPracticeLanguages"
             android:layout_marginBottom="2dp"
             android:background="@drawable/edittextregisterstyle"
             android:ems="10"
