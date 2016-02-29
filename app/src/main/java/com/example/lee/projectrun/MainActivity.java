@@ -3,10 +3,7 @@ package com.example.lee.projectrun;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,10 +37,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String stringLogin = txtLogin.getText().toString().trim();
-                if(!isValidLogin(stringLogin)) {
+                if (!isValidLogin(stringLogin)) {
                     txtLogin.setError("Please enter a valid King's ID (e.g. K1234567");
-                }
-                else{
+                } else {
                     //Code for moving to picture page
                 }
             }
