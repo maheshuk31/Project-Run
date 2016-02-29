@@ -28,6 +28,14 @@
             android:name=".ForgotPasswordActivity"
             android:label="@string/title_activity_forgot_password_acitivty"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HomePageActivity"
+            android:label="@string/title_activity_home_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SearchResultsActivity"
+            android:label="@string/title_activity_search_results"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

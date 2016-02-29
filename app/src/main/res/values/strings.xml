@@ -4,4 +4,6 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_data_to_server">DataToServer</string>
     <string name="title_activity_forgot_password_acitivty">ForgotPasswordAcitivty</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+    <string name="title_activity_search_results">SearchResultsActivity</string>
 </resources>

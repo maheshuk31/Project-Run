@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 if (!isValidLogin(stringLogin)) {
                     txtLogin.setError("Please enter a valid King's ID (e.g. K1234567");
                 } else {
-                    //Code for moving to picture page
+                    Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+                    startActivity(intent);
                 }
             }
         });
