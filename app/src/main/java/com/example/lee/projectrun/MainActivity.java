@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnRegister, btnLogin;
     private TextView txtTitle, txtForgotPassword;
+    private Button btnRegister, btnLogin;
     private EditText txtLogin;
 
     @Override
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String stringLogin = txtLogin.getText().toString().trim();
-                if (!isValidLogin(stringLogin)) {
+                if(!isValidLogin(stringLogin)) {
                     txtLogin.setError("Please enter a valid King's ID (e.g. K1234567");
                 } else {
                     Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
