@@ -40,13 +40,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Boolean booleanGenderSelected = true;
     private static String letterList = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static Random random = new Random();
-    private String[] arrayListLanguages = {"Select a Language", "Arabic", "Bengali", "Dutch", "French",
+    private String[] arrayListLanguages = {"Select a Language", "Arabic", "Bengali", "Dutch", "English", "French",
             "German", "Greek", "Gujarati", "Hebrew",
             "Hindi", "Italian", "Japanese", "Korean",
             "Mandarin", "Punjabi", "Persian (Farsi)", "Polish",
             "Portuguese (Brazilian)", "Portuguese(European)", "Portuguese via Spanish", "Russian",
             "Spanish", "Swedish", "Turkish", "Urdu"};
-    private String[] arrayLanguageLevel = {"Select a Skill", "A1", "A2", "B1", "B2", "C1", "C2"};
+    private String[] arrayLanguageLevel = {"Select a Level", "A1", "A2", "B1", "B2", "C1", "C2"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +158,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         if (TextUtils.isEmpty(stringLastName)) {
             booleanLastName = false;
-            txtLastName.setError("Please Enter Your Last Name");
+            txtLastName.setError("Please enter your last name");
             return;
         } else {
             booleanLastName = true;
