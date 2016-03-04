@@ -387,13 +387,36 @@
             android:paddingTop="10dp"
             android:scrollbars="vertical" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linLayRegisterImage"
+            android:weightSum="1"
+            android:layout_below="@+id/txtPersonalInterests">
+
+            <ImageView
+                android:layout_width="128dp"
+                android:id="@+id/imgRegisterUser"
+                android:layout_height="128dp"
+                android:src="@drawable/defaultavatar"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnUploadImage"
+                android:text="Upload"/>
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/btnConfirmRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/txtPersonalInterests"
+            android:layout_below="@+id/linLayRegisterImage"
             android:background="@drawable/buttonstyle"
             android:shadowColor="#2655D4"
             android:shadowDx="0"

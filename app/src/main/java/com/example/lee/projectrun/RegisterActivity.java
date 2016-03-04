@@ -1,7 +1,9 @@
 package com.example.lee.projectrun;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
@@ -30,7 +33,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             spinnerTeaching3, spinnerTeaching3Level, spinnerTeaching4, spinnerTeaching4Level;
     private Spinner spinnerPractice1, spinnerPractice1Level, spinnerPractice2, spinnerPractice2Level,
             spinnerPractice3, spinnerPractice3Level, spinnerPractice4, spinnerPractice4Level;
-    private Button btnConfirmRegister;
+    private ImageView imgRegisterUser;
+    private Button btnConfirmRegister, btnUploadImage;
     private Boolean booleanFirstName = true;
     private Boolean booleanLastName = true;
     private Boolean booleanKingsID = true;
@@ -47,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             "Portuguese (Brazilian)", "Portuguese(European)", "Portuguese via Spanish", "Russian",
             "Spanish", "Swedish", "Turkish", "Urdu"};
     private String[] arrayLanguageLevel = {"Select a Level", "A1", "A2", "B1", "B2", "C1", "C2"};
+    private static final int RESULT_LOAD_IMAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +106,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         spinnerPractice3Level.setAdapter(adapterSkill);
         spinnerPractice4.setAdapter(adapterLanguages);
         spinnerPractice4Level.setAdapter(adapterSkill);
+
+        imgRegisterUser = (ImageView) findViewById(R.id.imgRegisterUser);
+        btnUploadImage = (Button) findViewById(R.id.btnUploadImage);
+        btnUploadImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intentGallery, RESULT_LOAD_IMAGE);
+            }
+        });
 
         btnConfirmRegister.setOnClickListener(this);
     }
@@ -315,139 +330,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return codeGenerator(length);
     }
 
-    //trying to make a method that ignores the first selection in spinner currently not working
-//    private void checkingSpinner() {
-//
-//        spinnerTeaching1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerTeaching1.getSelectedItem() == "Select a Language") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerTeaching1Level.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerTeaching1Level.getSelectedItem() == "Select a Skill") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerTeaching2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerTeaching2.getSelectedItem() == "Select a Language") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerTeaching2Level.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerTeaching2Level.getSelectedItem() == "Select a Skill") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerTeaching3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerTeaching3.getSelectedItem() == "Select a Language") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerTeaching3Level.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerTeaching3Level.getSelectedItem() == "Select a Skill") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerTeaching4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerTeaching4.getSelectedItem() == "Select a Language") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerTeaching4Level.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerTeaching4Level.getSelectedItem() == "Select a Skill") {
-//                    //set to null
-//                }
-//            }
-//        });
-//
-//        spinnerPractice1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerPractice1.getSelectedItem() == "Select a Language") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerPractice1Level.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerPractice1Level.getSelectedItem() == "Select a Skill") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerPractice2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerPractice2.getSelectedItem() == "Select a Language") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerPractice2Level.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerPractice2Level.getSelectedItem() == "Select a Skill") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerPractice3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerPractice3.getSelectedItem() == "Select a Language") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerPractice3Level.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerPractice3Level.getSelectedItem() == "Select a Skill") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerPractice4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerPractice4.getSelectedItem() == "Select a Language") {
-//                    //set to null
-//                }
-//            }
-//        });
-//        spinnerPractice4Level.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (spinnerPractice4Level.getSelectedItem() == "Select a Skill") {
-//                    //set to null
-//                }
-//            }
-//        });
-//
-//    }
-
+    /**
+     * Activity adapts to the change of the image that is being selected
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
+            Uri selectedImage = data.getData();
+            imgRegisterUser.setImageURI(selectedImage);
+        }
+    }
 }
