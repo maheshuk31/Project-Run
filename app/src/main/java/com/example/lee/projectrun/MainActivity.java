@@ -18,9 +18,8 @@ import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnRegister, btnLogin;
     private TextView txtTitle, txtForgotPassword;
-    private Button btnRegister, btnLogin;
+    private Button btnRegister, btnLogin, btnViewAll, btnViewOne;
     private EditText txtLogin;
 
     @Override
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String stringLogin = txtLogin.getText().toString().trim();
-                if(!isValidLogin(stringLogin)) {
+                if (!isValidLogin(stringLogin)) {
                     txtLogin.setError("Please enter a valid King's ID (e.g. K1234567");
                 } else {
                     Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
@@ -63,6 +62,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
+
+        btnViewAll = (Button) findViewById(R.id.btnViewAll);
+        btnViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ViewAllUsers.class);
+                startActivity(intent);
+            }
+        });
+
+        btnViewOne = (Button) findViewById(R.id.btnViewOne);
+        btnViewOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RetrieveUser.class);
                 startActivity(intent);
             }
         });

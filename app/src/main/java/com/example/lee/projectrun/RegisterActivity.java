@@ -1,6 +1,8 @@
 package com.example.lee.projectrun;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -11,7 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -204,7 +208,78 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
+
+
+        if(v == btnConfirmRegister)
+        {
+            AddUser();
+        }
+
+
+
+
     }
+
+
+
+
+
+    private void AddUser()
+    {
+        final String ID = txtRegisterKingsID.getText().toString().trim();
+        final String FirstName = txtFirstName.getText().toString().trim();
+        final String Email = txtEmailAddress.getText().toString().trim();
+
+        class AddUser extends AsyncTask<Void, Void, String>
+        {
+            ProgressDialog Loading;
+
+
+            protected void OnPreExecute(String S)
+            {
+                super.onPreExecute();
+                Loading = ProgressDialog.show(RegisterActivity.this, "Adding...", "Wait...", false, false);
+            }
+
+
+
+            protected void OnPostExecute(String S)
+            {
+                super.onPostExecute(S);
+                Loading.dismiss();
+                Toast.makeText(RegisterActivity.this, S, Toast.LENGTH_LONG).show();
+            }
+
+
+
+            protected String doInBackground(Void... V)
+            {
+                HashMap<String, String> Params = new HashMap<>();
+                Params.put(Config.Key_ID, ID);
+                Params.put(Config.Key_Name, FirstName);
+                Params.put(Config.Key_Email, Email);
+
+                RequestHandler RH = new RequestHandler();
+                String Res = RH.SendPostRequest(Config.URL_AddUser, Params);
+                return Res;
+            }
+        }
+
+
+        AddUser AU = new AddUser();
+        AU.execute();
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Checks to see if what the user has inputted to register is a valid set of characters that matches

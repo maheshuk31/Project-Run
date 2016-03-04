@@ -81,6 +81,28 @@ public class RequestHandler
 
 
 
+    public String SendGetRequest(String RequestURL)
+    {
+        StringBuilder SB = new StringBuilder();
+
+        try
+        {
+            URL URL = new URL(RequestURL);
+            HttpURLConnection Connection = (HttpURLConnection) URL.openConnection();
+            BufferedReader BufferedReader = new BufferedReader(new InputStreamReader(Connection.getInputStream()));
+
+            String S;
+            while((S = BufferedReader.readLine()) != null)
+            {
+                SB.append(S + "\n");
+            }
+        }
+        catch (Exception e)
+        {
+            // ...Nothing
+        }
+        return SB.toString();
+    }
 
 
 
