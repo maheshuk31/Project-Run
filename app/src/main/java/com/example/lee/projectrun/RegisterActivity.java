@@ -1,20 +1,23 @@
 package com.example.lee.projectrun;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -214,11 +217,50 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 booleanPassword == true && booleanConfirmPassword == true &&
                 booleanGenderSelected == true) {
             emailSend();
-            //database code should go here
+            addStudent();
             //checkingSpinner();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
+    }
+
+    public void addStudent(){
+        final String fName = txtFirstName.getText().toString().trim();
+        final String uniqueCode = txtRegisterKingsID.getText().toString().trim();
+        final String Email = txtEmailAddress.getText().toString().trim();
+        final String dataOfBirth;
+        final String password;
+        final String gender;
+        final String practicingLanguage;
+        final String teachingLanguage;
+        final String personalInterestl;
+        final String image;
+
+        class AddStudent extends AsyncTask<Void,Void,String>{
+        ProgressDialog loading;
+            protected void onPreExecute(){
+                super.onPreExecute();
+                loading = ProgressDialog.show(RegisterActivity.this, "Adding", "Wait", false, false);
+            }
+            protected void onPostExecture(String s){
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(RegisterActivity.this,s,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected String doInBackground(Void... v) {
+                HashMap<String, String> params = new HashMap<>();
+                params.put(Config.Key_Name, fName);
+                params.put(Config.Key_ID, uniqueCode);
+                params.put(Config.Key_Email, Email);
+                RequestHandler rh = new RequestHandler();
+                String res = rh.SendPostRequest(Config.URL_AddUser, params);
+                return res;
+            }
+        }
+        AddStudent as = new AddStudent();
+        as.execute();
     }
 
     /**
