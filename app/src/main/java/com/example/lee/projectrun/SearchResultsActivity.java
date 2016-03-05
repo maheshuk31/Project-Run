@@ -1,6 +1,7 @@
 package com.example.lee.projectrun;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     private TextView txtSearchResultName, txtSearchResultPersonalInfo;
     private ImageView imgProfilePic;
     private String JSON_STRING;
-    private String Search= "dazza";
+    private String Search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,16 @@ public class SearchResultsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_results);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Intent intent = getIntent();
+        Search = intent.getExtras().getString("stringSearch");
+
         search();
 
         linLayResultsHolder = (LinearLayout)findViewById(R.id.linLayResultsHolder);
 
 
-        addingLayout("SDAsd", "DSassad", "adsdasda");
+        addingLayout(Search, "DSassad", "Personal Interests");
 
     }
 
@@ -84,15 +89,15 @@ public class SearchResultsActivity extends AppCompatActivity {
                 addingLayout(chatRoomsObj.getString(Config.Key_Name), chatRoomsObj.getString(Config.Key_Name), chatRoomsObj.getString(Config.Key_Name));
             }
 
-       //   JSONObject jsonObject = new JSONObject(json);
-       //   JSONObject mObj = jsonObject.getJSONObject("friends");
-       //   JSONObject c = mObj.getJSONObject(0);
-       //   String name = c.getString(Config.TAG_Name);
-       //   String personal = c.getString(Config.TAG_PersonalInterests);
-       //   String image = c.getString(Config.TAG_Image);
-       //   System.out.println(name);
+            //   JSONObject jsonObject = new JSONObject(json);
+            //   JSONObject mObj = jsonObject.getJSONObject("friends");
+            //   JSONObject c = mObj.getJSONObject(0);
+            //   String name = c.getString(Config.TAG_Name);
+            //   String personal = c.getString(Config.TAG_PersonalInterests);
+            //   String image = c.getString(Config.TAG_Image);
+            //   System.out.println(name);
 
-          //  addingLayout(name, personal, image);
+            //  addingLayout(name, personal, image);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -100,6 +105,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
     private void addingLayout(String Name, String Image, String Personal){
+
 
         txtSearchResultName = new TextView(this);
         txtSearchResultName.setText(Name);
@@ -117,7 +123,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         TextView txtIMAGEHOLDER = new TextView(this);
         txtIMAGEHOLDER.setText("Picture");
-        LinearLayout.LayoutParams lpImageHolder = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpImageHolder = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
         lpImageHolder.weight = 0.7f;
         txtSearchResultPersonalInfo.setLayoutParams(lpImageHolder);
 
@@ -135,7 +141,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         linLayThirdSearchResultsNameImageHolder = new LinearLayout(this);
         linLayThirdSearchResultsNameImageHolder.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams linParamThird = new LinearLayout.LayoutParams(
-               0,
+                0,
                 LinearLayout.LayoutParams.MATCH_PARENT);
         linParamThird.weight = 0.3f;
 
@@ -146,6 +152,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         linLaySecondSearchResultsPerPerson.addView(txtSearchResultPersonalInfo);
         linLayThirdSearchResultsNameImageHolder.addView(txtIMAGEHOLDER);
         linLayThirdSearchResultsNameImageHolder.addView(txtSearchResultName);
+
     }
 
 }
