@@ -11,13 +11,14 @@ public class Config
     public static final String URL_ModifyUser = "http://projectrun.x10host.com/UserModification.php";
     public static final String URL_FindFriends = "http://projectrun.x10host.com/FindFriends.php";
     public static final String URL_RetrieveUser = "http://projectrun.x10host.com/RetrieveUser.php";
-    public static final String URL_Search = "...";
+    public static final String URL_Search = "http://projectrun.x10host.com/Search.php";
 
     // Keys that will be used to send requests to php scripts.
     public static final String Key_ID = "UniqueCode";
     public static final String Key_Name = "FName";
     public static final String Key_LName = "LName";
     public static final String Key_Email = "Email";
+    public static final String Key_Search = "Search";
     public static final String Key_Password = "Password";
     public static final String Key_Age = "Age";
     public static final String Key_Gender = "Gender";
@@ -28,7 +29,9 @@ public class Config
 
     // JSON tags.
     public static final String TAG_ID = "UniqueCode";
+    public static final String TAG_JSON_ARRAY="result";
     public static final String TAG_Name = "FName";
+    public static final String TAG_Image = "Image";
     public static final String TAG_LName = "LName";
     public static final String TAG_Email = "Email";
     public static final String TAG_Password = "Password";
