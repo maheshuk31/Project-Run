@@ -174,7 +174,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/txtDOB"
+                android:id="@+id/txtAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/radioGroupGender"
@@ -183,8 +183,8 @@
                 android:layout_toRightOf="@+id/radioGroupGender"
                 android:background="@drawable/edittextregisterstyle"
                 android:ems="10"
-                android:hint="Date Of Birth"
-                android:inputType="date"
+                android:hint="Age"
+                android:inputType="number"
                 android:paddingBottom="10dp"
                 android:paddingLeft="5dp"
                 android:paddingTop="10dp"
@@ -199,6 +199,18 @@
             android:background="@drawable/edittextregisterstyle"
             android:orientation="vertical"
             android:layout_marginBottom="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Teaching Languages"
+                    android:textColor="#030303"/>
+
+            </LinearLayout>
 
 
             <LinearLayout
@@ -220,62 +232,62 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:weightSum="1">-->
 
-                <Spinner
-                    android:id="@+id/spinnerTeaching2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6" />
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinnerTeaching2"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.6" />-->
 
-                <Spinner
-                    android:id="@+id/spinnerTeaching2Level"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4" />
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinnerTeaching2Level"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.4" />-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:weightSum="1">-->
 
-                <Spinner
-                    android:id="@+id/spinnerTeaching3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6" />
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinnerTeaching3"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.6" />-->
 
-                <Spinner
-                    android:id="@+id/spinnerTeaching3Level"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4" />
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinnerTeaching3Level"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.4" />-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:weightSum="1">-->
 
-                <Spinner
-                    android:id="@+id/spinnerTeaching4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6" />
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinnerTeaching4"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.6" />-->
 
-                <Spinner
-                    android:id="@+id/spinnerTeaching4Level"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4" />
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinnerTeaching4Level"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.4" />-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
         </LinearLayout>
 
@@ -287,6 +299,18 @@
             android:background="@drawable/edittextregisterstyle"
             android:orientation="vertical"
             android:layout_marginBottom="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Practice Languages"
+                    android:textColor="#030303"/>
+
+            </LinearLayout>
 
 
             <LinearLayout
@@ -308,62 +332,62 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:weightSum="1">-->
 
-                <Spinner
-                    android:id="@+id/spinnerPractice2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6" />
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinnerPractice2"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.6" />-->
 
-                <Spinner
-                    android:id="@+id/spinnerPractice2Level"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4" />
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinnerPractice2Level"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.4" />-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:weightSum="1">-->
 
-                <Spinner
-                    android:id="@+id/spinnerPractice3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6" />
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinnerPractice3"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.6" />-->
 
-                <Spinner
-                    android:id="@+id/spinnerPractice3Level"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4" />
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinnerPractice3Level"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.4" />-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:weightSum="1">-->
 
-                <Spinner
-                    android:id="@+id/spinnerPractice4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6" />
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinnerPractice4"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.6" />-->
 
-                <Spinner
-                    android:id="@+id/spinnerPractice4Level"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4" />
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinnerPractice4Level"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.4" />-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
         </LinearLayout>
 

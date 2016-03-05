@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,7 +30,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText txtEmailAddress;
     private EditText txtRegisterPassword;
     private EditText txtRegisterConfirmPassword;
+    private EditText txtAge;
+    private EditText txtPersonaalInterest;
     private RadioButton radioBtnMale, radioBtnFemale;
+    private RadioGroup radioGroupGender;
     private String stringKingsID, stringEmail, stringPassword, stringConfirmPassword;
     private String stringFirstName, stringLastName;
     private Spinner spinnerTeaching1, spinnerTeaching1Level, spinnerTeaching2, spinnerTeaching2Level,
@@ -73,42 +77,45 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         txtRegisterPassword = (EditText) findViewById(R.id.txtRegisterPassword);
         txtRegisterConfirmPassword = (EditText) findViewById(R.id.txtRegisterConfirmPassword);
         btnConfirmRegister = (Button) findViewById(R.id.btnConfirmRegister);
+        radioGroupGender = (RadioGroup) findViewById(R.id.radioGroupGender);
         radioBtnMale = (RadioButton) findViewById(R.id.radioBtnMale);
         radioBtnFemale = (RadioButton) findViewById(R.id.radioBtnFemale);
+        txtAge = (EditText) findViewById(R.id.txtAge);
+        txtPersonaalInterest = (EditText) findViewById(R.id.txtPersonalInterests);
 
         spinnerTeaching1 = (Spinner) findViewById(R.id.spinnerTeaching1);
         spinnerTeaching1Level = (Spinner) findViewById(R.id.spinnerTeaching1Level);
-        spinnerTeaching2 = (Spinner) findViewById(R.id.spinnerTeaching2);
-        spinnerTeaching2Level = (Spinner) findViewById(R.id.spinnerTeaching2Level);
-        spinnerTeaching3 = (Spinner) findViewById(R.id.spinnerTeaching3);
-        spinnerTeaching3Level = (Spinner) findViewById(R.id.spinnerTeaching3Level);
-        spinnerTeaching4 = (Spinner) findViewById(R.id.spinnerTeaching4);
-        spinnerTeaching4Level = (Spinner) findViewById(R.id.spinnerTeaching4Level);
+//        spinnerTeaching2 = (Spinner) findViewById(R.id.spinnerTeaching2);
+//        spinnerTeaching2Level = (Spinner) findViewById(R.id.spinnerTeaching2Level);
+//        spinnerTeaching3 = (Spinner) findViewById(R.id.spinnerTeaching3);
+//        spinnerTeaching3Level = (Spinner) findViewById(R.id.spinnerTeaching3Level);
+//        spinnerTeaching4 = (Spinner) findViewById(R.id.spinnerTeaching4);
+//        spinnerTeaching4Level = (Spinner) findViewById(R.id.spinnerTeaching4Level);
         spinnerTeaching1.setAdapter(adapterLanguages);
         spinnerTeaching1Level.setAdapter(adapterSkill);
-        spinnerTeaching2.setAdapter(adapterLanguages);
-        spinnerTeaching2Level.setAdapter(adapterSkill);
-        spinnerTeaching3.setAdapter(adapterLanguages);
-        spinnerTeaching3Level.setAdapter(adapterSkill);
-        spinnerTeaching4.setAdapter(adapterLanguages);
-        spinnerTeaching4Level.setAdapter(adapterSkill);
+//        spinnerTeaching2.setAdapter(adapterLanguages);
+//        spinnerTeaching2Level.setAdapter(adapterSkill);
+//        spinnerTeaching3.setAdapter(adapterLanguages);
+//        spinnerTeaching3Level.setAdapter(adapterSkill);
+//        spinnerTeaching4.setAdapter(adapterLanguages);
+//        spinnerTeaching4Level.setAdapter(adapterSkill);
 
         spinnerPractice1 = (Spinner) findViewById(R.id.spinnerPractice1);
         spinnerPractice1Level = (Spinner) findViewById(R.id.spinnerPractice1Level);
-        spinnerPractice2 = (Spinner) findViewById(R.id.spinnerPractice2);
-        spinnerPractice2Level = (Spinner) findViewById(R.id.spinnerPractice2Level);
-        spinnerPractice3 = (Spinner) findViewById(R.id.spinnerPractice3);
-        spinnerPractice3Level = (Spinner) findViewById(R.id.spinnerPractice3Level);
-        spinnerPractice4 = (Spinner) findViewById(R.id.spinnerPractice4);
-        spinnerPractice4Level = (Spinner) findViewById(R.id.spinnerPractice4Level);
+//        spinnerPractice2 = (Spinner) findViewById(R.id.spinnerPractice2);
+//        spinnerPractice2Level = (Spinner) findViewById(R.id.spinnerPractice2Level);
+//        spinnerPractice3 = (Spinner) findViewById(R.id.spinnerPractice3);
+//        spinnerPractice3Level = (Spinner) findViewById(R.id.spinnerPractice3Level);
+//        spinnerPractice4 = (Spinner) findViewById(R.id.spinnerPractice4);
+//        spinnerPractice4Level = (Spinner) findViewById(R.id.spinnerPractice4Level);
         spinnerPractice1.setAdapter(adapterLanguages);
         spinnerPractice1Level.setAdapter(adapterSkill);
-        spinnerPractice2.setAdapter(adapterLanguages);
-        spinnerPractice2Level.setAdapter(adapterSkill);
-        spinnerPractice3.setAdapter(adapterLanguages);
-        spinnerPractice3Level.setAdapter(adapterSkill);
-        spinnerPractice4.setAdapter(adapterLanguages);
-        spinnerPractice4Level.setAdapter(adapterSkill);
+//        spinnerPractice2.setAdapter(adapterLanguages);
+//        spinnerPractice2Level.setAdapter(adapterSkill);
+//        spinnerPractice3.setAdapter(adapterLanguages);
+//        spinnerPractice3Level.setAdapter(adapterSkill);
+//        spinnerPractice4.setAdapter(adapterLanguages);
+//        spinnerPractice4Level.setAdapter(adapterSkill);
 
         imgRegisterUser = (ImageView) findViewById(R.id.imgRegisterUser);
         btnUploadImage = (Button) findViewById(R.id.btnUploadImage);
@@ -218,7 +225,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 booleanGenderSelected == true) {
             emailSend();
             addStudent();
-            //checkingSpinner();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
@@ -228,12 +234,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         final String fName = txtFirstName.getText().toString().trim();
         final String uniqueCode = txtRegisterKingsID.getText().toString().trim();
         final String Email = txtEmailAddress.getText().toString().trim();
-        final String dataOfBirth;
-        final String password;
-        final String gender;
-        final String practicingLanguage;
-        final String teachingLanguage;
-        final String personalInterestl;
+        final String age = txtAge.getText().toString().trim();
+        final String password = txtRegisterPassword.getText().toString().trim();
+        final String gender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
+        final String practicingLanguage = spinnerPractice1.getSelectedItem().toString();
+        final String teachingLanguage = spinnerTeaching1.getSelectedItem().toString();
+        final String personalInterest = txtPersonaalInterest.getText().toString().trim();
         final String image;
 
         class AddStudent extends AsyncTask<Void,Void,String>{
