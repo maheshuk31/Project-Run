@@ -3,11 +3,13 @@ package com.example.lee.projectrun;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,7 +37,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private RadioButton radioBtnMale, radioBtnFemale;
     private RadioGroup radioGroupGender;
     private String stringKingsID, stringEmail, stringPassword, stringConfirmPassword;
-    private String stringFirstName, stringLastName;
+    private String stringFirstName, stringLastName, stringAge, stringTeachingLanguage, stringPracticeLanguage;
+    private String stringPersonalInterest, stringGender, stringCodeHolder;
     private Spinner spinnerTeaching1, spinnerTeaching1Level, spinnerTeaching2, spinnerTeaching2Level,
             spinnerTeaching3, spinnerTeaching3Level, spinnerTeaching4, spinnerTeaching4Level;
     private Spinner spinnerPractice1, spinnerPractice1Level, spinnerPractice2, spinnerPractice2Level,
@@ -59,6 +62,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             "Spanish", "Swedish", "Turkish", "Urdu"};
     private String[] arrayLanguageLevel = {"Select a Level", "A1", "A2", "B1", "B2", "C1", "C2"};
     private static final int RESULT_LOAD_IMAGE = 1;
+    private String stringIp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,11 +142,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         stringFirstName = txtFirstName.getText().toString().trim();
         stringLastName = txtLastName.getText().toString().trim();
         stringEmail = txtEmailAddress.getText().toString().trim();
+        stringCodeHolder = setCodeHolder(6);
         String subject = "One Final Step, Please Register";
         String message =
                 "Welcome " + stringFirstName + " " + stringLastName + "," + "\n" + "\n"
                         + "Thank you for registering for the Tandem Learning App to complete your registration please use the following code " + "\n" + "\n"
-                        + setCodeHolder(6) + "\n" + "\n"
+                        + stringCodeHolder + "\n" + "\n"
                         + "in the application to complete your account verification to be able to use the app" + "\n" + "\n" + "\n"
                         + "This is a automated email please do not reply to it. "
                         + "If you have received this email in error please notify the sender immediately. The email is intended for the exclusive use of the addressee only. " + "\n"
@@ -173,6 +178,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         stringEmail = txtEmailAddress.getText().toString();
         stringPassword = txtRegisterPassword.getText().toString();
         stringConfirmPassword = txtRegisterConfirmPassword.getText().toString();
+        stringAge = txtAge.getText().toString();
+        stringPersonalInterest = txtPersonalInterest.getText().toString();
+        stringPracticeLanguage = spinnerPractice1.getSelectedItem().toString();
+        stringTeachingLanguage = spinnerTeaching1.getSelectedItem().toString();
+        stringGender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
 
         if (TextUtils.isEmpty(stringFirstName)) {
             booleanFirstName = false;
@@ -223,51 +233,66 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (booleanFirstName == true && booleanLastName && booleanKingsID == true && booleanEmail == true &&
                 booleanPassword == true && booleanConfirmPassword == true &&
                 booleanGenderSelected == true) {
+            WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
+            stringIp = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
             emailSend();
-            addStudent();
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//            addStudent();
+            Intent intent = new Intent(getApplicationContext(), VerificationPageActivity.class);
+            intent.putExtra("fname", stringFirstName);
+            intent.putExtra("uniqueCode", stringKingsID);
+            intent.putExtra("Email", stringEmail);
+            intent.putExtra("age", stringAge);
+            intent.putExtra("password", stringPassword);
+            intent.putExtra("gender", stringGender);
+            intent.putExtra("practicingLanguage", stringPracticeLanguage);
+            intent.putExtra("teachingLanguage", stringTeachingLanguage);
+            intent.putExtra("personalInterest", stringPersonalInterest);
+            intent.putExtra("ip", stringIp);
+            //intent.putExtra("image",);
+
+            intent.putExtra("code", stringCodeHolder);
             startActivity(intent);
         }
     }
 
-    public void addStudent(){
-        final String fName = txtFirstName.getText().toString().trim();
-        final String uniqueCode = txtRegisterKingsID.getText().toString().trim();
-        final String Email = txtEmailAddress.getText().toString().trim();
-        final String age = txtAge.getText().toString().trim();
-        final String password = txtRegisterPassword.getText().toString().trim();
-        final String gender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
-        final String practicingLanguage = spinnerPractice1.getSelectedItem().toString();
-        final String teachingLanguage = spinnerTeaching1.getSelectedItem().toString();
-        final String personalInterest = txtPersonalInterest.getText().toString().trim();
-        final String image;
-
-        class AddStudent extends AsyncTask<Void,Void,String>{
-        ProgressDialog loading;
-            protected void onPreExecute(){
-                super.onPreExecute();
-                loading = ProgressDialog.show(RegisterActivity.this, "Adding", "Wait", false, false);
-            }
-            protected void onPostExecture(String s){
-                super.onPostExecute(s);
-                loading.dismiss();
-                Toast.makeText(RegisterActivity.this,s,Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            protected String doInBackground(Void... v) {
-                HashMap<String, String> params = new HashMap<>();
-                params.put(Config.Key_Name, fName);
-                params.put(Config.Key_ID, uniqueCode);
-                params.put(Config.Key_Email, Email);
-                RequestHandler rh = new RequestHandler();
-                String res = rh.SendPostRequest(Config.URL_AddUser, params);
-                return res;
-            }
-        }
-        AddStudent as = new AddStudent();
-        as.execute();
-    }
+//    public void addStudent(){
+//        final String fName = txtFirstName.getText().toString().trim();
+//        final String uniqueCode = txtRegisterKingsID.getText().toString().trim();
+//        final String Email = txtEmailAddress.getText().toString().trim();
+//        final String age = txtAge.getText().toString().trim();
+//        final String password = txtRegisterPassword.getText().toString().trim();
+//        final String gender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
+//        final String practicingLanguage = spinnerPractice1.getSelectedItem().toString();
+//        final String teachingLanguage = spinnerTeaching1.getSelectedItem().toString();
+//        final String personalInterest = txtPersonalInterest.getText().toString().trim();
+//        final String image;
+//
+//        class AddStudent extends AsyncTask<Void,Void,String>{
+//        ProgressDialog loading;
+//            protected void onPreExecute(){
+//                super.onPreExecute();
+//                loading = ProgressDialog.show(RegisterActivity.this, "Adding", "Wait", false, false);
+//            }
+//            protected void onPostExecture(String s){
+//                super.onPostExecute(s);
+//                loading.dismiss();
+//                Toast.makeText(RegisterActivity.this,s,Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            protected String doInBackground(Void... v) {
+//                HashMap<String, String> params = new HashMap<>();
+//                params.put(Config.Key_Name, fName);
+//                params.put(Config.Key_ID, uniqueCode);
+//                params.put(Config.Key_Email, Email);
+//                RequestHandler rh = new RequestHandler();
+//                String res = rh.SendPostRequest(Config.URL_AddUser, params);
+//                return res;
+//            }
+//        }
+//        AddStudent as = new AddStudent();
+//        as.execute();
+//    }
 
     /**
      * Checks to see if what the user has inputted to register is a valid set of characters that matches
