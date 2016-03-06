@@ -38,12 +38,12 @@ public class SearchResultsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Search = intent.getExtras().getString("stringSearch");
 
+
         search();
 
         linLayResultsHolder = (LinearLayout)findViewById(R.id.linLayResultsHolder);
 
 
-        addingLayout(Search, "DSassad", "Personal Interests");
 
     }
 
@@ -130,7 +130,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         linLaySecondSearchResultsPerPerson = new LinearLayout(this);
         linLaySecondSearchResultsPerPerson.setOrientation(LinearLayout.HORIZONTAL);
         linLaySecondSearchResultsPerPerson.setWeightSum(1f);
-        linLaySecondSearchResultsPerPerson.setBackground(getDrawable(R.drawable.customborder));
+       // linLaySecondSearchResultsPerPerson.setBackground(getDrawable(R.drawable.customborder));
         LinearLayout.LayoutParams linParamSecond = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
