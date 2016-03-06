@@ -23,6 +23,9 @@ public class VerificationPageActivity extends AppCompatActivity {
     private String gender;
     private String practicingLanguage;
     private String teachingLanguage;
+    private String practicingLanguageLevel;
+    private String teachingLanguageLevel;
+    private String entirePractice, entireTeaching;
     private String personalInterest;
     private String image;
     private String ip;
@@ -47,11 +50,17 @@ public class VerificationPageActivity extends AppCompatActivity {
         password= intent.getExtras().getString("password");
         gender = intent.getExtras().getString("gender");
         practicingLanguage = intent.getExtras().getString("practicingLanguage");
+        practicingLanguageLevel = intent.getExtras().getString("practicingLanguageLevel");
         teachingLanguage = intent.getExtras().getString("teachingLanguage");
+        teachingLanguageLevel = intent.getExtras().getString("teachingLanguageLevel");
         personalInterest = intent.getExtras().getString("personalInterest");
         ip = intent.getExtras().getString("ip");
         image = intent.getExtras().getString("image");
         code = intent.getExtras().getString("code");
+
+        entirePractice = practicingLanguage + ", " + practicingLanguageLevel;
+        entireTeaching = teachingLanguage + ", " + teachingLanguageLevel;
+
         btnVefSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

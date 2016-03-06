@@ -38,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private RadioGroup radioGroupGender;
     private String stringKingsID, stringEmail, stringPassword, stringConfirmPassword;
     private String stringFirstName, stringLastName, stringAge, stringTeachingLanguage, stringPracticeLanguage;
+    private String stringTeachingLanguageLevel, stringPracticeLanguageLevel;
     private String stringPersonalInterest, stringGender, stringCodeHolder, stringImage;
     private Spinner spinnerTeaching1, spinnerTeaching1Level, spinnerTeaching2, spinnerTeaching2Level,
             spinnerTeaching3, spinnerTeaching3Level, spinnerTeaching4, spinnerTeaching4Level;
@@ -181,7 +182,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         stringAge = txtAge.getText().toString();
         stringPersonalInterest = txtPersonalInterest.getText().toString();
         stringPracticeLanguage = spinnerPractice1.getSelectedItem().toString();
+        stringPracticeLanguageLevel = spinnerPractice1Level.getSelectedItem().toString();
         stringTeachingLanguage = spinnerTeaching1.getSelectedItem().toString();
+        stringTeachingLanguageLevel = spinnerTeaching1Level.getSelectedItem().toString();
         stringGender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
 
         if (TextUtils.isEmpty(stringFirstName)) {
@@ -229,6 +232,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         } else {
             booleanGenderSelected = true;
         }
+        if (stringPracticeLanguage.equals("Select a Language")){
+            stringPracticeLanguage = "";
+        }
+        if (stringTeachingLanguage.equals("Select a Language")){
+            stringTeachingLanguage = "";
+        }
+        if (stringPracticeLanguageLevel.equals("Select a Level")){
+            stringPracticeLanguageLevel = "";
+        }
+        if (stringTeachingLanguageLevel.equals("Select a Level")){
+            stringTeachingLanguageLevel = "";
+        }
 
         if (booleanFirstName == true && booleanLastName && booleanKingsID == true && booleanEmail == true &&
                 booleanPassword == true && booleanConfirmPassword == true &&
@@ -254,7 +269,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             intent.putExtra("password", stringPassword);
             intent.putExtra("gender", stringGender);
             intent.putExtra("practicingLanguage", stringPracticeLanguage);
+            intent.putExtra("practicingLanguageLevel", stringPracticeLanguageLevel);
             intent.putExtra("teachingLanguage", stringTeachingLanguage);
+            intent.putExtra("teachingLanguageLevel", stringTeachingLanguageLevel);
             intent.putExtra("personalInterest", stringPersonalInterest);
             intent.putExtra("ip", stringIp);
             intent.putExtra("image", stringImage);
