@@ -2,11 +2,14 @@ package com.example.lee.projectrun;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,14 +44,13 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         search();
 
-        linLayResultsHolder = (LinearLayout)findViewById(R.id.linLayResultsHolder);
-
+        linLayResultsHolder = (LinearLayout) findViewById(R.id.linLayResultsHolder);
 
 
     }
 
-    private void search(){
-        class GetUsers extends AsyncTask<Void, Void, String>{
+    private void search() {
+        class GetUsers extends AsyncTask<Void, Void, String> {
             ProgressDialog loading;
 
             @Override
@@ -85,25 +87,15 @@ public class SearchResultsActivity extends AppCompatActivity {
             Log.d("AAA", search.toString());
             for (int i = 0; i < search.length(); i++) {
                 JSONObject jo = search.getJSONObject(i);
-                addingLayout(jo.getString("FirstName"), jo.getString("FirstName"), jo.getString("FirstName"));
+                addingLayout(jo.getString("FirstName"), jo.getString("Image"), jo.getString("PersonalInterests"));
             }
-
-            //   JSONObject jsonObject = new JSONObject(json);
-            //   JSONObject mObj = jsonObject.getJSONObject("friends");
-            //   JSONObject c = mObj.getJSONObject(0);
-            //   String name = c.getString(Config.TAG_Name);
-            //   String personal = c.getString(Config.TAG_PersonalInterests);
-            //   String image = c.getString(Config.TAG_Image);
-            //   System.out.println(name);
-
-            //  addingLayout(name, personal, image);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void addingLayout(String Name, String Image, String Personal){
+    private void addingLayout(String Name, String Image, String Personal) {
 
 
         txtSearchResultName = new TextView(this);
@@ -120,11 +112,14 @@ public class SearchResultsActivity extends AppCompatActivity {
         txtSearchResultPersonalInfo.setTextColor(Color.BLACK);
         txtSearchResultPersonalInfo.setLayoutParams(lpPersonalInfo);
 
-        TextView txtIMAGEHOLDER = new TextView(this);
-        txtIMAGEHOLDER.setText("Picture");
+        imgProfilePic = new ImageView(this);
         LinearLayout.LayoutParams lpImageHolder = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
         lpImageHolder.weight = 0.7f;
         txtSearchResultPersonalInfo.setLayoutParams(lpImageHolder);
+        byte[] decodedString = Base64.decode(Image, 0);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        imgProfilePic.setImageBitmap(decodedByte);
+
 
 
         linLaySecondSearchResultsPerPerson = new LinearLayout(this);
@@ -151,9 +146,10 @@ public class SearchResultsActivity extends AppCompatActivity {
         linLayResultsHolder.addView(linLaySecondSearchResultsPerPerson);
         linLaySecondSearchResultsPerPerson.addView(linLayThirdSearchResultsNameImageHolder);
         linLaySecondSearchResultsPerPerson.addView(txtSearchResultPersonalInfo);
-        linLayThirdSearchResultsNameImageHolder.addView(txtIMAGEHOLDER);
+        linLayThirdSearchResultsNameImageHolder.addView(imgProfilePic);
         linLayThirdSearchResultsNameImageHolder.addView(txtSearchResultName);
 
     }
 
 }
+

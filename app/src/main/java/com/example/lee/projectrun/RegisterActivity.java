@@ -292,46 +292,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             startActivity(intent);
         }
     }
-
-//    public void addStudent(){
-//        final String fName = txtFirstName.getText().toString().trim();
-//        final String uniqueCode = txtRegisterKingsID.getText().toString().trim();
-//        final String Email = txtEmailAddress.getText().toString().trim();
-//        final String age = txtAge.getText().toString().trim();
-//        final String password = txtRegisterPassword.getText().toString().trim();
-//        final String gender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
-//        final String practicingLanguage = spinnerPractice1.getSelectedItem().toString();
-//        final String teachingLanguage = spinnerTeaching1.getSelectedItem().toString();
-//        final String personalInterest = txtPersonalInterest.getText().toString().trim();
-//        final String image;
-//
-//        class AddStudent extends AsyncTask<Void,Void,String>{
-//        ProgressDialog loading;
-//            protected void onPreExecute(){
-//                super.onPreExecute();
-//                loading = ProgressDialog.show(RegisterActivity.this, "Adding", "Wait", false, false);
-//            }
-//            protected void onPostExecture(String s){
-//                super.onPostExecute(s);
-//                loading.dismiss();
-//                Toast.makeText(RegisterActivity.this,s,Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            protected String doInBackground(Void... v) {
-//                HashMap<String, String> params = new HashMap<>();
-//                params.put(Config.Key_Name, fName);
-//                params.put(Config.Key_ID, uniqueCode);
-//                params.put(Config.Key_Email, Email);
-//                RequestHandler rh = new RequestHandler();
-//                String res = rh.SendPostRequest(Config.URL_AddUser, params);
-//                return res;
-//            }
-//        }
-//        AddStudent as = new AddStudent();
-//        as.execute();
-//    }
-
     /**
      * Checks to see if what the user has inputted to register is a valid set of characters that matches
      * a King's student User ID.
