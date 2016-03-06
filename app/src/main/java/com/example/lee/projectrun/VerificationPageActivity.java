@@ -30,6 +30,7 @@ public class VerificationPageActivity extends AppCompatActivity {
     private String image;
     private String ip;
     private String code;
+    private String gps;
     private EditText txtVerificationInput;
     private Button btnVefSubmit;
 
@@ -57,6 +58,7 @@ public class VerificationPageActivity extends AppCompatActivity {
         ip = intent.getExtras().getString("ip");
         image = intent.getExtras().getString("image");
         code = intent.getExtras().getString("code");
+        gps = intent.getExtras().getString("gps");
 
         entirePractice = practicingLanguage + ", " + practicingLanguageLevel;
         entireTeaching = teachingLanguage + ", " + teachingLanguageLevel;

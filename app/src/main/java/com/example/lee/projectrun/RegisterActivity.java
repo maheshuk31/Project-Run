@@ -1,8 +1,12 @@
 package com.example.lee.projectrun;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -19,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Random;
@@ -39,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private String stringKingsID, stringEmail, stringPassword, stringConfirmPassword;
     private String stringFirstName, stringLastName, stringAge, stringTeachingLanguage, stringPracticeLanguage;
     private String stringTeachingLanguageLevel, stringPracticeLanguageLevel;
-    private String stringPersonalInterest, stringGender, stringCodeHolder, stringImage;
+    private String stringPersonalInterest, stringGender, stringCodeHolder, stringImage, stringGps;
     private Spinner spinnerTeaching1, spinnerTeaching1Level, spinnerTeaching2, spinnerTeaching2Level,
             spinnerTeaching3, spinnerTeaching3Level, spinnerTeaching4, spinnerTeaching4Level;
     private Spinner spinnerPractice1, spinnerPractice1Level, spinnerPractice2, spinnerPractice2Level,
@@ -124,6 +129,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         imgRegisterUser = (ImageView) findViewById(R.id.imgRegisterUser);
         btnUploadImage = (Button) findViewById(R.id.btnUploadImage);
+
         btnUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -249,6 +255,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 booleanPassword == true && booleanConfirmPassword == true &&
                 booleanGenderSelected == true) {
 
+            LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            LocationListener mlocListener = new GetLocation();
+            mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+
             BitmapDrawable drawable = (BitmapDrawable) imgRegisterUser.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -275,6 +285,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             intent.putExtra("personalInterest", stringPersonalInterest);
             intent.putExtra("ip", stringIp);
             intent.putExtra("image", stringImage);
+            intent.putExtra("gps", stringGps);
             //intent.putExtra("image",imgRegisterUser.createScaledBitmap(mBitmap, 160, 160, true));
 
             intent.putExtra("code", stringCodeHolder);
@@ -442,6 +453,30 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
             Uri selectedImage = data.getData();
             imgRegisterUser.setImageURI(selectedImage);
+        }
+    }
+
+    class GetLocation implements LocationListener {
+        @Override
+        public void onLocationChanged(Location location) {
+
+            location.getLatitude();
+            location.getLongitude();
+
+            stringGps = location.getLatitude() + ", " + location.getLongitude();
+
+//            Toast.makeText(getApplicationContext(), stringGps, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {}
+        @Override
+        public void onProviderEnabled(String provider) {
+//            Toast.makeText(getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();
+        }
+        @Override
+        public void onProviderDisabled(String provider) {
+//            Toast.makeText(getApplicationContext(), "Gps Disabled", Toast.LENGTH_SHORT).show();
         }
     }
 }

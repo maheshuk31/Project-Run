@@ -1,7 +1,11 @@
 package com.example.lee.projectrun;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
@@ -12,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtTitle, txtForgotPassword;
     private Button btnRegister, btnLogin;
     private EditText txtLogin;
+    private String stringUpdateGps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +44,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String stringLogin = txtLogin.getText().toString().trim();
-                if(!isValidLogin(stringLogin)) {
+                if (!isValidLogin(stringLogin)) {
                     txtLogin.setError("Please enter a valid King's ID (e.g. K1234567");
                 } else {
                     Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+
+                    //link with database and store the String 'stringpdateGps' and update it
+                    LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                    LocationListener mlocListener = new GetLocation();
+                    mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+
                     startActivity(intent);
                 }
             }
@@ -71,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Checks to see if what the user has inputted as a login is a valid set of characters that matches
      * a King's student User ID.
+     *
      * @param loginString
      * @return
      */
@@ -84,14 +97,14 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * To test any inputted king's ID in the login to see if it passes
+     *
      * @param kingsIDHolder
      * @return
      */
-    public boolean getIsValidKingsID(String kingsIDHolder){
-        if(isValidLogin(kingsIDHolder)==true){
+    public boolean getIsValidKingsID(String kingsIDHolder) {
+        if (isValidLogin(kingsIDHolder) == true) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -116,5 +129,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    class GetLocation implements LocationListener {
+        @Override
+        public void onLocationChanged(Location location) {
+
+            location.getLatitude();
+            location.getLongitude();
+
+            stringUpdateGps = location.getLatitude() + ", " + location.getLongitude();
+
+//            Toast.makeText(getApplicationContext(), stringUpdateGps, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {}
+        @Override
+        public void onProviderEnabled(String provider) {
+//            Toast.makeText(getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();
+        }
+        @Override
+        public void onProviderDisabled(String provider) {
+//            Toast.makeText(getApplicationContext(), "Gps Disabled", Toast.LENGTH_SHORT).show();
+        }
     }
 }
