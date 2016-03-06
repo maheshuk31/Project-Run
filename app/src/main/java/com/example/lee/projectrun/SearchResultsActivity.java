@@ -81,12 +81,11 @@ public class SearchResultsActivity extends AppCompatActivity {
     private void showResult(String json) {
         try {
 
-            JSONObject obj = new JSONObject(json);
-            JSONArray search = obj.getJSONArray("friends");
+            JSONArray search = new JSONArray(json);
             Log.d("AAA", search.toString());
             for (int i = 0; i < search.length(); i++) {
-                JSONObject chatRoomsObj = (JSONObject) search.get(i);
-                addingLayout(chatRoomsObj.getString(Config.Key_Name), chatRoomsObj.getString(Config.Key_Name), chatRoomsObj.getString(Config.Key_Name));
+                JSONObject jo = search.getJSONObject(i);
+                addingLayout(jo.getString("FirstName"), jo.getString("FirstName"), jo.getString("FirstName"));
             }
 
             //   JSONObject jsonObject = new JSONObject(json);
