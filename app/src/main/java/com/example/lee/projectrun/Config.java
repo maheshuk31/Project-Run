@@ -26,6 +26,9 @@ public class Config
     public static final String Key_PracticeLanguage = "PracticeLanguage";
     public static final String Key_PersonalInterests = "PersonalInterests";
     public static final String Key_Friends = "Friends";
+    public static final String Key_IP = "IP";
+    public static final String Key_Image = "Image";
+    public static final String Key_GPS = "GPS";
 
     // JSON tags.
     public static final String TAG_ID = "UniqueCode";
