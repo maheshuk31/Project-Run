@@ -1,10 +1,8 @@
 package com.example.lee.projectrun;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -18,9 +16,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import java.util.HashMap;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -239,6 +235,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 //            addStudent();
             Intent intent = new Intent(getApplicationContext(), VerificationPageActivity.class);
             intent.putExtra("fname", stringFirstName);
+            intent.putExtra("lname", stringLastName);
             intent.putExtra("uniqueCode", stringKingsID);
             intent.putExtra("Email", stringEmail);
             intent.putExtra("age", stringAge);
@@ -248,7 +245,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             intent.putExtra("teachingLanguage", stringTeachingLanguage);
             intent.putExtra("personalInterest", stringPersonalInterest);
             intent.putExtra("ip", stringIp);
-            //intent.putExtra("image",);
+            //intent.putExtra("image",imgRegisterUser.createScaledBitmap(mBitmap, 160, 160, true));
 
             intent.putExtra("code", stringCodeHolder);
             startActivity(intent);
