@@ -1,6 +1,8 @@
 package com.example.lee.projectrun;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private RadioGroup radioGroupGender;
     private String stringKingsID, stringEmail, stringPassword, stringConfirmPassword;
     private String stringFirstName, stringLastName, stringAge, stringTeachingLanguage, stringPracticeLanguage;
-    private String stringPersonalInterest, stringGender, stringCodeHolder;
+    private String stringPersonalInterest, stringGender, stringCodeHolder, stringImage;
     private Spinner spinnerTeaching1, spinnerTeaching1Level, spinnerTeaching2, spinnerTeaching2Level,
             spinnerTeaching3, spinnerTeaching3Level, spinnerTeaching4, spinnerTeaching4Level;
     private Spinner spinnerPractice1, spinnerPractice1Level, spinnerPractice2, spinnerPractice2Level,
@@ -229,6 +233,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (booleanFirstName == true && booleanLastName && booleanKingsID == true && booleanEmail == true &&
                 booleanPassword == true && booleanConfirmPassword == true &&
                 booleanGenderSelected == true) {
+
+            BitmapDrawable drawable = (BitmapDrawable) imgRegisterUser.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            byte[] bb = bos.toByteArray();
+            stringImage = Base64.encodeToString(bb, 0);
+
             WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
             stringIp = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
             emailSend();
@@ -245,6 +257,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             intent.putExtra("teachingLanguage", stringTeachingLanguage);
             intent.putExtra("personalInterest", stringPersonalInterest);
             intent.putExtra("ip", stringIp);
+            intent.putExtra("image", stringImage);
             //intent.putExtra("image",imgRegisterUser.createScaledBitmap(mBitmap, 160, 160, true));
 
             intent.putExtra("code", stringCodeHolder);

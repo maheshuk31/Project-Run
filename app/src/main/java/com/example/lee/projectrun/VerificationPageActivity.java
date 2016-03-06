@@ -50,6 +50,7 @@ public class VerificationPageActivity extends AppCompatActivity {
         teachingLanguage = intent.getExtras().getString("teachingLanguage");
         personalInterest = intent.getExtras().getString("personalInterest");
         ip = intent.getExtras().getString("ip");
+        image = intent.getExtras().getString("image");
         code = intent.getExtras().getString("code");
         btnVefSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
