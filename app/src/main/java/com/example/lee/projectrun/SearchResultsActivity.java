@@ -130,9 +130,11 @@ public class SearchResultsActivity extends AppCompatActivity {
         linLaySecondSearchResultsPerPerson = new LinearLayout(this);
         linLaySecondSearchResultsPerPerson.setOrientation(LinearLayout.HORIZONTAL);
         linLaySecondSearchResultsPerPerson.setWeightSum(1f);
+        linLaySecondSearchResultsPerPerson.setBackground(getDrawable(R.drawable.customborder));
         LinearLayout.LayoutParams linParamSecond = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
+        linParamSecond.setMargins(0, 0, 0, 20);
 
 
         linLaySecondSearchResultsPerPerson.setLayoutParams(linParamSecond);
