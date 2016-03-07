@@ -9,4 +9,5 @@
     <string name="title_activity_tester">Tester</string>
     <string name="title_activity_verification_page">VerificationPageActivity</string>
     <string name="title_activity_profile_viewer">ProfileViewerActivity</string>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
 </resources>

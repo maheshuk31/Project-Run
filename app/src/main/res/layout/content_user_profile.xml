@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.lee.projectrun.ProfileViewerActivity"
-    tools:showIn="@layout/activity_profile_viewer">
-
+    tools:context="com.example.lee.projectrun.UserProfileActivity"
+    tools:showIn="@layout/activity_user_profile">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imgProfileImage"
+        android:id="@+id/imgUserImage"
         android:src="@drawable/defaultavatar"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -20,8 +19,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtProfileFname"
-        android:layout_below="@+id/imgProfileImage"
+        android:id="@+id/txtUserFname"
+        android:layout_below="@+id/imgUserImage"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -30,91 +29,73 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtProfileLname"
+        android:id="@+id/txtUserLname"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtProfileFname"
+        android:layout_below="@+id/txtUserFname"
         android:layout_alignParentLeft="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtProfileEmail"
+        android:id="@+id/txtUserEmail"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtProfileLname"
+        android:layout_below="@+id/txtUserLname"
         android:layout_alignParentLeft="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtProfileGender"
+        android:id="@+id/txtUserGender"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtProfileEmail"
+        android:layout_below="@+id/txtUserEmail"
         android:layout_alignParentLeft="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtProfileAge"
+        android:id="@+id/txtUserAge"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtProfileGender"
+        android:layout_below="@+id/txtUserGender"
         android:layout_alignParentLeft="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtProfileTeaching"
+        android:id="@+id/txtUserTeaching"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtProfileAge"
+        android:layout_below="@+id/txtUserAge"
         android:layout_alignParentLeft="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtProfilePractice"
+        android:id="@+id/txtUserPractice"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtProfileTeaching"
+        android:layout_below="@+id/txtUserTeaching"
         android:layout_alignParentLeft="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtProfilePersonalInterest"
+        android:id="@+id/txtUserPersonalInterest"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtProfilePractice"
+        android:layout_below="@+id/txtUserPractice"
         android:layout_alignParentLeft="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Connection"
-        android:id="@+id/btnProfileAddConnection"
-        android:layout_below="@+id/txtProfilePersonalInterest"
+        android:text="Edit Profile"
+        android:id="@+id/btnUserEditProfile"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chat"
-        android:id="@+id/btnProfileChat"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/btnProfileAddConnection"
-        android:layout_toEndOf="@+id/btnProfileAddConnection" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Last Location"
-        android:id="@+id/btnProfileLastLocation"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/btnProfileChat"
-        android:layout_toEndOf="@+id/btnProfileChat" />
 
 </RelativeLayout>

@@ -9,9 +9,13 @@ import android.widget.EditText;
 
 public class HomePageActivity extends AppCompatActivity {
 
-    private Button btnSearch, btnAdvanced;
+    private Button btnSearch, btnUserProfile;
     private EditText txtSearchVal;
     private String stringSearch;
+    private String stringUserFirstName, stringUserLastName, stringUserEmail, stringUserAge;
+    private String stringUserGender,stringUserPracticeLanguage, stringUserPracticeLanguageLevel;
+    private String stringUserTeachingLanguage, stringUserTeachingLanguageLevel, stringUserPersonalInterest;
+    private String stringUserImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +23,7 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         btnSearch = (Button) findViewById(R.id.btnSearch);
-        btnAdvanced = (Button) findViewById(R.id.btnAdvanced);
+        btnUserProfile = (Button) findViewById(R.id.btnUserProfile);
         txtSearchVal = (EditText) findViewById(R.id.txtSearch);
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -28,6 +32,28 @@ public class HomePageActivity extends AppCompatActivity {
                 stringSearch = txtSearchVal.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), SearchResultsActivity.class);
                 intent.putExtra("stringSearch", stringSearch);
+                startActivity(intent);
+            }
+        });
+
+        btnUserProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Connect to the database and get the information and store it into the strings code here
+
+                Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                intent.putExtra("userFname", stringUserFirstName);
+                intent.putExtra("userLname", stringUserLastName);
+                intent.putExtra("userEmail", stringUserEmail);
+                intent.putExtra("userAge", stringUserAge);
+                intent.putExtra("userGender", stringUserGender);
+                intent.putExtra("userPracticingLanguage", stringUserPracticeLanguage);
+                intent.putExtra("userPracticingLanguageLevel", stringUserPracticeLanguageLevel);
+                intent.putExtra("userTeachingLanguage", stringUserTeachingLanguage);
+                intent.putExtra("userTeachingLanguageLevel", stringUserTeachingLanguageLevel);
+                intent.putExtra("userPersonalInterest", stringUserPersonalInterest);
+                intent.putExtra("userImage", stringUserImage);
                 startActivity(intent);
             }
         });

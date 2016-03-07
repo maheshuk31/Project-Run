@@ -15,11 +15,12 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/linearLayout">
 
         <EditText
             android:layout_width="0dp"
@@ -35,12 +36,14 @@
             android:text="Search"
             android:id="@+id/btnSearch" />
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="0.25"
-            android:textSize="10dp"
-            android:layout_height="wrap_content"
-            android:text="Advanced"
-            android:id="@+id/btnAdvanced" />
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Profile"
+        android:id="@+id/btnUserProfile"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

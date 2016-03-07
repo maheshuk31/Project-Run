@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +31,10 @@ public class SearchResultsActivity extends AppCompatActivity {
     private ImageView imgProfilePic;
     private String JSON_STRING;
     private String Search;
+    private String stringProfileFirstName, stringProfileLastName, stringProfileEmail, stringProfileAge;
+    private String stringProfileGender,stringProfilePracticeLanguage, stringProfilePracticeLanguageLevel;
+    private String stringProfileTeachingLanguage, stringProfileTeachingLanguageLevel, stringProfilePersonalInterest;
+    private String stringProfileImage, stringProfileGps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +108,29 @@ public class SearchResultsActivity extends AppCompatActivity {
         LinearLayout.LayoutParams lpTxtName = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         txtSearchResultName.setTextAlignment(txtSearchResultName.TEXT_ALIGNMENT_CENTER);
         txtSearchResultName.setTextColor(Color.BLACK);
+        txtSearchResultName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Connect to the database and get the information and store it into the strings code here
+
+                Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
+                intent.putExtra("profileFname", stringProfileFirstName);
+                intent.putExtra("profileLname", stringProfileLastName);
+                intent.putExtra("profileEmail", stringProfileEmail);
+                intent.putExtra("profileAge", stringProfileAge);
+                intent.putExtra("profileGender", stringProfileGender);
+                intent.putExtra("profilePracticingLanguage", stringProfilePracticeLanguage);
+                intent.putExtra("profilePracticingLanguageLevel", stringProfilePracticeLanguageLevel);
+                intent.putExtra("profileTeachingLanguage", stringProfileTeachingLanguage);
+                intent.putExtra("profileTeachingLanguageLevel", stringProfileTeachingLanguageLevel);
+                intent.putExtra("profilePersonalInterest", stringProfilePersonalInterest);
+                intent.putExtra("profileImage", stringProfileImage);
+                intent.putExtra("profileGps", stringProfileGps);
+                startActivity(intent);
+
+            }
+        });
         txtSearchResultName.setLayoutParams(lpTxtName);
 
         txtSearchResultPersonalInfo = new TextView(this);
