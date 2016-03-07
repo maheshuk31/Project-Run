@@ -30,7 +30,7 @@
         <activity
             android:name=".Tester"
             android:label="@string/title_activity_tester"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ForgotPasswordActivity"
@@ -47,6 +47,10 @@
         <activity
             android:name=".VerificationPageActivity"
             android:label="@string/title_activity_verification_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProfileViewerActivity"
+            android:label="@string/title_activity_profile_viewer"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
