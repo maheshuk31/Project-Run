@@ -6,7 +6,7 @@ package com.example.lee.projectrun;
 public class Config
 {
     // Addresses to the scripts of the CRUD.
-    public static final String URL_GetUser = "...";
+    public static final String URL_CheckLogin= "http://projectrun.x10host.com/CheckLogin.php";
     public static final String URL_AddUser = "http://projectrun.x10host.com/UserCreation.php";
     public static final String URL_ModifyUser = "http://projectrun.x10host.com/UserModification.php";
     public static final String URL_FindFriends = "http://projectrun.x10host.com/FindFriends.php";
@@ -19,7 +19,7 @@ public class Config
     public static final String Key_LName = "LName";
     public static final String Key_Email = "Email";
     public static final String Key_Search = "Search";
-    public static final String Key_Password = "Password";
+    public static final String Key_Password = "password";
     public static final String Key_Age = "Age";
     public static final String Key_Gender = "Gender";
     public static final String Key_TeachingLanguage = "TeachingLanguage";
@@ -33,11 +33,11 @@ public class Config
     // JSON tags.
     public static final String TAG_ID = "UniqueCode";
     public static final String TAG_JSON_ARRAY="result";
-    public static final String TAG_Name = "FName";
+    public static final String TAG_Name = "FirstName";
     public static final String TAG_Image = "Image";
-    public static final String TAG_LName = "LName";
+    public static final String TAG_LName = "LastName";
     public static final String TAG_Email = "Email";
-    public static final String TAG_Password = "Password";
+    public static final String TAG_Password = "password";
     public static final String TAG_Age = "Age";
     public static final String TAG_Gender = "Gender";
     public static final String TAG_TeachingLanguage = "TeachingLanguage";

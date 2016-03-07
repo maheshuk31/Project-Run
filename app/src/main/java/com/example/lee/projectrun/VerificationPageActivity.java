@@ -119,6 +119,7 @@ public class VerificationPageActivity extends AppCompatActivity {
                 params.put(Config.Key_Image, image);
                 //params.put(Config.Key_GPS, gps);
                 params.put(Config.Key_Password, password);
+                params.put(Config.Key_Friends, "");
 
                 RequestHandler rh = new RequestHandler();
                 String res = rh.SendPostRequest(Config.URL_AddUser, params);

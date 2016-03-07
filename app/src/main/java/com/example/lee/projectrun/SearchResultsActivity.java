@@ -35,6 +35,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     private String stringProfileGender,stringProfilePracticeLanguage, stringProfilePracticeLanguageLevel;
     private String stringProfileTeachingLanguage, stringProfileTeachingLanguageLevel, stringProfilePersonalInterest;
     private String stringProfileImage, stringProfileGps;
+    private String json1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +88,13 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     private void showResult(String json) {
         try {
-
+            json1 = json;
             JSONArray search = new JSONArray(json);
             Log.d("AAA", search.toString());
             for (int i = 0; i < search.length(); i++) {
                 JSONObject jo = search.getJSONObject(i);
-                addingLayout(jo.getString("FirstName"), jo.getString("Image"), jo.getString("PersonalInterests"));
+                addingLayout(jo.getString("UniqueCode"),jo.getString("FirstName"), jo.getString("Image"), jo.getString("PersonalInterests"));
+
             }
 
         } catch (JSONException e) {
@@ -100,7 +102,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         }
     }
 
-    private void addingLayout(String Name, String Image, String Personal) {
+    private void addingLayout(final String Unique, String Name, final String Image, String Personal) {
 
 
         txtSearchResultName = new TextView(this);
@@ -111,26 +113,34 @@ public class SearchResultsActivity extends AppCompatActivity {
         txtSearchResultName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    JSONArray profileSearch = new JSONArray(json1);
+                    for (int i = 0; i < profileSearch.length(); i++) {
+                        JSONObject jo = profileSearch.getJSONObject(i);
+                        if (jo.getString("UniqueCode").equals(Unique)) {
+                            Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
+                            intent.putExtra("profileFname", jo.getString("FirstName"));
+                            intent.putExtra("profileLname", jo.getString("LastName"));
+                            intent.putExtra("profileEmail", jo.getString("Email"));
+                            intent.putExtra("profileAge", jo.getString("Age"));
+                            intent.putExtra("profileGender", jo.getString("Gender"));
+                            intent.putExtra("profilePracticingLanguage", jo.getString("PracticeLanguage"));
+                            intent.putExtra("profileTeachingLanguage", jo.getString("TeachingLanguage"));
+                            intent.putExtra("profilePersonalInterest", jo.getString("PersonalInterests"));
+                            intent.putExtra("profileImage", jo.getString("Image"));
+                           // intent.putExtra("profileGps", jo.getString("GPS"));
+                            startActivity(intent);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 //Connect to the database and get the information and store it into the strings code here
 
-                Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
-                intent.putExtra("profileFname", stringProfileFirstName);
-                intent.putExtra("profileLname", stringProfileLastName);
-                intent.putExtra("profileEmail", stringProfileEmail);
-                intent.putExtra("profileAge", stringProfileAge);
-                intent.putExtra("profileGender", stringProfileGender);
-                intent.putExtra("profilePracticingLanguage", stringProfilePracticeLanguage);
-                intent.putExtra("profilePracticingLanguageLevel", stringProfilePracticeLanguageLevel);
-                intent.putExtra("profileTeachingLanguage", stringProfileTeachingLanguage);
-                intent.putExtra("profileTeachingLanguageLevel", stringProfileTeachingLanguageLevel);
-                intent.putExtra("profilePersonalInterest", stringProfilePersonalInterest);
-                intent.putExtra("profileImage", stringProfileImage);
-                intent.putExtra("profileGps", stringProfileGps);
-                startActivity(intent);
 
             }
-        });
+            });
         txtSearchResultName.setLayoutParams(lpTxtName);
 
         txtSearchResultPersonalInfo = new TextView(this);
