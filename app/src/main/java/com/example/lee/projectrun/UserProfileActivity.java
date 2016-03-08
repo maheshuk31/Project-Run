@@ -24,11 +24,15 @@ public class UserProfileActivity extends AppCompatActivity {
     private String Gender,PracticeLanguage, PracticeLanguageLevel;
     private String TeachingLanguage, TeachingLanguageLevel, PersonalInterest, Image;
     private String TeachingLanguageComplete, PracticeLanguageComplete;
+    private UserInformation userInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
+        Intent intent = getIntent();
+        userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
 
         txtUserFname = (TextView) findViewById(R.id.txtUserFname);
         txtUserLname = (TextView) findViewById(R.id.txtUserLname);
@@ -51,34 +55,34 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-        FirstName = intent.getExtras().getString("userFname");
-        LastName = intent.getExtras().getString("userLname");
-        Email = intent.getExtras().getString("userEmail");
-        Age = intent.getExtras().getString("usereAge");
-        Gender = intent.getExtras().getString("userGender");
-        PracticeLanguage = intent.getExtras().getString("userPracticingLanguage");
-        PracticeLanguageLevel = intent.getExtras().getString("userPracticingLanguageLevel");
-        TeachingLanguage = intent.getExtras().getString("userTeachingLanguage");
-        TeachingLanguageLevel = intent.getExtras().getString("userTeachingLanguageLevel");
-        PersonalInterest = intent.getExtras().getString("userPersonalInterest");
-        Image = intent.getExtras().getString("userImage");
+//        Intent intent = getIntent();
+//        FirstName = intent.getExtras().getString("userFname");
+//        LastName = intent.getExtras().getString("userLname");
+//        Email = intent.getExtras().getString("userEmail");
+//        Age = intent.getExtras().getString("usereAge");
+//        Gender = intent.getExtras().getString("userGender");
+//        PracticeLanguage = intent.getExtras().getString("userPracticingLanguage");
+//        PracticeLanguageLevel = intent.getExtras().getString("userPracticingLanguageLevel");
+//        TeachingLanguage = intent.getExtras().getString("userTeachingLanguage");
+//        TeachingLanguageLevel = intent.getExtras().getString("userTeachingLanguageLevel");
+//        PersonalInterest = intent.getExtras().getString("userPersonalInterest");
+//        Image = intent.getExtras().getString("userImage");
+//
+//        TeachingLanguageComplete = TeachingLanguage + ", " + TeachingLanguageLevel;
+//        PracticeLanguageComplete = PracticeLanguage + ", " + PracticeLanguageLevel;
 
-        TeachingLanguageComplete = TeachingLanguage + ", " + TeachingLanguageLevel;
-        PracticeLanguageComplete = PracticeLanguage + ", " + PracticeLanguageLevel;
+//        byte[] decodedString = Base64.decode(Image, 0);
+//        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-        byte[] decodedString = Base64.decode(Image, 0);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
-        txtUserFname.setText(FirstName);
-        txtUserLname.setText(LastName);
-        txtUserEmail.setText(Email);
-        txtUserAge.setText(Age);
-        txtUserGender.setText(Gender);
-        txtUserTeaching.setText(TeachingLanguageComplete);
-        txtUserPractice.setText(PracticeLanguageComplete);
-        txtUserPersonalInterest.setText(PersonalInterest);
-        imgUserImage.setImageBitmap(decodedByte);
+//        txtUserFname.setText(userInformation.getFirstName());
+        txtUserLname.setText(userInformation.getLastName());
+        txtUserEmail.setText(userInformation.getEmail());
+        txtUserAge.setText(userInformation.getAge());
+        txtUserGender.setText(userInformation.getAge());
+        txtUserTeaching.setText(userInformation.getTeachingLanguage());
+        txtUserPractice.setText(userInformation.getPracticeLanguage());
+        txtUserPersonalInterest.setText(userInformation.getPersonalInterests());
+//        imgUserImage.setImageBitmap(decodedByte);
 
     }
 

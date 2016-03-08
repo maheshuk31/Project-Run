@@ -51,7 +51,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0.2dp"
-                android:layout_toRightOf="@id/txtFirstName"
                 android:layout_weight="1"
                 android:background="@drawable/edittextregisterstyle"
                 android:hint="Last Name"

@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
         Typeface custom = Typeface.createFromAsset(getAssets(), "fonts/liberationserif.regular.ttf");
         txtTitle.setTypeface(custom);
 
-
-
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

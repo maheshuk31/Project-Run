@@ -16,11 +16,15 @@ public class HomePageActivity extends AppCompatActivity {
     private String stringUserGender,stringUserPracticeLanguage, stringUserPracticeLanguageLevel;
     private String stringUserTeachingLanguage, stringUserTeachingLanguageLevel, stringUserPersonalInterest;
     private String stringUserImage;
+    private UserInformation userInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        Intent intent = getIntent();
+        userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
 
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnUserProfile = (Button) findViewById(R.id.btnUserProfile);
@@ -40,21 +44,26 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //Connect to the database and get the information and store it into the strings code here
 
                 Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
-                intent.putExtra("userFname", stringUserFirstName);
-                intent.putExtra("userLname", stringUserLastName);
-                intent.putExtra("userEmail", stringUserEmail);
-                intent.putExtra("userAge", stringUserAge);
-                intent.putExtra("userGender", stringUserGender);
-                intent.putExtra("userPracticingLanguage", stringUserPracticeLanguage);
-                intent.putExtra("userPracticingLanguageLevel", stringUserPracticeLanguageLevel);
-                intent.putExtra("userTeachingLanguage", stringUserTeachingLanguage);
-                intent.putExtra("userTeachingLanguageLevel", stringUserTeachingLanguageLevel);
-                intent.putExtra("userPersonalInterest", stringUserPersonalInterest);
-                intent.putExtra("userImage", stringUserImage);
+                intent.putExtra("userinfo", userInformation);
                 startActivity(intent);
+
+
+
+//                Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+//                intent.putExtra("userFname", stringUserFirstName);
+//                intent.putExtra("userLname", stringUserLastName);
+//                intent.putExtra("userEmail", stringUserEmail);
+//                intent.putExtra("userAge", stringUserAge);
+//                intent.putExtra("userGender", stringUserGender);
+//                intent.putExtra("userPracticingLanguage", stringUserPracticeLanguage);
+//                intent.putExtra("userPracticingLanguageLevel", stringUserPracticeLanguageLevel);
+//                intent.putExtra("userTeachingLanguage", stringUserTeachingLanguage);
+//                intent.putExtra("userTeachingLanguageLevel", stringUserTeachingLanguageLevel);
+//                intent.putExtra("userPersonalInterest", stringUserPersonalInterest);
+//                intent.putExtra("userImage", stringUserImage);
+//                startActivity(intent);
             }
         });
 
