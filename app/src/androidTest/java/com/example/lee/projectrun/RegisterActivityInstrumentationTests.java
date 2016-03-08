@@ -41,13 +41,13 @@ public class RegisterActivityInstrumentationTests extends ActivityInstrumentatio
 
     public void testEmailEditTextExists() {
         RegisterActivity registerActivity = getActivity();
-        EditText txtEmailAddress = (EditText) registerActivity.findViewById(R.id.txtEmailAddress);
+        EditText txtEmailAddress = (EditText) registerActivity.findViewById(R.id.txtEditEmailAddress);
         assertNotNull(txtEmailAddress);
     }
 
     public void testRegisterPasswordEditTextExists() {
         RegisterActivity registerActivity = getActivity();
-        EditText txtRegisterPassword = (EditText) registerActivity.findViewById(R.id.txtRegisterPassword);
+        EditText txtRegisterPassword = (EditText) registerActivity.findViewById(R.id.txtEditPassword);
         assertNotNull(txtRegisterPassword);
     }
 
@@ -83,7 +83,7 @@ public class RegisterActivityInstrumentationTests extends ActivityInstrumentatio
 
     public void testRegisterPersonalInterestsEditTextExists() {
         RegisterActivity registerActivity = getActivity();
-        EditText txtPersonalInterests = (EditText) registerActivity.findViewById(R.id.txtPersonalInterests);
+        EditText txtPersonalInterests = (EditText) registerActivity.findViewById(R.id.txtEditPersonalInterests);
         assertNotNull(txtPersonalInterests);
     }
 
@@ -98,11 +98,11 @@ public class RegisterActivityInstrumentationTests extends ActivityInstrumentatio
         final EditText txtFirstName = (EditText) registerActivity.findViewById(R.id.txtFirstName);
         final EditText txtLastName = (EditText) registerActivity.findViewById(R.id.txtLastName);
         final EditText txtRegisterKingsID = (EditText) registerActivity.findViewById(R.id.txtRegisterKingsID);
-        final EditText txtEmailAddress = (EditText) registerActivity.findViewById(R.id.txtEmailAddress);
-        final EditText txtRegisterPassword = (EditText) registerActivity.findViewById(R.id.txtRegisterPassword);
+        final EditText txtEmailAddress = (EditText) registerActivity.findViewById(R.id.txtEditEmailAddress);
+        final EditText txtRegisterPassword = (EditText) registerActivity.findViewById(R.id.txtEditPassword);
         final EditText txtRegisterConfirmPassword = (EditText) registerActivity.findViewById(R.id.txtRegisterConfirmPassword);
         final RadioButton radioBtnMale = (RadioButton) registerActivity.findViewById(R.id.radioBtnMale);
-        final EditText txtPersonalInterests = (EditText) registerActivity.findViewById(R.id.txtPersonalInterests);
+        final EditText txtPersonalInterests = (EditText) registerActivity.findViewById(R.id.txtEditPersonalInterests);
         final Button btnConfirmRegister = (Button) registerActivity.findViewById(R.id.btnConfirmRegister);
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override

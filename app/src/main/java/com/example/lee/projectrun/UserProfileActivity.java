@@ -40,6 +40,16 @@ public class UserProfileActivity extends AppCompatActivity {
         txtUserPersonalInterest = (TextView) findViewById(R.id.txtUserPersonalInterest);
         imgUserImage = (ImageView) findViewById(R.id.imgUserImage);
         btnUserEditProfile = (Button) findViewById(R.id.btnUserEditProfile);
+        btnUserEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), EditUserProfileActivity.class);
+
+                startActivity(intent);
+
+            }
+        });
 
         Intent intent = getIntent();
         FirstName = intent.getExtras().getString("userFname");

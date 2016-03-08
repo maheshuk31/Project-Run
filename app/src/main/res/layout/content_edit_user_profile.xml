@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.lee.projectrun.EditUserProfileActivity"
+    tools:showIn="@layout/activity_edit_user_profile">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgEditView"
+        android:src="@drawable/defaultavatar"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+        <LinearLayout
+            android:id="@+id/NameHolder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imgEditView"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txtEditFirstName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="0.2dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittextregisterstyle"
+                android:hint="First Name"
+                android:inputType="textPersonName"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp" />
+
+            <EditText
+                android:id="@+id/txtEditLastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0.2dp"
+                android:layout_toRightOf="@id/txtFirstName"
+                android:layout_weight="1"
+                android:background="@drawable/edittextregisterstyle"
+                android:hint="Last Name"
+                android:inputType="textPersonName"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/txtEditEmailAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/NameHolder"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edittextregisterstyle"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp" />
+
+        <EditText
+            android:id="@+id/txtEditPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtEditEmailAddress"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edittextregisterstyle"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp" />
+
+        <LinearLayout
+            android:id="@+id/linLay2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/txtEditPassword"
+            android:layout_marginBottom="2dp"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:id="@+id/linLayGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextregisterstyle"
+                android:orientation="horizontal"
+                android:paddingBottom="6dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="3dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/txtGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="3dp"
+                    android:text="Gender"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#000000" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroupGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioBtnFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Female" />
+
+                    <RadioButton
+                        android:id="@+id/radioBtnMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Male" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/txtEditAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/radioGroupGender"
+                android:layout_marginLeft="0.1dp"
+                android:layout_toEndOf="@+id/radioGroupGender"
+                android:layout_toRightOf="@+id/radioGroupGender"
+                android:background="@drawable/edittextregisterstyle"
+                android:ems="10"
+                android:hint="Age"
+                android:inputType="number"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:textColor="#030303" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linLayTeachingLanguages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linLay2"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edittextregisterstyle"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Teaching Languages"
+                    android:textColor="#030303" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/spinnerTeaching1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+
+                <Spinner
+                    android:id="@+id/spinnerTeaching1Level"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linLayPracticeLanguages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linLayTeachingLanguages"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edittextregisterstyle"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Practice Languages"
+                    android:textColor="#030303" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/spinnerPractice1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+
+                <Spinner
+                    android:id="@+id/spinnerPractice1Level"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/txtEditPersonalInterests"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linLayPracticeLanguages"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edittextregisterstyle"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="Personal Interests"
+            android:inputType="textMultiLine"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:scrollbars="vertical" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:id="@+id/btnEditConfirm"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtEditPersonalInterests"
+        android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+</ScrollView>

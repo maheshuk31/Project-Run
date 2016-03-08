@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private String stringUpdateGps;
     private String password, UniqueCode;
     private boolean userfill;
+    private UserInformation userInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
 
                     Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+                    intent.putExtra("userinfo", userInformation);
 
                     //link with database and store the String 'stringpdateGps' and update it
                     LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -142,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("AAA", userInfo.toString());
                 if (userInfo.length() == 1) {
                     JSONObject userObject = userInfo.getJSONObject(0);
-                    UserInformation userInformation = new UserInformation(userObject.getString("UniqueCode"), userObject.getString("FirstName"), userObject.getString("Image"), userObject.getString("LastName"),
+                    userInformation = new UserInformation(userObject.getString("UniqueCode"), userObject.getString("FirstName"), userObject.getString("Image"), userObject.getString("LastName"),
                             userObject.getString("Email"), userObject.getString("password"), userObject.getString("Age"), userObject.getString("Gender"), userObject.getString("TeachingLanguage"),
                             userObject.getString("PracticeLanguage"), userObject.getString("PersonalInterests"), userObject.getString("Friends"));
                 } else {

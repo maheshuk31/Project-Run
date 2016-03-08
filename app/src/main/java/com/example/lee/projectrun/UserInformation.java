@@ -6,9 +6,10 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class UserInformation {
+public class UserInformation implements Serializable {
     public String UniqueCode;
     public String FirstName;
     public String Image;
