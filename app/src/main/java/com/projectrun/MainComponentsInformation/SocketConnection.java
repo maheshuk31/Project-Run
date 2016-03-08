@@ -23,7 +23,7 @@ import java.util.Iterator;
  */
 public class SocketConnection implements ISocket
 {
-    private static final String AUTHENTICATION_SERVER_ADDRESS = "http://10.177.223.253/projectrun/";
+    private static final String AUTHENTICATION_SERVER_ADDRESS = "http://ipaddress/projectrun/";
 
     //Default listeningPort. This will be changed later.
     private int listeningPort = 0;
