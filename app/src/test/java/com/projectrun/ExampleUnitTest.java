@@ -1,4 +1,4 @@
-package com.example.lee.projectrun;
+package com.projectrun;
 
 import org.junit.Test;
 

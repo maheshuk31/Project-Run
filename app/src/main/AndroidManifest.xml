@@ -1,23 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.lee.projectrun">
+    package="com.projectrun">
 
-    <application
+ <uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+ <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:theme="@style/AppTheme" >
+    <activity android:name=".Actions.ListFriend" android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"></action>
+				<category
+					android:name="android.intent.category.NORMAL">
+				</category>
+			</intent-filter>
+			
+		</activity>
+		<service android:name="com.projectrun.MessageService.MessagingService"></service>
+		<activity android:name=".Actions.LoggingIn"  android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"></action>
+				<category android:name="android.intent.category.LAUNCHER">
+				</category>
+			</intent-filter>
+		</activity>
+		<activity android:name=".Actions.ChatMessage"  android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"></action>
+				<category
+					android:name="android.intent.category.NORMAL">
+				</category>
+			</intent-filter>
+		</activity>
+		
+		
+	<activity android:name=".Actions.SigningUp" android:screenOrientation="portrait"><intent-filter><action android:name="android.intent.action.MAIN"></action>
+<category android:name="android.intent.category.NORMAL"></category>
+</intent-filter>
+</activity>
+<activity android:name=".Actions.AddFriend" android:screenOrientation="portrait"><intent-filter><action android:name="android.intent.action.MAIN"></action>
+<category android:name="android.intent.category.NORMAL"></category>
+</intent-filter>
+</activity>
+<activity android:name=".Actions.AwaitsAprovalForFriends" android:screenOrientation="portrait"><intent-filter><action android:name="android.intent.action.MAIN"></action>
+<category android:name="android.intent.category.NORMAL"></category>
+</intent-filter>
+</activity>
+</application>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+
+
+
 
 </manifest>
