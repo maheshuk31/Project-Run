@@ -24,6 +24,7 @@ public class UserInformation implements Serializable {
     public String Friends;
     public String Search;
     public String IP;
+    public String GPS;
 
     public UserInformation(String UniqueCode, String FirstName,
                            String Image,
@@ -35,7 +36,9 @@ public class UserInformation implements Serializable {
                            String TeachingLanguage,
                            String PracticeLanguage,
                            String PersonalInterests,
-                           String Friends) {
+                           String Friends,
+                            String GPS) {
+        this.GPS = GPS;
         this.UniqueCode = UniqueCode;
         this.FirstName = FirstName;
         this.Image = Image;
@@ -52,6 +55,9 @@ public class UserInformation implements Serializable {
         System.out.println(UniqueCode);
         }
 
+    public String getGPS(){
+        return GPS;
+    }
     public String getFirstName(){
         return FirstName;
     }
@@ -118,6 +124,9 @@ public class UserInformation implements Serializable {
     public void updateFriends(String friends){
         Friends  = Friends + "," + friends;
     }
+    public void updateGPS(String GPS){
+        this.GPS = GPS;
+    }
 
     public void updateStudent(final Activity activity){
         class updateStudent extends AsyncTask<Void,Void,String> {
@@ -150,6 +159,7 @@ public class UserInformation implements Serializable {
                 params.put(Config.Key_Friends, Friends);
                 params.put(Config.Key_TeachingLanguage, TeachingLanguage);
                 params.put(Config.Key_PracticeLanguage, PracticeLanguage);
+                params.put(Config.Key_GPS, GPS);
 
                 RequestHandler rh = new RequestHandler();
                 String res = rh.SendPostRequest(Config.URL_ModifyUser, params);

@@ -1,14 +1,8 @@
 package com.example.lee.projectrun;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -78,7 +72,7 @@ public class UserProfileActivity extends AppCompatActivity {
         txtUserLname.setText(userInformation.getLastName());
         txtUserEmail.setText(userInformation.getEmail());
         txtUserAge.setText(userInformation.getAge());
-        txtUserGender.setText(userInformation.getAge());
+        txtUserGender.setText(userInformation.getGender());
         txtUserTeaching.setText(userInformation.getTeachingLanguage());
         txtUserPractice.setText(userInformation.getPracticeLanguage());
         txtUserPersonalInterest.setText(userInformation.getPersonalInterests());

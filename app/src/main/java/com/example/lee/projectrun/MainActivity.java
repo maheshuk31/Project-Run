@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private String stringUpdateGps;
     private String password, UniqueCode;
     private boolean userfill;
-    private UserInformation userInformation;
+    private UserInformation userInformation, userInformation3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,15 +68,14 @@ public class MainActivity extends AppCompatActivity {
                     txtLogin.setError("Incorrect Password Or Login");
                 } else {
 
-                    Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
-                    intent.putExtra("userinfo", userInformation);
+
 
                     //link with database and store the String 'stringpdateGps' and update it
                     LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                     LocationListener mlocListener = new GetLocation();
                     mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
 
-                    startActivity(intent);
+
                 }
             }
         });
@@ -103,9 +102,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void userChecker() {
+    private UserInformation userChecker() {
         class GetUsers extends AsyncTask<Void, Void, String> {
             ProgressDialog loading;
+            UserInformation userInformation1;
 
             @Override
             protected String doInBackground(Void... v) {
@@ -122,7 +122,11 @@ public class MainActivity extends AppCompatActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                RetrieveUser(s);
+                userInformation1 = RetrieveUser(s);
+              Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+              intent.putExtra("userinfo", userInformation1);
+                System.out.print(userInformation1.getFirstName());
+               startActivity(intent);
             }
 
             @Override
@@ -130,20 +134,29 @@ public class MainActivity extends AppCompatActivity {
                 super.onPreExecute();
                 loading = ProgressDialog.show(MainActivity.this, "Fetching...", "Wait...", false, false);
             }
+
+            public UserInformation getUserInformation1(){
+                return userInformation1;
+            }
         }
         GetUsers getUsers = new GetUsers();
         getUsers.execute();
+
+
+        return getUsers.getUserInformation1();
     }
 
-    private void RetrieveUser(String json) {
+    private UserInformation RetrieveUser(String json) {
+        UserInformation userInformation2 = null;
         try {
+
             if (json!=null) {
                 JSONArray userInfo = new JSONArray(json);
 
                 Log.d("AAA", userInfo.toString());
                 if (userInfo.length() == 1) {
                     JSONObject userObject = userInfo.getJSONObject(0);
-                    userInformation = new UserInformation(userObject.getString("UniqueCode"), userObject.getString("FirstName"), userObject.getString("Image"), userObject.getString("LastName"),
+                    userInformation2 = new UserInformation(userObject.getString("UniqueCode"), userObject.getString("FirstName"), userObject.getString("Image"), userObject.getString("LastName"),
                             userObject.getString("Email"), userObject.getString("password"), userObject.getString("Age"), userObject.getString("Gender"), userObject.getString("TeachingLanguage"),
                             userObject.getString("PracticeLanguage"), userObject.getString("PersonalInterests"), userObject.getString("Friends"));
                 } else {
@@ -153,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return  userInformation2;
     }
 
 
