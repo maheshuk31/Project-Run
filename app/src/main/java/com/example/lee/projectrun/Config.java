@@ -29,6 +29,7 @@ public class Config
     public static final String Key_IP = "IP";
     public static final String Key_Image = "Image";
     public static final String Key_GPS = "GPS";
+    public static final String Key_Stats = "Stats";
 
     // JSON tags.
     public static final String TAG_ID = "UniqueCode";
