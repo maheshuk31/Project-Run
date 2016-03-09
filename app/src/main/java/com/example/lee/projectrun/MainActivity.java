@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnRegister, btnLogin;
+   // private Button btnRegister, btnLogin;
     private TextView txtTitle, txtForgotPassword;
     private Button btnRegister, btnLogin;
     private EditText txtLogin;

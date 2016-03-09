@@ -7,4 +7,11 @@
     <string name="title_activity_home_page">HomePageActivity</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
     <string name="title_activity_tester">Tester</string>
+    <string name="title">Barry Chuckle</string>
+    <string name="snippet">Computer Science</string>
+    <string name="course">Computer Science</string>
+    <string name="google_maps_key">AIzaSyCek0St1agCWLq_T4PSTJ9q_hcZAe8zhfE</string>
+    <string name="google_app_id">project-run-1240</string>
+
+
 </resources>
