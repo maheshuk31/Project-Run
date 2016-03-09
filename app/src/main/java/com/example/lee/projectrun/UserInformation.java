@@ -25,6 +25,7 @@ public class UserInformation implements Serializable {
     public String Search;
     public String IP;
     public String GPS;
+    public String Stats;
 
     public UserInformation(String UniqueCode, String FirstName,
                            String Image,
@@ -37,7 +38,9 @@ public class UserInformation implements Serializable {
                            String PracticeLanguage,
                            String PersonalInterests,
                            String Friends,
-                            String GPS) {
+                            String GPS,
+                           String Stats) {
+        this.Stats = Stats;
         this.GPS = GPS;
         this.UniqueCode = UniqueCode;
         this.FirstName = FirstName;
@@ -63,6 +66,10 @@ public class UserInformation implements Serializable {
     }
     public String getUniqueCode(){
         return UniqueCode;
+    }
+    public String getStats
+            (){
+        return Stats;
     }
     public String getImageString(){
         return Image;
@@ -109,6 +116,7 @@ public class UserInformation implements Serializable {
     public void updateAge(String age){
         Age = age;
     }
+    public void updateStats(String Stats){ this.Stats = Stats;}
     public void updateGender(String gender){
         Gender = gender;
     }
@@ -160,6 +168,7 @@ public class UserInformation implements Serializable {
                 params.put(Config.Key_TeachingLanguage, TeachingLanguage);
                 params.put(Config.Key_PracticeLanguage, PracticeLanguage);
                 params.put(Config.Key_GPS, GPS);
+                params.put(Config.Key_STATS, Stats);
 
                 RequestHandler rh = new RequestHandler();
                 String res = rh.SendPostRequest(Config.URL_ModifyUser, params);
