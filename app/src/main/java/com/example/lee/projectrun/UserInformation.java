@@ -168,7 +168,7 @@ public class UserInformation implements Serializable {
                 params.put(Config.Key_TeachingLanguage, TeachingLanguage);
                 params.put(Config.Key_PracticeLanguage, PracticeLanguage);
                 params.put(Config.Key_GPS, GPS);
-                params.put(Config.Key_STATS, Stats);
+                params.put(Config.Key_Stats, Stats);
 
                 RequestHandler rh = new RequestHandler();
                 String res = rh.SendPostRequest(Config.URL_ModifyUser, params);
