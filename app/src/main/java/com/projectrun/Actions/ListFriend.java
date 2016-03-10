@@ -204,10 +204,11 @@ public class ListFriend extends ListActivity
                 }
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.notification)
-                        .setContentTitle(getText(R.string.new_friend_request_exist));
-                Notification notification = new Notification(R.drawable.notification,
-                        getText(R.string.new_friend_request_exist),
-                        System.currentTimeMillis());
+                        .setContentTitle(getText(R.string.new_friend_request_exist))
+                        .setPriority(NotificationCompat.PRIORITY_HIGH);
+//                Notification notification = new Notification(R.drawable.notification,
+//                        getText(R.string.new_friend_request_exist),
+//                        System.currentTimeMillis());
 
                 Intent i = new Intent(this, AwaitsAprovalForFriends.class);
                 i.putExtra(FriendNetworkInformation.FRIEND_LIST, tmp);
@@ -224,7 +225,7 @@ public class ListFriend extends ListActivity
 
 
                 NM.notify(R.string.new_friend_request_exist, mBuilder.build());
-                NM.notify(R.string.new_friend_request_exist, notification);
+//                NM.notify(R.string.new_friend_request_exist, notification);
             }
             else
             {
