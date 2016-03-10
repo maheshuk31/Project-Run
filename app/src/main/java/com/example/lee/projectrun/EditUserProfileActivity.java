@@ -33,8 +33,8 @@ public class EditUserProfileActivity extends AppCompatActivity {
     private EditText txtEditPersonalInterest;
     private RadioButton radioEditBtnMale, radioEditBtnFemale;
     private RadioGroup radioEditGroupGender;
-    private Spinner spinnerEditTeachingLanguage,spinnerEditTeachingLanguageLevel;
-    private Spinner spinnerEditPracticeLanguage,spinnerEditPracticeLanguageLevel;
+    private Spinner spinnerEditTeachingLanguage, spinnerEditTeachingLanguageLevel;
+    private Spinner spinnerEditPracticeLanguage, spinnerEditPracticeLanguageLevel;
     private Button btnEditImage, btnEditConfirm;
     private ImageView imgEditView;
     private UserInformation userInformation;
@@ -55,7 +55,7 @@ public class EditUserProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_user_profile);
 
         Intent intent = getIntent();
-        userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
+        userInformation = (UserInformation) intent.getSerializableExtra("userinfo");
 
         ArrayAdapter<String> adapterLanguages = new ArrayAdapter<>(this,
                 R.layout.support_simple_spinner_dropdown_item, arrayListLanguages);
@@ -80,7 +80,6 @@ public class EditUserProfileActivity extends AppCompatActivity {
         radioEditGroupGender = (RadioGroup) findViewById(R.id.radioEditGroupGender);
         radioEditBtnMale = (RadioButton) findViewById(R.id.radioEditBtnMale);
         radioEditBtnFemale = (RadioButton) findViewById(R.id.radioEditBtnFemale);
-//        stringGender = ((RadioButton) findViewById(radioEditGroupGender.getCheckedRadioButtonId())).getText().toString();
         txtEditAge = (EditText) findViewById(R.id.txtEditAge);
         spinnerEditTeachingLanguage = (Spinner) findViewById(R.id.spinnerEditTeaching1);
         spinnerEditTeachingLanguageLevel = (Spinner) findViewById(R.id.spinnerEditTeaching1Level);
@@ -98,13 +97,43 @@ public class EditUserProfileActivity extends AppCompatActivity {
 
         txtEditPersonalInterest = (EditText) findViewById(R.id.txtEditPersonalInterests);
         btnEditConfirm = (Button) findViewById(R.id.btnEditConfirm);
+
+        byte[] decodedString = Base64.decode(userInformation.getImageString(), 0);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        imgEditView.setImageBitmap(decodedByte);
+        txtEditFirstName.setText(userInformation.getFirstName());
+        txtEditLastName.setText(userInformation.getLastName());
+        txtEditEmailAddress.setText(userInformation.getEmail());
+        txtEditPassword.setText(userInformation.getPassword());
+        txtEditAge.setText(userInformation.getAge());
+        txtEditPersonalInterest.setText(userInformation.getPersonalInterests());
+        if (userInformation.getGender().equals("Male")) {
+            radioEditBtnMale.setChecked(true);
+        } else {
+            radioEditBtnFemale.setChecked(false);
+        }
+
+        String[] teachingLanguageArray = userInformation.getTeachingLanguage();
+        final String stringTeachingLanguage = teachingLanguageArray[0];
+        final String stringTeachingLanguageLevel = teachingLanguageArray[1];
+        spinnerEditTeachingLanguage.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguage.getAdapter()).getPosition(stringTeachingLanguage));
+        spinnerEditTeachingLanguageLevel.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguageLevel.getAdapter()).getPosition(stringTeachingLanguageLevel));
+
+        String[] practiceLanguageArray = userInformation.getPracticeLanguage();
+        final String stringPracticeLanguage = practiceLanguageArray[0];
+        final String stringPracticeLanguageLevel = practiceLanguageArray[1];
+        spinnerEditPracticeLanguage.setSelection(((ArrayAdapter<String>) spinnerEditPracticeLanguage.getAdapter()).getPosition(stringPracticeLanguage));
+        spinnerEditPracticeLanguageLevel.setSelection(((ArrayAdapter<String>) spinnerEditPracticeLanguageLevel.getAdapter()).getPosition(stringPracticeLanguageLevel));
+
         btnEditConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userInformation.updateFirstName(txtEditFirstName.getText().toString());
                 userInformation.updateLastName(txtEditLastName.getText().toString());
                 userInformation.updatePassword(txtEditPassword.getText().toString());
-//                userInformation.updateGender(stringGender);
+                stringGender = ((RadioButton) findViewById(radioEditGroupGender.getCheckedRadioButtonId())).getText().toString();
+                userInformation.updateGender(stringGender);
                 userInformation.updateAge(txtEditAge.getText().toString());
                 userInformation.updateTeaching(stringTeachingLanguage);
                 userInformation.updateTeaching(stringTeachingLanguageLevel);
@@ -121,46 +150,21 @@ public class EditUserProfileActivity extends AppCompatActivity {
 
                 userInformation.updateImage(stringImage);
 
-                Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+                Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                intent.putExtra("userinfo", userInformation);
                 startActivity(intent);
 
             }
         });
 
-        byte[] decodedString = Base64.decode(userInformation.getImageString(), 0);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-        imgEditView.setImageBitmap(decodedByte);
-        txtEditFirstName.setText(userInformation.getFirstName());
-        txtEditLastName.setText(userInformation.getLastName());
-        txtEditEmailAddress.setText(userInformation.getEmail());
-        txtEditPassword.setText(userInformation.getPassword());
-        txtEditAge.setText(userInformation.getAge());
-        txtEditPersonalInterest.setText(userInformation.getPersonalInterests());
-        if(userInformation.getGender().equals("Male")){
-            radioEditBtnMale.setChecked(true);
-        } else {
-            radioEditBtnFemale.setChecked(false);
-        }
-
-        String[] teachingLanguageArray = userInformation.getTeachingLanguage();
-        String stringTeachingLanguage = teachingLanguageArray[0];
-        String stringTeachingLanguageLevel = teachingLanguageArray[1];
-        spinnerEditTeachingLanguage.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguage.getAdapter()).getPosition(stringTeachingLanguage));
-        spinnerEditTeachingLanguageLevel.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguageLevel.getAdapter()).getPosition(stringTeachingLanguageLevel));
-
-        String[] practiceLanguageArray = userInformation.getPracticeLanguage();
-        String stringPracticeLanguage = practiceLanguageArray[0];
-        String stringPracticeLanguageLevel = practiceLanguageArray[1];
-        spinnerEditPracticeLanguage.setSelection(((ArrayAdapter<String>) spinnerEditPracticeLanguage.getAdapter()).getPosition(stringPracticeLanguage));
-        spinnerEditPracticeLanguageLevel.setSelection(((ArrayAdapter<String>) spinnerEditPracticeLanguageLevel.getAdapter()).getPosition(stringPracticeLanguageLevel));
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             imgEditView.setImageURI(selectedImage);
         }
