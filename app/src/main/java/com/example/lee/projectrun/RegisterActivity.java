@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -45,10 +46,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private String stringFirstName, stringLastName, stringAge, stringTeachingLanguage, stringPracticeLanguage;
     private String stringTeachingLanguageLevel, stringPracticeLanguageLevel;
     private String stringPersonalInterest, stringGender, stringCodeHolder, stringImage, stringGps;
-    private Spinner spinnerTeaching1, spinnerTeaching1Level, spinnerTeaching2, spinnerTeaching2Level,
-            spinnerTeaching3, spinnerTeaching3Level, spinnerTeaching4, spinnerTeaching4Level;
-    private Spinner spinnerPractice1, spinnerPractice1Level, spinnerPractice2, spinnerPractice2Level,
-            spinnerPractice3, spinnerPractice3Level, spinnerPractice4, spinnerPractice4Level;
+    private Spinner spinnerTeaching1, spinnerTeaching1Level;
+    private Spinner spinnerPractice1, spinnerPractice1Level;
     private ImageView imgRegisterUser;
     private Button btnConfirmRegister, btnUploadImage;
     private Boolean booleanFirstName = true;
@@ -95,37 +94,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         spinnerTeaching1 = (Spinner) findViewById(R.id.spinnerTeaching1);
         spinnerTeaching1Level = (Spinner) findViewById(R.id.spinnerTeaching1Level);
-//        spinnerTeaching2 = (Spinner) findViewById(R.id.spinnerTeaching2);
-//        spinnerTeaching2Level = (Spinner) findViewById(R.id.spinnerTeaching2Level);
-//        spinnerTeaching3 = (Spinner) findViewById(R.id.spinnerTeaching3);
-//        spinnerTeaching3Level = (Spinner) findViewById(R.id.spinnerTeaching3Level);
-//        spinnerTeaching4 = (Spinner) findViewById(R.id.spinnerTeaching4);
-//        spinnerTeaching4Level = (Spinner) findViewById(R.id.spinnerTeaching4Level);
+
         spinnerTeaching1.setAdapter(adapterLanguages);
         spinnerTeaching1Level.setAdapter(adapterSkill);
-//        spinnerTeaching2.setAdapter(adapterLanguages);
-//        spinnerTeaching2Level.setAdapter(adapterSkill);
-//        spinnerTeaching3.setAdapter(adapterLanguages);
-//        spinnerTeaching3Level.setAdapter(adapterSkill);
-//        spinnerTeaching4.setAdapter(adapterLanguages);
-//        spinnerTeaching4Level.setAdapter(adapterSkill);
+
 
         spinnerPractice1 = (Spinner) findViewById(R.id.spinnerPractice1);
         spinnerPractice1Level = (Spinner) findViewById(R.id.spinnerPractice1Level);
-//        spinnerPractice2 = (Spinner) findViewById(R.id.spinnerPractice2);
-//        spinnerPractice2Level = (Spinner) findViewById(R.id.spinnerPractice2Level);
-//        spinnerPractice3 = (Spinner) findViewById(R.id.spinnerPractice3);
-//        spinnerPractice3Level = (Spinner) findViewById(R.id.spinnerPractice3Level);
-//        spinnerPractice4 = (Spinner) findViewById(R.id.spinnerPractice4);
-//        spinnerPractice4Level = (Spinner) findViewById(R.id.spinnerPractice4Level);
+
         spinnerPractice1.setAdapter(adapterLanguages);
         spinnerPractice1Level.setAdapter(adapterSkill);
-//        spinnerPractice2.setAdapter(adapterLanguages);
-//        spinnerPractice2Level.setAdapter(adapterSkill);
-//        spinnerPractice3.setAdapter(adapterLanguages);
-//        spinnerPractice3Level.setAdapter(adapterSkill);
-//        spinnerPractice4.setAdapter(adapterLanguages);
-//        spinnerPractice4Level.setAdapter(adapterSkill);
+
 
         imgRegisterUser = (ImageView) findViewById(R.id.imgRegisterUser);
         btnUploadImage = (Button) findViewById(R.id.btnUploadImage);
@@ -266,10 +245,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             byte[] bb = bos.toByteArray();
             stringImage = Base64.encodeToString(bb, 0);
 
-            WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
-            stringIp = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+            getWifi();
+
             emailSend();
-//            addStudent();
             Intent intent = new Intent(getApplicationContext(), VerificationPageActivity.class);
             intent.putExtra("fname", stringFirstName);
             intent.putExtra("lname", stringLastName);
@@ -286,7 +264,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             intent.putExtra("ip", stringIp);
             intent.putExtra("image", stringImage);
             intent.putExtra("gps", stringGps);
-            //intent.putExtra("image",imgRegisterUser.createScaledBitmap(mBitmap, 160, 160, true));
 
             intent.putExtra("code", stringCodeHolder);
             startActivity(intent);
@@ -415,6 +392,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             imgRegisterUser.setImageURI(selectedImage);
         }
     }
+
+    public void getWifi(){
+
+        WifiManager myWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+
+        WifiInfo myWifiInfo = myWifiManager.getConnectionInfo();
+        int myIp = myWifiInfo.getIpAddress();
+        int intMyIp3 = myIp/0x1000000;
+        int intMyIp3mod = myIp%0x1000000;
+        int intMyIp2 = intMyIp3mod/0x10000;
+        int intMyIp2mod = intMyIp3mod%0x10000;
+        int intMyIp1 = intMyIp2mod/0x100;
+        int intMyIp0 = intMyIp2mod%0x100;
+        stringIp = intMyIp0 + "." + intMyIp1 + "." + intMyIp2 + "." + intMyIp3;
+
+    }
+
 
     class GetLocation implements LocationListener {
         @Override

@@ -89,17 +89,26 @@ public class UserInformation implements Serializable {
     public String getGender(){
         return Gender;
     }
-    public String getTeachingLanguage(){
-        return TeachingLanguage;
+    public String[] getTeachingLanguage(){
+        String holder = TeachingLanguage;
+        String[] parts = holder.split(",");
+
+        return parts;
     }
-    public String getPracticeLanguage(){
-        return PracticeLanguage;
+    public String[] getPracticeLanguage(){
+        String holder = PracticeLanguage;
+        String[] parts = holder.split(",");
+
+        return parts;
     }
     public String getPersonalInterests(){
         return PersonalInterests;
     }
-    public String getFriends(){
-        return Friends;
+    public String[] getFriends(){
+        String holder = Friends;
+        String[] parts = holder.split(",");
+
+        return parts;
     }
     public void updateFirstName(String firstName){
         FirstName = firstName;
@@ -121,10 +130,10 @@ public class UserInformation implements Serializable {
         Gender = gender;
     }
     public void updateTeaching(String teachingLanguage){
-        TeachingLanguage = teachingLanguage;
+        TeachingLanguage  = TeachingLanguage + "," + teachingLanguage;
     }
     public void updatePractice(String practiceLanguage){
-        PracticeLanguage = practiceLanguage;
+        PracticeLanguage  = PracticeLanguage + "," + practiceLanguage;
     }
     public void updatePersonal(String personalInterests){
         PersonalInterests = personalInterests;

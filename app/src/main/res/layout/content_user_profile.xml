@@ -94,6 +94,7 @@
         android:layout_height="wrap_content"
         android:text="Edit Profile"
         android:id="@+id/btnUserEditProfile"
+        android:layout_below="@+id/txtUserPersonalInterest"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

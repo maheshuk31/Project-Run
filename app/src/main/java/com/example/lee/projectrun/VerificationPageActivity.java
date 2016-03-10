@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -82,16 +83,6 @@ public class VerificationPageActivity extends AppCompatActivity {
     }
 
     public void addStudent(){
-//        final String fName = txtFirstName.getText().toString().trim();
-//        final String uniqueCode = txtRegisterKingsID.getText().toString().trim();
-//        final String Email = txtEmailAddress.getText().toString().trim();
-//        final String age = txtAge.getText().toString().trim();
-//        final String password = txtRegisterPassword.getText().toString().trim();
-//        final String gender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
-//        final String practicingLanguage = spinnerPractice1.getSelectedItem().toString();
-//        final String teachingLanguage = spinnerTeaching1.getSelectedItem().toString();
-//        final String personalInterest = txtPersonalInterest.getText().toString().trim();
-//        final String image;
 
         class AddStudent extends AsyncTask<Void,Void,String> {
             ProgressDialog loading;
@@ -114,6 +105,8 @@ public class VerificationPageActivity extends AppCompatActivity {
                 params.put(Config.Key_Age, age);
                 params.put(Config.Key_LName, lName);
                 params.put(Config.Key_Gender, gender);
+                params.put(Config.Key_TeachingLanguage, entireTeaching);
+                params.put(Config.Key_PracticeLanguage, entirePractice);
                 params.put(Config.Key_PersonalInterests, personalInterest);
                 params.put(Config.Key_IP, ip);
                 params.put(Config.Key_Image, image);

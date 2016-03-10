@@ -116,7 +116,7 @@
                 android:paddingTop="5dp">
 
                 <TextView
-                    android:id="@+id/txtGender"
+                    android:id="@+id/txtEditGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="3dp"
@@ -125,20 +125,20 @@
                     android:textColor="#000000" />
 
                 <RadioGroup
-                    android:id="@+id/radioGroupGender"
+                    android:id="@+id/radioEditGroupGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/radioBtnFemale"
+                        android:id="@+id/radioEditBtnFemale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="Female" />
 
                     <RadioButton
-                        android:id="@+id/radioBtnMale"
+                        android:id="@+id/radioEditBtnMale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="false"
@@ -151,10 +151,10 @@
                 android:id="@+id/txtEditAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/radioGroupGender"
+                android:layout_alignTop="@+id/radioEditGroupGender"
                 android:layout_marginLeft="0.1dp"
-                android:layout_toEndOf="@+id/radioGroupGender"
-                android:layout_toRightOf="@+id/radioGroupGender"
+                android:layout_toEndOf="@+id/radioEditGroupGender"
+                android:layout_toRightOf="@+id/radioEditGroupGender"
                 android:background="@drawable/edittextregisterstyle"
                 android:ems="10"
                 android:hint="Age"
@@ -193,13 +193,13 @@
                 android:weightSum="1">
 
                 <Spinner
-                    android:id="@+id/spinnerTeaching1"
+                    android:id="@+id/spinnerEditTeaching1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6" />
 
                 <Spinner
-                    android:id="@+id/spinnerTeaching1Level"
+                    android:id="@+id/spinnerEditTeaching1Level"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4" />
@@ -236,13 +236,13 @@
                 android:weightSum="1">
 
                 <Spinner
-                    android:id="@+id/spinnerPractice1"
+                    android:id="@+id/spinnerEditPractice1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6" />
 
                 <Spinner
-                    android:id="@+id/spinnerPractice1Level"
+                    android:id="@+id/spinnerEditPractice1Level"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4" />
@@ -279,6 +279,16 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/txtEditPersonalInterests"
         android:layout_centerHorizontal="true" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change"
+            android:id="@+id/btnEditImage"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 </ScrollView>

@@ -1,6 +1,9 @@
 package com.example.lee.projectrun;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,10 +15,7 @@ public class HomePageActivity extends AppCompatActivity {
     private Button btnSearch, btnUserProfile;
     private EditText txtSearchVal;
     private String stringSearch;
-    private String stringUserFirstName, stringUserLastName, stringUserEmail, stringUserAge;
-    private String stringUserGender,stringUserPracticeLanguage, stringUserPracticeLanguageLevel;
-    private String stringUserTeachingLanguage, stringUserTeachingLanguageLevel, stringUserPersonalInterest;
-    private String stringUserImage;
+    private String stringIp;
     private UserInformation userInformation;
 
     @Override
@@ -44,29 +44,29 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
                 intent.putExtra("userinfo", userInformation);
                 startActivity(intent);
 
-
-
-//                Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
-//                intent.putExtra("userFname", stringUserFirstName);
-//                intent.putExtra("userLname", stringUserLastName);
-//                intent.putExtra("userEmail", stringUserEmail);
-//                intent.putExtra("userAge", stringUserAge);
-//                intent.putExtra("userGender", stringUserGender);
-//                intent.putExtra("userPracticingLanguage", stringUserPracticeLanguage);
-//                intent.putExtra("userPracticingLanguageLevel", stringUserPracticeLanguageLevel);
-//                intent.putExtra("userTeachingLanguage", stringUserTeachingLanguage);
-//                intent.putExtra("userTeachingLanguageLevel", stringUserTeachingLanguageLevel);
-//                intent.putExtra("userPersonalInterest", stringUserPersonalInterest);
-//                intent.putExtra("userImage", stringUserImage);
-//                startActivity(intent);
             }
         });
 
+
+    }
+
+    public void getWifi(){
+
+        WifiManager myWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+
+        WifiInfo myWifiInfo = myWifiManager.getConnectionInfo();
+        int myIp = myWifiInfo.getIpAddress();
+        int intMyIp3 = myIp/0x1000000;
+        int intMyIp3mod = myIp%0x1000000;
+        int intMyIp2 = intMyIp3mod/0x10000;
+        int intMyIp2mod = intMyIp3mod%0x10000;
+        int intMyIp1 = intMyIp2mod/0x100;
+        int intMyIp0 = intMyIp2mod%0x100;
+        stringIp = intMyIp0 + "." + intMyIp1 + "." + intMyIp2 + "." + intMyIp3;
 
     }
 
