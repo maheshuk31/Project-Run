@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     //link with database and store the String 'stringpdateGps' and update it
                     LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                     LocationListener mlocListener = new GetLocation();
-                    mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+//                    mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
 
                     startActivity(intent);
                 }

@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 public class HomePageActivity extends AppCompatActivity {
 
-    private Button btnSearch, btnUserProfile;
+    private Button btnSearch, btnUserProfile, btnGps;
     private EditText txtSearchVal;
     private String stringSearch;
     private String stringUserFirstName, stringUserLastName, stringUserEmail, stringUserAge;
@@ -28,6 +28,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnUserProfile = (Button) findViewById(R.id.btnUserProfile);
+        btnGps = (Button) findViewById(R.id.btnGps);
         txtSearchVal = (EditText) findViewById(R.id.txtSearch);
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +37,14 @@ public class HomePageActivity extends AppCompatActivity {
                 stringSearch = txtSearchVal.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), SearchResultsActivity.class);
                 intent.putExtra("stringSearch", stringSearch);
+                startActivity(intent);
+            }
+        });
+
+        btnGps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), GpsMapFragment.class);
                 startActivity(intent);
             }
         });
@@ -66,6 +75,8 @@ public class HomePageActivity extends AppCompatActivity {
 //                startActivity(intent);
             }
         });
+
+
 
 
     }

@@ -11,4 +11,8 @@
     <string name="title_activity_profile_viewer">ProfileViewerActivity</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_edit_user_profile">EditUserProfileActivity</string>
+    <string name="title">Barry Chuckle</string>
+    <string name="snippet">Computer Science</string>
+    <string name="google_maps_key">AIzaSyCek0St1agCWLq_T4PSTJ9q_hcZAe8zhfE</string>
+    <string name="google_app_id">project-run-1240</string>
 </resources>
