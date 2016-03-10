@@ -129,6 +129,9 @@ public class UserInformation implements Serializable {
     public void updateGender(String gender){
         Gender = gender;
     }
+    public void updateIp(String Ip){
+        IP = Ip;
+    }
     public void updateTeaching(String teachingLanguage){
         TeachingLanguage  = TeachingLanguage + "," + teachingLanguage;
     }

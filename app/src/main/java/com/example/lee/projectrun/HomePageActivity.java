@@ -15,7 +15,6 @@ public class HomePageActivity extends AppCompatActivity {
     private Button btnSearch, btnUserProfile;
     private EditText txtSearchVal;
     private String stringSearch;
-    private String stringIp;
     private UserInformation userInformation;
 
     @Override
@@ -25,6 +24,8 @@ public class HomePageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
+
+        userInformation.updateStudent(HomePageActivity.this);
 
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnUserProfile = (Button) findViewById(R.id.btnUserProfile);
@@ -54,20 +55,6 @@ public class HomePageActivity extends AppCompatActivity {
 
     }
 
-    public void getWifi(){
 
-        WifiManager myWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
-
-        WifiInfo myWifiInfo = myWifiManager.getConnectionInfo();
-        int myIp = myWifiInfo.getIpAddress();
-        int intMyIp3 = myIp/0x1000000;
-        int intMyIp3mod = myIp%0x1000000;
-        int intMyIp2 = intMyIp3mod/0x10000;
-        int intMyIp2mod = intMyIp3mod%0x10000;
-        int intMyIp1 = intMyIp2mod/0x100;
-        int intMyIp0 = intMyIp2mod%0x100;
-        stringIp = intMyIp0 + "." + intMyIp1 + "." + intMyIp2 + "." + intMyIp3;
-
-    }
 
 }

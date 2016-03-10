@@ -7,6 +7,8 @@ import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +32,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener {
 
 
     private TextView txtTitle, txtForgotPassword;
@@ -38,7 +40,11 @@ public class MainActivity extends AppCompatActivity {
     private EditText txtLogin, txtPassword;
     private String stringUpdateGps;
     private String password, UniqueCode;
+    private String stringIp;
     private boolean userfill;
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+    private Context context;
     private UserInformation userInformation, userInformation3;
 
     @Override
@@ -53,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
         Typeface custom = Typeface.createFromAsset(getAssets(), "fonts/liberationserif.regular.ttf");
         txtTitle.setTypeface(custom);
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,18 +71,16 @@ public class MainActivity extends AppCompatActivity {
                 UniqueCode = stringLogin;
                 password = stringPassword;
                 userChecker();
-                if (!isValidLogin(stringLogin)&& stringPassword.isEmpty()) {
+                if (!isValidLogin(stringLogin) && stringPassword.isEmpty()) {
                     txtLogin.setError("Please enter a valid King's ID (e.g. K1234567) Or fill in a password");
-                } else if (userfill==false) {
+                } else if (userfill == false) {
                     txtLogin.setError("Incorrect Password Or Login");
                 } else {
 
 
-
-                    //link with database and store the String 'stringpdateGps' and update it
-                    LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                    LocationListener mlocListener = new GetLocation();
-                    mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+//                    LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//                    LocationListener mlocListener = new GetLocation();
+//                    mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
 
 
                 }
@@ -123,10 +130,14 @@ public class MainActivity extends AppCompatActivity {
                 super.onPostExecute(s);
                 loading.dismiss();
                 userInformation1 = RetrieveUser(s);
-              Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
-              intent.putExtra("userinfo", userInformation1);
+                getIP();
+                userInformation1.updateIp(stringIp);
+                userInformation1.updateGPS(stringUpdateGps);
+                userInformation1.updateStudent(MainActivity.this);
+                Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+                intent.putExtra("userinfo", userInformation1);
                 System.out.print(userInformation1.getFirstName());
-               startActivity(intent);
+                startActivity(intent);
             }
 
             @Override
@@ -135,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 loading = ProgressDialog.show(MainActivity.this, "Fetching...", "Wait...", false, false);
             }
 
-            public UserInformation getUserInformation1(){
+            public UserInformation getUserInformation1() {
                 return userInformation1;
             }
         }
@@ -150,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         UserInformation userInformation2 = null;
         try {
 
-            if (json!=null) {
+            if (json != null) {
                 JSONArray userInfo = new JSONArray(json);
 
                 Log.d("AAA", userInfo.toString());
@@ -166,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  userInformation2;
+        return userInformation2;
     }
 
 
@@ -221,27 +232,38 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    class GetLocation implements LocationListener {
-        @Override
-        public void onLocationChanged(Location location) {
-
-            location.getLatitude();
-            location.getLongitude();
-
-            stringUpdateGps = location.getLatitude() + ", " + location.getLongitude();
-
-//            Toast.makeText(getApplicationContext(), stringUpdateGps, Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {}
-        @Override
-        public void onProviderEnabled(String provider) {
-//            Toast.makeText(getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();
-        }
-        @Override
-        public void onProviderDisabled(String provider) {
-//            Toast.makeText(getApplicationContext(), "Gps Disabled", Toast.LENGTH_SHORT).show();
-        }
+    @Override
+    public void onLocationChanged(Location location) {
+        stringUpdateGps = location.getLatitude() + ", " + location.getLongitude();
     }
-}
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
+    public void getIP(){
+
+        WifiManager myWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+
+        WifiInfo myWifiInfo = myWifiManager.getConnectionInfo();
+        int myIp = myWifiInfo.getIpAddress();
+        int intMyIp3 = myIp/0x1000000;
+        int intMyIp3mod = myIp%0x1000000;
+        int intMyIp2 = intMyIp3mod/0x10000;
+        int intMyIp2mod = intMyIp3mod%0x10000;
+        int intMyIp1 = intMyIp2mod/0x100;
+        int intMyIp0 = intMyIp2mod%0x100;
+        stringIp = intMyIp0 + "." + intMyIp1 + "." + intMyIp2 + "." + intMyIp3;
+
+    }}

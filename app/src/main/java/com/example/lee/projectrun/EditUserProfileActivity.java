@@ -150,6 +150,8 @@ public class EditUserProfileActivity extends AppCompatActivity {
 
                 userInformation.updateImage(stringImage);
 
+                userInformation.updateStudent(EditUserProfileActivity.this);
+
                 Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
                 intent.putExtra("userinfo", userInformation);
                 startActivity(intent);
