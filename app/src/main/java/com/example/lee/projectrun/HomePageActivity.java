@@ -25,7 +25,7 @@ public class HomePageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
 
-        userInformation.updateStudent(HomePageActivity.this);
+        //userInformation.updateStudent(HomePageActivity.this);
 
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnUserProfile = (Button) findViewById(R.id.btnUserProfile);

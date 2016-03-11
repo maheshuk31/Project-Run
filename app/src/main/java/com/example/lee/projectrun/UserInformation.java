@@ -39,7 +39,7 @@ public class UserInformation implements Serializable {
                            String PersonalInterests,
                            String Friends,
                             String GPS,
-                           String Stats) {
+                           String Stats, String Ip) {
         this.Stats = Stats;
         this.GPS = GPS;
         this.UniqueCode = UniqueCode;
@@ -54,6 +54,7 @@ public class UserInformation implements Serializable {
         this.PracticeLanguage = PracticeLanguage;
         this.PersonalInterests = PersonalInterests;
         this.Friends = Friends;
+        this.IP = Ip;
 
         System.out.println(UniqueCode);
         }
@@ -73,6 +74,9 @@ public class UserInformation implements Serializable {
     }
     public String getImageString(){
         return Image;
+    }
+    public String getIP() {
+        return IP;
     }
     public String getLastName(){
         return LastName;
@@ -174,7 +178,6 @@ public class UserInformation implements Serializable {
                 params.put(Config.Key_PersonalInterests, PersonalInterests);
                 params.put(Config.Key_IP, IP);
                 params.put(Config.Key_Image, Image);
-                //params.put(Config.Key_GPS, gps);
                 params.put(Config.Key_Password, password);
                 params.put(Config.Key_Friends, Friends);
                 params.put(Config.Key_TeachingLanguage, TeachingLanguage);

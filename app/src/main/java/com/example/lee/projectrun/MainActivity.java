@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Typeface custom = Typeface.createFromAsset(getAssets(), "fonts/liberationserif.regular.ttf");
         txtTitle.setTypeface(custom);
 
+
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
@@ -130,12 +131,17 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 super.onPostExecute(s);
                 loading.dismiss();
                 userInformation1 = RetrieveUser(s);
-                getIP();
                 userInformation1.updateIp(stringIp);
+                System.out.print(userInformation1.getIP());
+                System.out.print(stringIp);
                 userInformation1.updateGPS(stringUpdateGps);
                 userInformation1.updateStudent(MainActivity.this);
+                userInformation1.updateFirstName("VantheVin");
                 Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
                 intent.putExtra("userinfo", userInformation1);
+                getIP();
+                Log.d("AAAAa", stringIp);
+                Log.d("IP", stringIp);
                 System.out.print(userInformation1.getFirstName());
                 startActivity(intent);
             }
@@ -165,11 +171,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 JSONArray userInfo = new JSONArray(json);
 
                 Log.d("AAA", userInfo.toString());
-                if (userInfo.length() == 1) {
+                if (!userInfo.isNull(0)) {
                     JSONObject userObject = userInfo.getJSONObject(0);
                     userInformation2 = new UserInformation(userObject.getString("UniqueCode"), userObject.getString("FirstName"), userObject.getString("Image"), userObject.getString("LastName"),
                             userObject.getString("Email"), userObject.getString("password"), userObject.getString("Age"), userObject.getString("Gender"), userObject.getString("TeachingLanguage"),
-                            userObject.getString("PracticeLanguage"), userObject.getString("PersonalInterests"), userObject.getString("Friends"), userObject.getString("GPS"), userObject.getString("Stats"));
+                            userObject.getString("PracticeLanguage"), userObject.getString("PersonalInterests"), userObject.getString("Friends"), userObject.getString("GPS"), userObject.getString("Stats"),
+                            userObject.getString("IP"));
                 } else {
                     userfill = false;
                 }
