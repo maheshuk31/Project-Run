@@ -46,6 +46,7 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GpsMapFragment.class);
+                intent.putExtra("userinfo", userInformation);
                 startActivity(intent);
             }
         });

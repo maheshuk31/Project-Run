@@ -1,8 +1,11 @@
 package com.example.lee.projectrun;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -28,6 +31,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 
 public class GpsMapFragment extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
@@ -36,6 +45,8 @@ public class GpsMapFragment extends AppCompatActivity implements
 
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
+    private UserInformation userInformation;
+
 
     private static final String TAG = "MyActivity";
 
@@ -46,6 +57,11 @@ public class GpsMapFragment extends AppCompatActivity implements
     GoogleMap mGoogleMap;
     SupportMapFragment mFragment;
     Marker mCurrLocation;
+    Marker serachLocation;
+    MarkerOptions markersO;
+
+    private String json1;
+
     private static final int LOCATION_REQUEST_CODE = 101;
 
 
@@ -57,6 +73,9 @@ public class GpsMapFragment extends AppCompatActivity implements
         //Builds the map
         mFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mFragment.getMapAsync(this);
+        Intent intent = getIntent();
+        userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
+     //   searchLanguage();
 
 
 
@@ -103,6 +122,83 @@ public class GpsMapFragment extends AppCompatActivity implements
         Log.e(TAG, "Client build " + mGoogleApiClient);
 
     }
+
+    private void searchLanguage(){
+        String[] string = userInformation.getPracticeLanguage();
+
+        for(int x = 0; x<userInformation.getPracticeLanguage().length;x++){
+            search(string[x]);
+
+            x++;
+        }
+
+
+    }
+
+    private void search(final String Search) {
+        class GetUsers extends AsyncTask<Void, Void, String> {
+            ProgressDialog loading;
+
+            @Override
+            protected String doInBackground(Void... v) {
+                HashMap<String, String> params = new HashMap<>();
+                params.put(Config.Key_Search, Search);
+                RequestHandler rh = new RequestHandler();
+                String res = rh.SendPostRequest(Config.URL_Search, params);
+                Log.d("AAAA", "doInBackground: " + res);
+                return res;
+
+            }
+
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                showResult(s);
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(GpsMapFragment.this, "Fetching...", "Wait...", false, false);
+            }
+        }
+        GetUsers getUsers = new GetUsers();
+        getUsers.execute();
+    }
+
+    private void showResult(String json) {
+        try {
+            json1 = json;
+            LatLng latlng2;
+            Double lat;
+            Double lng;
+            JSONArray search = new JSONArray(json);
+            Log.d("AAA", search.toString());
+            for (int i = 0; i < search.length(); i++) {
+                JSONObject jo = search.getJSONObject(i);
+                String holder = userInformation.getGPS();
+                String[] parts = holder.split(",");
+
+                lat = Double.parseDouble(parts[0]);
+                lng = Double.parseDouble(parts[1]);
+                //lat = new LatLng(0,0);
+                Log.d(TAG,"Long"+ lng);
+
+                latlng2 = new LatLng(lat,lng);
+                markersO.position(latlng2);
+                serachLocation = mGoogleMap.addMarker(markersO);
+
+              //  addingLayout(jo.getString("UniqueCode"),jo.getString("FirstName"), jo.getString("Image"), jo.getString("PersonalInterests"));
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
     @Override
     public void onConnected(Bundle bundle) {
