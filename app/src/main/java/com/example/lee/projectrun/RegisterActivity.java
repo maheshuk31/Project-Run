@@ -31,7 +31,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, LocationListener {
 
     private EditText txtFirstName, txtLastName;
     private EditText txtRegisterKingsID;
@@ -68,6 +68,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private String[] arrayLanguageLevel = {"Select a Level", "A1", "A2", "B1", "B2", "C1", "C2"};
     private static final int RESULT_LOAD_IMAGE = 1;
     private String stringIp;
+    private LocationManager locationManager;
+    private LocationListener locationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +118,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 startActivityForResult(intentGallery, RESULT_LOAD_IMAGE);
             }
         });
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
         btnConfirmRegister.setOnClickListener(this);
     }
@@ -234,9 +239,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 booleanPassword == true && booleanConfirmPassword == true &&
                 booleanGenderSelected == true) {
 
-            LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            LocationListener mlocListener = new GetLocation();
-            mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+
+            getIp();
 
             BitmapDrawable drawable = (BitmapDrawable) imgRegisterUser.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
@@ -244,8 +248,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
             byte[] bb = bos.toByteArray();
             stringImage = Base64.encodeToString(bb, 0);
-
-            getWifi();
 
             emailSend();
             Intent intent = new Intent(getApplicationContext(), VerificationPageActivity.class);
@@ -393,7 +395,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public void getWifi(){
+    public void getIp(){
 
         WifiManager myWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
 
@@ -409,28 +411,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-
-    class GetLocation implements LocationListener {
-        @Override
-        public void onLocationChanged(Location location) {
-
-            location.getLatitude();
-            location.getLongitude();
-
-            stringGps = location.getLatitude() + ", " + location.getLongitude();
-
-//            Toast.makeText(getApplicationContext(), stringGps, Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {}
-        @Override
-        public void onProviderEnabled(String provider) {
-//            Toast.makeText(getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();
-        }
-        @Override
-        public void onProviderDisabled(String provider) {
-//            Toast.makeText(getApplicationContext(), "Gps Disabled", Toast.LENGTH_SHORT).show();
-        }
+    @Override
+    public void onLocationChanged(Location location) {
+        stringGps = location.getLatitude() + ", " + location.getLongitude();
     }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
 }
