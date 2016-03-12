@@ -7,11 +7,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.location.Location;
-//import android.location.LocationListener;
+
+import android.location.LocationListener;
+
 import android.location.LocationManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -24,21 +27,11 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-
-import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -49,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private TextView txtTitle, txtForgotPassword;
     private Button btnRegister, btnLogin;
     private EditText txtLogin, txtPassword;
-    private String stringUpdateGps;
+    private String stringUpdateGps = "0";
     private String password, UniqueCode;
     private String stringIp;
     private boolean userfill;
@@ -57,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private LocationListener locationListener;
     private Context context;
     private UserInformation userInformation, userInformation3;
-    private static int REQUEST_CODE_LOCATION;
+    private final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,23 +65,28 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         txtTitle.setTypeface(custom);
 
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            REQUEST_CODE_LOCATION = 2;
-
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
-                // Request missing location permission.
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_CODE_LOCATION);
-            } else {
-                // Location permission has been granted, continue as usual.
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (android.location.LocationListener) this);
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                } else {
+
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+                }
             }
-
-
+            else{
+                getGPS();
+                Config.permissionrequest = true;
+            }
+        }
+        else{
+            getGPS();
+            Config.permissionrequest = true;
         }
 
         getIP();
@@ -106,11 +104,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     txtLogin.setError("Please enter a valid King's ID (e.g. K1234567) Or fill in a password");
                 } else if (userfill == false) {
                     txtLogin.setError("Incorrect Password Or Login");
-                } else {
+                } else if(Config.permissionrequest) {
 
-
-
-
+                    getGPS();
                 }
             }
         });
@@ -135,6 +131,26 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_FINE_LOCATION: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                   Config.permissionrequest = true;
+                    getGPS();
+
+
+                } else {
+
+                }
+                return;
+            }
+
+        }
     }
 
     private UserInformation userChecker() {
@@ -262,25 +278,31 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("ResourceType")
+    public void getGPS() {
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+    }
+
     @Override
     public void onLocationChanged(Location location) {
         stringUpdateGps = location.getLatitude() + ", " + location.getLongitude();
     }
 
-//    @Override
-//    public void onStatusChanged(String provider, int status, Bundle extras) {
-//
-//    }
-//
-//    @Override
-//    public void onProviderEnabled(String provider) {
-//
-//    }
-//
-//    @Override
-//    public void onProviderDisabled(String provider) {
-//
-//    }
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 
     public void getIP(){
 
@@ -296,4 +318,5 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         int intMyIp0 = intMyIp2mod%0x100;
         stringIp = intMyIp0 + "." + intMyIp1 + "." + intMyIp2 + "." + intMyIp3;
 
-    }}
+    }
+}

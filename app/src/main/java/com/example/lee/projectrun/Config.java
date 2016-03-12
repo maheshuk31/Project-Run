@@ -46,6 +46,8 @@ public class Config
     public static final String TAG_PersonalInterests = "PersonalInterests";
     public static final String TAG_Friends = "Friends";
 
+    public static boolean permissionrequest = false;
+
 
 
 
