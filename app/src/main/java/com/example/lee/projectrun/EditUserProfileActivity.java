@@ -39,13 +39,13 @@ public class EditUserProfileActivity extends AppCompatActivity {
     private ImageView imgEditView;
     private UserInformation userInformation;
     private static final int RESULT_LOAD_IMAGE = 1;
-    private String[] arrayListLanguages = {"Select a Language", "Arabic", "Bengali", "Dutch", "English", "French",
+    private String[] arrayEditListLanguages = {"Select a Language", "Arabic", "Bengali", "Dutch", "English", "French",
             "German", "Greek", "Gujarati", "Hebrew",
             "Hindi", "Italian", "Japanese", "Korean",
             "Mandarin", "Punjabi", "Persian (Farsi)", "Polish",
             "Portuguese (Brazilian)", "Portuguese(European)", "Portuguese via Spanish", "Russian",
             "Spanish", "Swedish", "Turkish", "Urdu"};
-    private String[] arrayLanguageLevel = {"Select a Level", "A1", "A2", "B1", "B2", "C1", "C2"};
+    private String[] arrayEditLanguageLevel = {"Select a Level", "A1", "A2", "B1", "B2", "C1", "C2"};
     private String stringGender, stringImage, stringTeachingLanguage, stringTeachingLanguageLevel;
     private String stringPracticeLanguage, stringPracticeLanguageLevel;
 
@@ -58,9 +58,9 @@ public class EditUserProfileActivity extends AppCompatActivity {
         userInformation = (UserInformation) intent.getSerializableExtra("userinfo");
 
         ArrayAdapter<String> adapterLanguages = new ArrayAdapter<>(this,
-                R.layout.support_simple_spinner_dropdown_item, arrayListLanguages);
+                R.layout.support_simple_spinner_dropdown_item, arrayEditListLanguages);
         ArrayAdapter<String> adapterSkill = new ArrayAdapter<>(this,
-                R.layout.support_simple_spinner_dropdown_item, arrayLanguageLevel);
+                R.layout.support_simple_spinner_dropdown_item, arrayEditLanguageLevel);
 
         imgEditView = (ImageView) findViewById(R.id.imgEditView);
 
@@ -135,10 +135,26 @@ public class EditUserProfileActivity extends AppCompatActivity {
                 stringGender = ((RadioButton) findViewById(radioEditGroupGender.getCheckedRadioButtonId())).getText().toString();
                 userInformation.updateGender(stringGender);
                 userInformation.updateAge(txtEditAge.getText().toString());
-                userInformation.updateTeaching(stringTeachingLanguage);
-                userInformation.updateTeaching(stringTeachingLanguageLevel);
-                userInformation.updatePractice(stringPracticeLanguage);
-                userInformation.updatePractice(stringPracticeLanguageLevel);
+                if(stringTeachingLanguage.equals(spinnerEditTeachingLanguage.getSelectedItem().toString())){
+                    //do nothing
+                }else{
+                    userInformation.updateTeaching(stringTeachingLanguage);
+                }
+                if(stringTeachingLanguageLevel.equals(spinnerEditTeachingLanguageLevel.getSelectedItem().toString())){
+                    //do nothing
+                }else{
+                    userInformation.updateTeaching(stringTeachingLanguageLevel);
+                }
+                if(stringPracticeLanguage.equals(spinnerEditPracticeLanguage.getSelectedItem().toString())){
+                    //do nothing
+                }else{
+                    userInformation.updatePractice(stringPracticeLanguage);
+                }
+                if(stringPracticeLanguageLevel.equals(spinnerEditPracticeLanguageLevel.getSelectedItem().toString())){
+                    //do nothing
+                }else{
+                    userInformation.updatePractice(stringPracticeLanguageLevel);
+                }
                 userInformation.updatePersonal(txtEditPersonalInterest.getText().toString());
 
                 BitmapDrawable drawable = (BitmapDrawable) imgEditView.getDrawable();
