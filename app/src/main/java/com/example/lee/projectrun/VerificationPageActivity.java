@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,6 +71,9 @@ public class VerificationPageActivity extends AppCompatActivity {
 
                 //checks the code
                 if(txtVerificationInput.getText().toString().trim().equals(code)){
+                    Log.d("GPS", gps);
+                    Log.d("ip", ip);
+
                     addStudent();
                     Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
                     startActivity(intent);

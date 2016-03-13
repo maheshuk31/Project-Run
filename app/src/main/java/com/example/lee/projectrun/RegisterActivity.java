@@ -88,6 +88,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+
+        new RetrieveOnlineStatusTask().execute((Void) null);
+
         ArrayAdapter<String> adapterLanguages = new ArrayAdapter<>(this,
                 R.layout.support_simple_spinner_dropdown_item, arrayListLanguages);
         ArrayAdapter<String> adapterSkill = new ArrayAdapter<>(this,
@@ -292,8 +295,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (booleanFirstName == true && booleanLastName && booleanKingsID == true && booleanEmail == true &&
                 booleanPassword == true && booleanConfirmPassword == true &&
                 booleanGenderSelected == true) {
-
-            new RetrieveOnlineStatusTask().execute((Void) null);
 
             BitmapDrawable drawable = (BitmapDrawable) imgRegisterUser.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
