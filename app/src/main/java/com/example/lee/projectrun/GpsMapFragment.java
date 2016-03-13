@@ -50,19 +50,12 @@ public class GpsMapFragment extends AppCompatActivity implements
     GoogleApiClient mGoogleApiClient;
     private UserInformation userInformation;
 
-
     private static final String TAG = "MyActivity";
-
-    TextView textView;
-
 
     LatLng latLng;
     GoogleMap mGoogleMap;
     SupportMapFragment mFragment;
     Marker mCurrLocation;
-
-
-
 
     private static final int LOCATION_REQUEST_CODE = 101;
 
@@ -87,14 +80,9 @@ public class GpsMapFragment extends AppCompatActivity implements
         mGoogleMap = googleMap;
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
 
-
         buildGoogleApiClient();
 
         mGoogleApiClient.connect();
-
-
-
-
     }
 
     @Override
@@ -168,7 +156,7 @@ public class GpsMapFragment extends AppCompatActivity implements
             JSONArray search = new JSONArray(json);
             Log.d("AAA", search.toString());
             for (int i = 0; i < search.length(); i++) {
-                JSONObject jo = search.getJSONObject(i);
+                final JSONObject jo = search.getJSONObject(i);
                 String holder = jo.getString("GPS");
 
                 String[] parts = holder.split(",");
@@ -181,10 +169,11 @@ public class GpsMapFragment extends AppCompatActivity implements
                 latlng2 = new LatLng(lat,lng);
                 MarkerOptions markersO = new MarkerOptions();
                 markersO.position(latlng2);
-                markersO.title(jo.getString("FirstName") + " " +  (jo.getString("LastName")));
+                markersO.title(jo.getString("FirstName") + " " + (jo.getString("LastName")));
                 Marker serachLocation = mGoogleMap.addMarker(markersO);
 
                 mGoogleMap.setInfoWindowAdapter(new MyInfoWindowAdapter(jo.getString("FirstName") + " " +  jo.getString("LastName"), jo.getString("PersonalInterests"), jo.getString("Image")));
+
                 mGoogleMap.setOnInfoWindowClickListener(this);
 
 
@@ -219,8 +208,6 @@ public class GpsMapFragment extends AppCompatActivity implements
             MarkerOptions markerOptions;
             markerOptions = new MarkerOptions();
             markerOptions.position(latLng);
-          //  markerOptions.title("Lee Wonnacott");
-          //  markerOptions.snippet("Computer Science");
 
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
 
@@ -321,6 +308,7 @@ public class GpsMapFragment extends AppCompatActivity implements
     public void onInfoWindowClick(Marker marker) {
         //Called when the user click the marker pop up
 
+        marker.showInfoWindow();
         System.out.println("Info window has been clicked!");
     }
 
@@ -350,33 +338,30 @@ public class GpsMapFragment extends AppCompatActivity implements
         @Override
         public View getInfoContents(Marker marker) {
 
+            View v = getLayoutInflater().inflate(R.layout.custom_info_window, null);
 
-            //TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.title));
-            //TextView tvSnippet = ((TextView)myContentsView.findViewById(R.id.snippet));
+            TextView tvTitle = (TextView)v.findViewById(R.id.title);
+            TextView tvSnippet = (TextView)v.findViewById(R.id.snippet);
+            ImageView icon = (ImageView)v.findViewById(R.id.icon_);
 
-            TextView personal = new TextView(GpsMapFragment.this);
-            personal.setText(Personal);
+//            TextView personal = new TextView(GpsMapFragment.this);
+//            personal.setText(Personal);
+//
+//            TextView name = new TextView(GpsMapFragment.this);
+//            name.setText(Name);
 
-            TextView name = new TextView(GpsMapFragment.this);
-            name.setText(Name);
+            tvTitle.setText(Name);
+            tvSnippet.setText(Personal);
 
 
             //Sets the text views to the value assigned in markerOptions.title etc
-            ImageView imgProfilePic = new ImageView(GpsMapFragment.this);
+//            ImageView imgProfilePic = new ImageView(GpsMapFragment.this);
 
             byte[] decodedString = Base64.decode(Image, 0);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            imgProfilePic.setImageBitmap(decodedByte);
+            icon.setImageBitmap(decodedByte);
 
-
-            //  image.setImageIcon(marker.setIcon(R.drawable.kinglogo);
-
-
-            //  tvTitle.setText(marker.getTitle());
-            //     tvSnippet.setText(marker.getSnippet());
-
-
-            return null;
+            return v;
         }
 
     }
