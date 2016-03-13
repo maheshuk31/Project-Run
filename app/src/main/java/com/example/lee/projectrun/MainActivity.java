@@ -32,13 +32,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.URL;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -96,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             Config.permissionrequest = true;
         }
 
-        new RetrieveOnlineStatusTask().execute((Void) null);
+        getIP();
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -311,49 +304,19 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     }
 
-    class RetrieveOnlineStatusTask extends AsyncTask<Void, Void, BufferedReader> {
+    public void getIP(){
 
-        @Override
-        protected BufferedReader doInBackground(Void... arg0) {
-            URL url;
-            BufferedReader bufferedReader = null;
-            InputStreamReader inputStreamReader = null;
-            HttpURLConnection httpURLConnection = null;
-            try {
-                url = new URL("http://ip2country.sourceforge.net/ip2c.php?format=JSON");
-                httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setRequestMethod("GET");
-                httpURLConnection.connect();
-                inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
-                bufferedReader = new BufferedReader(inputStreamReader);
-                String line;
-                StringBuffer buffer = new StringBuffer();
-                while ((line = bufferedReader.readLine()) != null) {
-                    buffer.append(line);
-                    buffer.append('\r');
-                }
-                bufferedReader.close();
-                inputStreamReader.close();
-                JSONObject json_data = new JSONObject(buffer.toString());
-                stringIp = json_data.getString("ip");
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (httpURLConnection != null) {
-                        httpURLConnection.disconnect();
-                    }
-                    if (bufferedReader != null) {
-                        bufferedReader.close();
-                    }
-                    if (inputStreamReader != null) {
-                        inputStreamReader.close();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
+        WifiManager myWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+
+        WifiInfo myWifiInfo = myWifiManager.getConnectionInfo();
+        int myIp = myWifiInfo.getIpAddress();
+        int intMyIp3 = myIp/0x1000000;
+        int intMyIp3mod = myIp%0x1000000;
+        int intMyIp2 = intMyIp3mod/0x10000;
+        int intMyIp2mod = intMyIp3mod%0x10000;
+        int intMyIp1 = intMyIp2mod/0x100;
+        int intMyIp0 = intMyIp2mod%0x100;
+        stringIp = intMyIp0 + "." + intMyIp1 + "." + intMyIp2 + "." + intMyIp3;
+
     }
 }
