@@ -163,23 +163,12 @@ public class GpsMapFragment extends AppCompatActivity implements
     private void showResult(String json) {
         try {
             json1 = json;
-            LatLng latlng2;
-            Double lat;
-            Double lng;
             JSONArray search = new JSONArray(json);
             Log.d("AAA", search.toString());
             for (int i = 0; i < search.length(); i++) {
                 final JSONObject jo = search.getJSONObject(i);
-                String holder = jo.getString("GPS");
+                addMarkers(jo, jo.getString("UniqueCode"));
 
-                String[] parts = holder.split(",");
-
-                lat = Double.parseDouble(parts[0]);
-                lng = Double.parseDouble(parts[1]);
-                //lat = new LatLng(0,0);
-                Log.d(TAG, "Long" + lng);
-                latlng2 = new LatLng(lat,lng);
-                addMarkers(jo.getString("UniqueCode"), jo.getString("UniqueCode"), jo.getString("UniqueCode"), jo.getString("UniqueCode"), latlng2, jo, search);
 
 
 
@@ -191,30 +180,42 @@ public class GpsMapFragment extends AppCompatActivity implements
 
     }
 
-    public void addMarkers(final String UniqueCode, String FirstName, String Image, String Personal, LatLng latlng,final JSONObject jo, final JSONArray search) throws JSONException {
+    public void addMarkers(final JSONObject joobject, final String UniqueCode) throws JSONException {
+        String holder = joobject.getString("GPS");
 
+        String[] parts = holder.split(",");
+
+        LatLng latlng2;
+        Double lat;
+        Double lng;
+        lat = Double.parseDouble(parts[0]);
+        lng = Double.parseDouble(parts[1]);
+        //lat = new LatLng(0,0);
+        Log.d(TAG, "Long" + lng);
+        latlng2 = new LatLng(lat,lng);
         MarkerOptions markersO = new MarkerOptions();
-        markersO.position(latlng);
-        markersO.snippet(jo.getString("FirstName"));
-        byte[] decodedString = Base64.decode(jo.getString("Image"), 0);
+        markersO.position(latlng2);
+        markersO.snippet(joobject.getString("FirstName"));
+        byte[] decodedString = Base64.decode(joobject.getString("Image"), 0);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
         View marker = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_info_window, null);
         ImageView imgView = (ImageView) marker.findViewById(R.id.imgperson);
         imgView.setImageBitmap(decodedByte);
         final MarkerOptions icon = markersO.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker)));
-        markersO.title(jo.getString("FirstName") + " " + (jo.getString("LastName")));
+        markersO.title(joobject.getString("UniqueCode"));
+
 
 
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
-            public boolean onMarkerClick(Marker marker) {
+            public boolean onMarkerClick(final Marker marker) {
 
                 try {
                     JSONArray profileSearch = new JSONArray(json1);
                     for (int i = 0; i < profileSearch.length(); i++) {
                         JSONObject jo = profileSearch.getJSONObject(i);
-                        if (jo.getString("UniqueCode").equals(UniqueCode)) {
+                        if (jo.getString("UniqueCode").equals(marker.getTitle())) {
                             Log.d("FirstName", jo.getString("FirstName"));
                             Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
                             intent.putExtra("profileFname", jo.getString("FirstName"));
