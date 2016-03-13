@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 public class HomePageActivity extends AppCompatActivity {
 
-    private Button btnSearch, btnUserProfile, btnGps;
+    private Button btnSearch, btnUserProfile, btnGps, btnContacts;
     private EditText txtSearchVal;
     private String stringSearch;
     private UserInformation userInformation;
@@ -30,6 +30,7 @@ public class HomePageActivity extends AppCompatActivity {
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnUserProfile = (Button) findViewById(R.id.btnUserProfile);
         btnGps = (Button) findViewById(R.id.btnGps);
+        btnContacts = (Button) findViewById(R.id.btnContacts);
         txtSearchVal = (EditText) findViewById(R.id.txtSearch);
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +60,15 @@ public class HomePageActivity extends AppCompatActivity {
                 intent.putExtra("userinfo", userInformation);
                 startActivity(intent);
 
+            }
+        });
+
+        btnContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FriendsListActivity.class);
+                intent.putExtra("userinfo", userInformation);
+                startActivity(intent);
             }
         });
 

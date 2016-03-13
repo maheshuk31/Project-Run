@@ -53,6 +53,15 @@
         android:text="GPS"
         android:id="@+id/btnGps"
         android:layout_below="@+id/btnUserProfile"
-        android:layout_alignRight="@+id/btnUserProfile"
-        android:layout_alignEnd="@+id/btnUserProfile" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contacts"
+        android:id="@+id/btnContacts"
+        android:layout_below="@+id/btnGps"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

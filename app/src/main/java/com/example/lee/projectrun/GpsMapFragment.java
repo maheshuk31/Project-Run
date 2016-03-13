@@ -348,7 +348,7 @@ public class GpsMapFragment extends AppCompatActivity implements
         }
 
         @Override
-        public void getInfoContents(Marker marker) {
+        public View getInfoContents(Marker marker) {
 
 
             //TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.title));
@@ -376,6 +376,7 @@ public class GpsMapFragment extends AppCompatActivity implements
             //     tvSnippet.setText(marker.getSnippet());
 
 
+            return null;
         }
 
     }
