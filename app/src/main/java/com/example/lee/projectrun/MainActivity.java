@@ -7,12 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.location.Location;
-
 import android.location.LocationListener;
-
 import android.location.LocationManager;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,9 +17,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -183,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 userInformation1.updateStudent(MainActivity.this);
                 Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
                 intent.putExtra("userinfo", userInformation1);
-                Log.d("AAAAa", stringIp);
                 Log.d("IP", stringIp);
                 System.out.print(userInformation1.getFirstName());
                 startActivity(intent);

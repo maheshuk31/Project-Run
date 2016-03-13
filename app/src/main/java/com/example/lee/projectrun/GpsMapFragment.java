@@ -1,11 +1,14 @@
 package com.example.lee.projectrun;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,9 +16,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +62,12 @@ public class GpsMapFragment extends AppCompatActivity implements
     GoogleMap mGoogleMap;
     SupportMapFragment mFragment;
     Marker mCurrLocation;
+    private LinearLayout information;
+    private LinearLayout linLaySecondSearchResultsPerPerson;
+    private LinearLayout linLayThirdSearchResultsNameImageHolder;
+    private TextView txtSearchResultName, txtSearchResultPersonalInfo;
+    private ImageView imgProfilePic;
+    public String json1;
 
     private static final int LOCATION_REQUEST_CODE = 101;
 
@@ -150,6 +162,7 @@ public class GpsMapFragment extends AppCompatActivity implements
 
     private void showResult(String json) {
         try {
+            json1 = json;
             LatLng latlng2;
             Double lat;
             Double lng;
@@ -165,16 +178,9 @@ public class GpsMapFragment extends AppCompatActivity implements
                 lng = Double.parseDouble(parts[1]);
                 //lat = new LatLng(0,0);
                 Log.d(TAG, "Long" + lng);
-
                 latlng2 = new LatLng(lat,lng);
-                MarkerOptions markersO = new MarkerOptions();
-                markersO.position(latlng2);
-                markersO.title(jo.getString("FirstName") + " " + (jo.getString("LastName")));
-                Marker serachLocation = mGoogleMap.addMarker(markersO);
+                addMarkers(jo.getString("UniqueCode"), jo.getString("UniqueCode"), jo.getString("UniqueCode"), jo.getString("UniqueCode"), latlng2, jo, search);
 
-                mGoogleMap.setInfoWindowAdapter(new MyInfoWindowAdapter(jo.getString("FirstName") + " " +  jo.getString("LastName"), jo.getString("PersonalInterests"), jo.getString("Image")));
-
-                mGoogleMap.setOnInfoWindowClickListener(this);
 
 
             }
@@ -182,6 +188,71 @@ public class GpsMapFragment extends AppCompatActivity implements
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public void addMarkers(final String UniqueCode, String FirstName, String Image, String Personal, LatLng latlng,final JSONObject jo, final JSONArray search) throws JSONException {
+
+        MarkerOptions markersO = new MarkerOptions();
+        markersO.position(latlng);
+        markersO.snippet(jo.getString("FirstName"));
+        byte[] decodedString = Base64.decode(jo.getString("Image"), 0);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        View marker = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_info_window, null);
+        ImageView imgView = (ImageView) marker.findViewById(R.id.imgperson);
+        imgView.setImageBitmap(decodedByte);
+        final MarkerOptions icon = markersO.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker)));
+        markersO.title(jo.getString("FirstName") + " " + (jo.getString("LastName")));
+
+
+        mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+                try {
+                    JSONArray profileSearch = new JSONArray(json1);
+                    for (int i = 0; i < profileSearch.length(); i++) {
+                        JSONObject jo = profileSearch.getJSONObject(i);
+                        if (jo.getString("UniqueCode").equals(UniqueCode)) {
+                            Log.d("FirstName", jo.getString("FirstName"));
+                            Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
+                            intent.putExtra("profileFname", jo.getString("FirstName"));
+                            intent.putExtra("profileLname", jo.getString("LastName"));
+                            intent.putExtra("profileEmail", jo.getString("Email"));
+                            intent.putExtra("profileAge", jo.getString("Age"));
+                            intent.putExtra("profileGender", jo.getString("Gender"));
+                            intent.putExtra("profilePracticingLanguage", jo.getString("PracticeLanguage"));
+                            intent.putExtra("profileTeachingLanguage", jo.getString("TeachingLanguage"));
+                            intent.putExtra("profilePersonalInterest", jo.getString("PersonalInterests"));
+                            intent.putExtra("profileImage", jo.getString("Image"));
+                            // intent.putExtra("profileGps", jo.getString("GPS"));
+                            startActivity(intent);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+        });
+
+        //MyInfoWindowAdapter searchinfoWindow = new MyInfoWindowAdapter(jo.getString("FirstName") + " " +  jo.getString("LastName"), jo.getString("PersonalInterests"), jo.getString("Image"), jo.getString("UniqueCode"));
+        //mGoogleMap.setInfoWindowAdapter(searchinfoWindow);
+        final Marker searchLocation = mGoogleMap.addMarker(markersO);
+    }
+
+    public static Bitmap createDrawableFromView(Context context, View view){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
     }
 
 
@@ -246,28 +317,28 @@ public class GpsMapFragment extends AppCompatActivity implements
         //Called when location request detects a differant longlat
         //remove previous current location marker and add new one at current position
 
-        if (mCurrLocation != null) {
-            mCurrLocation.remove();
-        }
-        latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        Toast.makeText(this, location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_SHORT);
+      // if (mCurrLocation != null) {
+      //     mCurrLocation.remove();
+      // }
+      // latLng = new LatLng(location.getLatitude(), location.getLongitude());
+      // Toast.makeText(this, location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_SHORT);
 
-        Log.e(TAG, "LATLNG onloc" + latLng);
-        //Adds marker to the current user location
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-        mCurrLocation = mGoogleMap.addMarker(markerOptions);
+      // Log.e(TAG, "LATLNG onloc" + latLng);
+      // //Adds marker to the current user location
+      // MarkerOptions markerOptions = new MarkerOptions();
+      // markerOptions.position(latLng);
+      // markerOptions.title("Current Position");
+      // markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+      // mCurrLocation = mGoogleMap.addMarker(markerOptions);
 
 
 
-        Toast.makeText(this,"Location Changed",Toast.LENGTH_SHORT).show();
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(latLng).zoom(13).build(); //chnages camara position/zoom when the location changes
+      // Toast.makeText(this,"Location Changed",Toast.LENGTH_SHORT).show();
+      // CameraPosition cameraPosition = new CameraPosition.Builder()
+      //         .target(latLng).zoom(13).build(); //chnages camara position/zoom when the location changes
 
-        mGoogleMap.animateCamera(CameraUpdateFactory
-                .newCameraPosition(cameraPosition));
+      // mGoogleMap.animateCamera(CameraUpdateFactory
+      //         .newCameraPosition(cameraPosition));
 
     }
 
@@ -321,13 +392,15 @@ public class GpsMapFragment extends AppCompatActivity implements
         public String Name;
         public String Personal;
         public String Image;
+        public String UniqueCode;
 
 
-        MyInfoWindowAdapter(String Name, String Personal, String Image){
+        MyInfoWindowAdapter(String Name, String Personal, String Image, String Unique){
             //myContentsView = getLayoutInflater().inflate(R.layout.custom_info_window, null);
             this.Name = Name;
             this.Personal = Personal;
             this.Image = Image;
+            this.UniqueCode = Unique;
         }
 
         @Override
@@ -341,8 +414,8 @@ public class GpsMapFragment extends AppCompatActivity implements
             View v = getLayoutInflater().inflate(R.layout.custom_info_window, null);
 
             TextView tvTitle = (TextView)v.findViewById(R.id.title);
-            TextView tvSnippet = (TextView)v.findViewById(R.id.snippet);
-            ImageView icon = (ImageView)v.findViewById(R.id.icon_);
+           // TextView tvSnippet = (TextView)v.findViewById(R.id.snippet);
+           // ImageView icon = (ImageView)v.findViewById(R.id.icon_);
 
 //            TextView personal = new TextView(GpsMapFragment.this);
 //            personal.setText(Personal);
@@ -350,16 +423,16 @@ public class GpsMapFragment extends AppCompatActivity implements
 //            TextView name = new TextView(GpsMapFragment.this);
 //            name.setText(Name);
 
-            tvTitle.setText(Name);
-            tvSnippet.setText(Personal);
+          //  tvTitle.setText(Name);
+           // tvSnippet.setText(Personal);
 
 
             //Sets the text views to the value assigned in markerOptions.title etc
 //            ImageView imgProfilePic = new ImageView(GpsMapFragment.this);
 
-            byte[] decodedString = Base64.decode(Image, 0);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            icon.setImageBitmap(decodedByte);
+        //   byte[] decodedString = Base64.decode(Image, 0);
+        //   Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        //   icon.setImageBitmap(decodedByte);
 
             return v;
         }
