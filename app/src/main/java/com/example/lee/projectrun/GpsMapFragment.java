@@ -4,12 +4,15 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,10 +60,9 @@ public class GpsMapFragment extends AppCompatActivity implements
     GoogleMap mGoogleMap;
     SupportMapFragment mFragment;
     Marker mCurrLocation;
-    Marker serachLocation;
-    MarkerOptions markersO;
 
-    private String json1;
+
+
 
     private static final int LOCATION_REQUEST_CODE = 101;
 
@@ -75,17 +77,13 @@ public class GpsMapFragment extends AppCompatActivity implements
         mFragment.getMapAsync(this);
         Intent intent = getIntent();
         userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
-     //   searchLanguage();
-
-
-
-
     }
 
     //Called when the map is created
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+        searchLanguage();
         mGoogleMap = googleMap;
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
 
@@ -93,11 +91,6 @@ public class GpsMapFragment extends AppCompatActivity implements
         buildGoogleApiClient();
 
         mGoogleApiClient.connect();
-
-
-
-        mGoogleMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
-        mGoogleMap.setOnInfoWindowClickListener(this);
 
 
 
@@ -124,13 +117,14 @@ public class GpsMapFragment extends AppCompatActivity implements
     }
 
     private void searchLanguage(){
-        String[] string = userInformation.getPracticeLanguage();
+       String[] string = userInformation.getPracticeLanguage();
 
-        for(int x = 0; x<userInformation.getPracticeLanguage().length;x++){
-            search(string[x]);
+       for(int x = 0; x<userInformation.getPracticeLanguage().length;x++){
+           search(string[x]);
 
-            x++;
-        }
+           x++;
+       }
+
 
 
     }
@@ -168,7 +162,6 @@ public class GpsMapFragment extends AppCompatActivity implements
 
     private void showResult(String json) {
         try {
-            json1 = json;
             LatLng latlng2;
             Double lat;
             Double lng;
@@ -176,19 +169,24 @@ public class GpsMapFragment extends AppCompatActivity implements
             Log.d("AAA", search.toString());
             for (int i = 0; i < search.length(); i++) {
                 JSONObject jo = search.getJSONObject(i);
-                String holder = userInformation.getGPS();
+                String holder = jo.getString("GPS");
+
                 String[] parts = holder.split(",");
 
                 lat = Double.parseDouble(parts[0]);
                 lng = Double.parseDouble(parts[1]);
                 //lat = new LatLng(0,0);
-                Log.d(TAG,"Long"+ lng);
+                Log.d(TAG, "Long" + lng);
 
                 latlng2 = new LatLng(lat,lng);
+                MarkerOptions markersO = new MarkerOptions();
                 markersO.position(latlng2);
-                serachLocation = mGoogleMap.addMarker(markersO);
+                markersO.title(jo.getString("FirstName") + " " +  (jo.getString("LastName")));
+                Marker serachLocation = mGoogleMap.addMarker(markersO);
 
-              //  addingLayout(jo.getString("UniqueCode"),jo.getString("FirstName"), jo.getString("Image"), jo.getString("PersonalInterests"));
+                mGoogleMap.setInfoWindowAdapter(new MyInfoWindowAdapter(jo.getString("FirstName") + " " +  jo.getString("LastName"), jo.getString("PersonalInterests"), jo.getString("Image")));
+                mGoogleMap.setOnInfoWindowClickListener(this);
+
 
             }
 
@@ -332,9 +330,16 @@ public class GpsMapFragment extends AppCompatActivity implements
 
     class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter{
 
-        private final View myContentsView;
-        MyInfoWindowAdapter(){
-            myContentsView = getLayoutInflater().inflate(R.layout.custom_info_window, null);
+        public String Name;
+        public String Personal;
+        public String Image;
+
+
+        MyInfoWindowAdapter(String Name, String Personal, String Image){
+            //myContentsView = getLayoutInflater().inflate(R.layout.custom_info_window, null);
+            this.Name = Name;
+            this.Personal = Personal;
+            this.Image = Image;
         }
 
         @Override
@@ -343,29 +348,32 @@ public class GpsMapFragment extends AppCompatActivity implements
         }
 
         @Override
-        public View getInfoContents(Marker marker) {
+        public void getInfoContents(Marker marker) {
 
 
+            //TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.title));
+            //TextView tvSnippet = ((TextView)myContentsView.findViewById(R.id.snippet));
 
-            TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.title));
-            TextView tvSnippet = ((TextView)myContentsView.findViewById(R.id.snippet));
+            TextView personal = new TextView(GpsMapFragment.this);
+            personal.setText(Personal);
 
-
+            TextView name = new TextView(GpsMapFragment.this);
+            name.setText(Name);
 
 
             //Sets the text views to the value assigned in markerOptions.title etc
-            ImageView image = ((ImageView) findViewById(R.id.icon_));
+            ImageView imgProfilePic = new ImageView(GpsMapFragment.this);
+
+            byte[] decodedString = Base64.decode(Image, 0);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imgProfilePic.setImageBitmap(decodedByte);
 
 
-          //  image.setImageIcon(marker.setIcon(R.drawable.kinglogo);
+            //  image.setImageIcon(marker.setIcon(R.drawable.kinglogo);
 
 
-          //  tvTitle.setText(marker.getTitle());
-       //     tvSnippet.setText(marker.getSnippet());
-
-
-
-            return myContentsView;
+            //  tvTitle.setText(marker.getTitle());
+            //     tvSnippet.setText(marker.getSnippet());
 
 
         }
