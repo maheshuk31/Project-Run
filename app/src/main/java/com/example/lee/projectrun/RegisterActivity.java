@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,7 +31,13 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -286,10 +293,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 booleanPassword == true && booleanConfirmPassword == true &&
                 booleanGenderSelected == true) {
 
-
-
-
-            getIp();
+            new RetrieveOnlineStatusTask().execute((Void) null);
 
             BitmapDrawable drawable = (BitmapDrawable) imgRegisterUser.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
@@ -444,20 +448,50 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public void getIp(){
+    class RetrieveOnlineStatusTask extends AsyncTask<Void, Void, BufferedReader> {
 
-        WifiManager myWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
-
-        WifiInfo myWifiInfo = myWifiManager.getConnectionInfo();
-        int myIp = myWifiInfo.getIpAddress();
-        int intMyIp3 = myIp/0x1000000;
-        int intMyIp3mod = myIp%0x1000000;
-        int intMyIp2 = intMyIp3mod/0x10000;
-        int intMyIp2mod = intMyIp3mod%0x10000;
-        int intMyIp1 = intMyIp2mod/0x100;
-        int intMyIp0 = intMyIp2mod%0x100;
-        stringIp = intMyIp0 + "." + intMyIp1 + "." + intMyIp2 + "." + intMyIp3;
-
+        @Override
+        protected BufferedReader doInBackground(Void... arg0) {
+            URL url;
+            BufferedReader bufferedReader = null;
+            InputStreamReader inputStreamReader = null;
+            HttpURLConnection httpURLConnection = null;
+            try {
+                url = new URL("http://ip2country.sourceforge.net/ip2c.php?format=JSON");
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("GET");
+                httpURLConnection.connect();
+                inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
+                bufferedReader = new BufferedReader(inputStreamReader);
+                String line;
+                StringBuffer buffer = new StringBuffer();
+                while ((line = bufferedReader.readLine()) != null) {
+                    buffer.append(line);
+                    buffer.append('\r');
+                }
+                bufferedReader.close();
+                inputStreamReader.close();
+                JSONObject json_data = new JSONObject(buffer.toString());
+                stringIp = json_data.getString("ip");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (httpURLConnection != null) {
+                        httpURLConnection.disconnect();
+                    }
+                    if (bufferedReader != null) {
+                        bufferedReader.close();
+                    }
+                    if (inputStreamReader != null) {
+                        inputStreamReader.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
     }
 
     @SuppressWarnings("ResourceType")
