@@ -1,7 +1,9 @@
 package com.example.lee.projectrun;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
@@ -10,8 +12,10 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.format.Formatter;
@@ -70,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private String stringIp;
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,10 +124,52 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                } else {
+
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+                }
+            }
+            else{
+                getGPS();
+                Config.permissionrequest = true;
+            }
+        }
+        else{
+            getGPS();
+            Config.permissionrequest = true;
+        }
+
 
         btnConfirmRegister.setOnClickListener(this);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_FINE_LOCATION: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Config.permissionrequest = true;
+                    getGPS();
+
+
+                } else {
+
+                }
+                return;
+            }
+
+        }
     }
 
     /**
@@ -238,6 +285,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (booleanFirstName == true && booleanLastName && booleanKingsID == true && booleanEmail == true &&
                 booleanPassword == true && booleanConfirmPassword == true &&
                 booleanGenderSelected == true) {
+
+
 
 
             getIp();
@@ -409,6 +458,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         int intMyIp0 = intMyIp2mod%0x100;
         stringIp = intMyIp0 + "." + intMyIp1 + "." + intMyIp2 + "." + intMyIp3;
 
+    }
+
+    @SuppressWarnings("ResourceType")
+    public void getGPS() {
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
     }
 
     @Override
