@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ public class ProfileViewerActivity extends AppCompatActivity {
     private String Gender,PracticeLanguage, PracticeLanguageLevel;
     private String TeachingLanguage, TeachingLanguageLevel, PersonalInterest, Image ,Gps;
     private String TeachingLanguageComplete, PracticeLanguageComplete;
+    private UserInformation userInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,14 @@ public class ProfileViewerActivity extends AppCompatActivity {
         txtProfilePractice.setText(PracticeLanguage);
         txtProfilePersonalInterest.setText(PersonalInterest);
         imgProfileUser.setImageBitmap(decodedByte);
+
+
+        btnProfileProfileAddConnection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 

@@ -93,7 +93,6 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Connection"
         android:id="@+id/btnProfileAddConnection"
         android:layout_below="@+id/txtProfilePersonalInterest"
         android:layout_alignParentLeft="true"
