@@ -54,17 +54,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        userfill = true;
-        txtLogin = (EditText) findViewById(R.id.txtKingsLogin);
-        txtTitle = (TextView) findViewById(R.id.txtTitle);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
-        Typeface custom = Typeface.createFromAsset(getAssets(), "fonts/liberationserif.regular.ttf");
-        txtTitle.setTypeface(custom);
-
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -88,6 +77,18 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             getGPS();
             Config.permissionrequest = true;
         }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Log.d("GPS STRING ", stringUpdateGps);
+
+
+
+        userfill = true;
+        txtLogin = (EditText) findViewById(R.id.txtKingsLogin);
+        txtTitle = (TextView) findViewById(R.id.txtTitle);
+        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        Typeface custom = Typeface.createFromAsset(getAssets(), "fonts/liberationserif.regular.ttf");
+        txtTitle.setTypeface(custom);
 
         new RetrieveOnlineStatusTask().execute((Void) null);
 
@@ -174,12 +175,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 super.onPostExecute(s);
                 loading.dismiss();
                 userInformation1 = RetrieveUser(s);
+                if(stringIp.equals(null)){
+                    stringIp = "No Ip found";
+                }
                 userInformation1.updateIp(stringIp);
                 userInformation1.updateGPS(stringUpdateGps);
                 userInformation1.updateStudent(MainActivity.this);
                 Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
                 intent.putExtra("userinfo", userInformation1);
                 Log.d("IP", stringIp);
+                Log.d("GPS", stringUpdateGps);
                 System.out.print(userInformation1.getFirstName());
                 startActivity(intent);
             }

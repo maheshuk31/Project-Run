@@ -31,20 +31,6 @@ public class Config
     public static final String Key_GPS = "GPS";
     public static final String Key_Stats = "Stats";
 
-    // JSON tags.
-    public static final String TAG_ID = "UniqueCode";
-    public static final String TAG_JSON_ARRAY="result";
-    public static final String TAG_Name = "FirstName";
-    public static final String TAG_Image = "Image";
-    public static final String TAG_LName = "LastName";
-    public static final String TAG_Email = "Email";
-    public static final String TAG_Password = "password";
-    public static final String TAG_Age = "Age";
-    public static final String TAG_Gender = "Gender";
-    public static final String TAG_TeachingLanguage = "TeachingLanguage";
-    public static final String TAG_PracticeLanguage = "PracticeLanguage";
-    public static final String TAG_PersonalInterests = "PersonalInterests";
-    public static final String TAG_Friends = "Friends";
 
     public static boolean permissionrequest = false;
 

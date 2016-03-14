@@ -30,12 +30,9 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Tester"
-            android:label="@string/title_activity_tester"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" /><![CDATA[
         android:theme="@style/AppTheme.NoActionBar" />
+        ]]>
         <activity
             android:name=".ForgotPasswordActivity"
             android:label="@string/title_activity_forgot_password_acitivty"

@@ -10,8 +10,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +17,6 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.text.format.Formatter;
 import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,7 +26,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -80,7 +76,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private static final int RESULT_LOAD_IMAGE = 1;
     private String stringIp;
     private LocationManager locationManager;
-    private LocationListener locationListener;
     private final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 6;
 
     @Override

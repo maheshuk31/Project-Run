@@ -29,12 +29,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     private LinearLayout linLayThirdSearchResultsNameImageHolder;
     private TextView txtSearchResultName, txtSearchResultPersonalInfo;
     private ImageView imgProfilePic;
-    private String JSON_STRING;
     private String Search;
-    private String stringProfileFirstName, stringProfileLastName, stringProfileEmail, stringProfileAge;
-    private String stringProfileGender,stringProfilePracticeLanguage, stringProfilePracticeLanguageLevel;
-    private String stringProfileTeachingLanguage, stringProfileTeachingLanguageLevel, stringProfilePersonalInterest;
-    private String stringProfileImage, stringProfileGps;
     private String json1;
 
     @Override
@@ -44,10 +39,11 @@ public class SearchResultsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //expands the intent
         Intent intent = getIntent();
         Search = intent.getExtras().getString("stringSearch");
 
-
+        //method to add data to the activity
         search();
 
         linLayResultsHolder = (LinearLayout) findViewById(R.id.linLayResultsHolder);
@@ -55,6 +51,9 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method that initiates the retrieval of data from the server.
+     */
     private void search() {
         class GetUsers extends AsyncTask<Void, Void, String> {
             ProgressDialog loading;
@@ -67,9 +66,12 @@ public class SearchResultsActivity extends AppCompatActivity {
                 String res = rh.SendPostRequest(Config.URL_Search, params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
-
             }
 
+            /**
+             * After the response is given from the database
+             * @param s json String
+             */
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
@@ -86,6 +88,10 @@ public class SearchResultsActivity extends AppCompatActivity {
         getUsers.execute();
     }
 
+    /**
+     * Method to generate the objects for the search result
+     * @param json String that contains the json array
+     */
     private void showResult(String json) {
         try {
             json1 = json;
@@ -94,22 +100,28 @@ public class SearchResultsActivity extends AppCompatActivity {
             for (int i = 0; i < search.length(); i++) {
                 JSONObject jo = search.getJSONObject(i);
                 addingLayout(jo.getString("UniqueCode"),jo.getString("FirstName"), jo.getString("Image"), jo.getString("PersonalInterests"));
-
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Adds a programmatic created layout for each object
+     * @param Unique - Object's Unique code
+     * @param Name - Object's Name
+     * @param Image - Object's Image
+     * @param Personal - Object's Personal
+     */
     private void addingLayout(final String Unique, String Name, final String Image, String Personal) {
 
-
+        //Creates a TextView for the name of the person
         txtSearchResultName = new TextView(this);
         txtSearchResultName.setText(Name);
         LinearLayout.LayoutParams lpTxtName = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         txtSearchResultName.setTextAlignment(txtSearchResultName.TEXT_ALIGNMENT_CENTER);
         txtSearchResultName.setTextColor(Color.BLACK);
+        //Onclick listener to go to their profile
         txtSearchResultName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,21 +140,18 @@ public class SearchResultsActivity extends AppCompatActivity {
                             intent.putExtra("profileTeachingLanguage", jo.getString("TeachingLanguage"));
                             intent.putExtra("profilePersonalInterest", jo.getString("PersonalInterests"));
                             intent.putExtra("profileImage", jo.getString("Image"));
-                           // intent.putExtra("profileGps", jo.getString("GPS"));
+                            intent.putExtra("profileGps", jo.getString("GPS"));
                             startActivity(intent);
                         }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                //Connect to the database and get the information and store it into the strings code here
-
-
             }
             });
         txtSearchResultName.setLayoutParams(lpTxtName);
 
+        //Creates a Text for the Personal information of that user
         txtSearchResultPersonalInfo = new TextView(this);
         txtSearchResultPersonalInfo.setText(Personal);
         LinearLayout.LayoutParams lpPersonalInfo = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -150,37 +159,37 @@ public class SearchResultsActivity extends AppCompatActivity {
         txtSearchResultPersonalInfo.setTextColor(Color.BLACK);
         txtSearchResultPersonalInfo.setLayoutParams(lpPersonalInfo);
 
+        //Creates a ImageView for the that users image
         imgProfilePic = new ImageView(this);
-        LinearLayout.LayoutParams lpImageHolder = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams lpImageHolder = new LinearLayout.LayoutParams(400, 500);
         lpImageHolder.weight = 0.7f;
-        txtSearchResultPersonalInfo.setLayoutParams(lpImageHolder);
+        imgProfilePic.setLayoutParams(lpImageHolder);
         byte[] decodedString = Base64.decode(Image, 0);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         imgProfilePic.setImageBitmap(decodedByte);
 
 
-
+        //Creates LinearLayout that holds, a third layout and personal information
         linLaySecondSearchResultsPerPerson = new LinearLayout(this);
         linLaySecondSearchResultsPerPerson.setOrientation(LinearLayout.HORIZONTAL);
         linLaySecondSearchResultsPerPerson.setWeightSum(1f);
-       // linLaySecondSearchResultsPerPerson.setBackground(getDrawable(R.drawable.customborder));
+        linLaySecondSearchResultsPerPerson.setBackground(getDrawable(R.drawable.customborder));
         LinearLayout.LayoutParams linParamSecond = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         linParamSecond.setMargins(0, 0, 0, 20);
-
-
         linLaySecondSearchResultsPerPerson.setLayoutParams(linParamSecond);
 
+        //Creates a LinearLayout to hold the name and the image
         linLayThirdSearchResultsNameImageHolder = new LinearLayout(this);
         linLayThirdSearchResultsNameImageHolder.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams linParamThird = new LinearLayout.LayoutParams(
                 0,
                 LinearLayout.LayoutParams.MATCH_PARENT);
         linParamThird.weight = 0.3f;
-
         linLayThirdSearchResultsNameImageHolder.setLayoutParams(linParamThird);
 
+        //Instantiate the layout
         linLayResultsHolder.addView(linLaySecondSearchResultsPerPerson);
         linLaySecondSearchResultsPerPerson.addView(linLayThirdSearchResultsNameImageHolder);
         linLaySecondSearchResultsPerPerson.addView(txtSearchResultPersonalInfo);

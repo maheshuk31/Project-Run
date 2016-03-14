@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -62,8 +61,8 @@ public class VerificationPageActivity extends AppCompatActivity {
         code = intent.getExtras().getString("code");
         gps = intent.getExtras().getString("gps");
 
-        entirePractice = practicingLanguage + ", " + practicingLanguageLevel;
-        entireTeaching = teachingLanguage + ", " + teachingLanguageLevel;
+        entirePractice = practicingLanguage + "," + practicingLanguageLevel;
+        entireTeaching = teachingLanguage + "," + teachingLanguageLevel;
 
         btnVefSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
