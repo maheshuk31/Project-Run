@@ -58,8 +58,10 @@ public class UserProfileActivity extends AppCompatActivity {
         txtUserEmail.setText(userInformation.getEmail());
         txtUserAge.setText(userInformation.getAge());
         txtUserGender.setText(userInformation.getGender());
-        txtUserTeaching.setText(Arrays.toString(userInformation.getTeachingLanguage()).replaceAll("\\[|\\]", ""));
-        txtUserPractice.setText(Arrays.toString(userInformation.getPracticeLanguage()).replaceAll("\\[|\\]", ""));
+//        txtUserTeaching.setText(Arrays.toString(userInformation.getTeachingLanguage()).replaceAll("\\[|\\]", ""));
+//        txtUserPractice.setText(Arrays.toString(userInformation.getPracticeLanguage()).replaceAll("\\[|\\]", ""));
+        txtUserTeaching.setText(Arrays.toString(userInformation.getTeachingLanguage()));
+        txtUserPractice.setText(Arrays.toString(userInformation.getPracticeLanguage()));
         txtUserPersonalInterest.setText(userInformation.getPersonalInterests());
         imgUserImage.setImageBitmap(decodedByte);
 

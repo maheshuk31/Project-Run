@@ -46,8 +46,9 @@ public class EditUserProfileActivity extends AppCompatActivity {
             "Portuguese (Brazilian)", "Portuguese(European)", "Portuguese via Spanish", "Russian",
             "Spanish", "Swedish", "Turkish", "Urdu"};
     private String[] arrayEditLanguageLevel = {"Select a Level", "A1", "A2", "B1", "B2", "C1", "C2"};
-    private String stringGender, stringImage, stringTeachingLanguage, stringTeachingLanguageLevel;
-    private String stringPracticeLanguage, stringPracticeLanguageLevel;
+    private String stringGender, stringImage;
+//    private String stringTeachingLanguage, stringTeachingLanguageLevel;
+//    private String stringPracticeLanguage, stringPracticeLanguageLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +91,7 @@ public class EditUserProfileActivity extends AppCompatActivity {
         spinnerEditPracticeLanguage.setAdapter(adapterLanguages);
         spinnerEditPracticeLanguageLevel.setAdapter(adapterSkill);
 
-        stringTeachingLanguage = spinnerEditTeachingLanguage.getSelectedItem().toString();
-        stringTeachingLanguageLevel = spinnerEditTeachingLanguageLevel.getSelectedItem().toString();
-        stringPracticeLanguage = spinnerEditPracticeLanguage.getSelectedItem().toString();
-        stringPracticeLanguageLevel = spinnerEditPracticeLanguageLevel.getSelectedItem().toString();
+
 
         txtEditPersonalInterest = (EditText) findViewById(R.id.txtEditPersonalInterests);
         btnEditConfirm = (Button) findViewById(R.id.btnEditConfirm);
@@ -115,20 +113,25 @@ public class EditUserProfileActivity extends AppCompatActivity {
         }
 
         String[] teachingLanguageArray = userInformation.getTeachingLanguage();
-        final String stringTeachingLanguage = teachingLanguageArray[0];
-        final String stringTeachingLanguageLevel = teachingLanguageArray[1];
-        spinnerEditTeachingLanguage.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguage.getAdapter()).getPosition(stringTeachingLanguage));
-        spinnerEditTeachingLanguageLevel.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguageLevel.getAdapter()).getPosition(stringTeachingLanguageLevel));
+        String stringTeachingLanguageArray = teachingLanguageArray[0];
+        String stringTeachingLanguageLevelArray = teachingLanguageArray[1];
+        spinnerEditTeachingLanguage.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguage.getAdapter()).getPosition(stringTeachingLanguageArray));
+        spinnerEditTeachingLanguageLevel.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguageLevel.getAdapter()).getPosition(stringTeachingLanguageLevelArray));
 
         String[] practiceLanguageArray = userInformation.getPracticeLanguage();
-        final String stringPracticeLanguage = practiceLanguageArray[0];
-        final String stringPracticeLanguageLevel = practiceLanguageArray[1];
-        spinnerEditPracticeLanguage.setSelection(((ArrayAdapter<String>) spinnerEditPracticeLanguage.getAdapter()).getPosition(stringPracticeLanguage));
-        spinnerEditPracticeLanguageLevel.setSelection(((ArrayAdapter<String>) spinnerEditPracticeLanguageLevel.getAdapter()).getPosition(stringPracticeLanguageLevel));
+        String stringPracticeLanguageArray = practiceLanguageArray[0];
+        String stringPracticeLanguageLevelArray = practiceLanguageArray[1];
+        spinnerEditPracticeLanguage.setSelection(((ArrayAdapter<String>) spinnerEditPracticeLanguage.getAdapter()).getPosition(stringPracticeLanguageArray));
+        spinnerEditPracticeLanguageLevel.setSelection(((ArrayAdapter<String>) spinnerEditPracticeLanguageLevel.getAdapter()).getPosition(stringPracticeLanguageLevelArray));
 
         btnEditConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String stringTeachingLanguage = spinnerEditTeachingLanguage.getSelectedItem().toString();
+                String stringTeachingLanguageLevel = spinnerEditTeachingLanguageLevel.getSelectedItem().toString();
+                String stringPracticeLanguage = spinnerEditPracticeLanguage.getSelectedItem().toString();
+                String stringPracticeLanguageLevel = spinnerEditPracticeLanguageLevel.getSelectedItem().toString();
 
                 userInformation.updateFirstName(txtEditFirstName.getText().toString());
                 userInformation.updateLastName(txtEditLastName.getText().toString());
@@ -136,8 +139,8 @@ public class EditUserProfileActivity extends AppCompatActivity {
                 stringGender = ((RadioButton) findViewById(radioEditGroupGender.getCheckedRadioButtonId())).getText().toString();
                 userInformation.updateGender(stringGender);
                 userInformation.updateAge(txtEditAge.getText().toString());
-                userInformation.modifyTeaching(userInformation.getTeachingLanguage()[0].toString(), stringTeachingLanguage, stringTeachingLanguageLevel);
-                userInformation.modifyPractice(userInformation.getPracticeLanguage()[0].toString(), stringPracticeLanguage, stringPracticeLanguageLevel);
+                userInformation.completeRedoTeachingLanguage(userInformation.modifyTeaching(userInformation.getTeachingLanguage()[0].toString(), stringTeachingLanguage, stringTeachingLanguageLevel));
+                userInformation.completeRedoPracticeLanguage(userInformation.modifyPractice(userInformation.getPracticeLanguage()[0].toString(), stringPracticeLanguage, stringPracticeLanguageLevel));
                 userInformation.updatePersonal(txtEditPersonalInterest.getText().toString());
 
                 BitmapDrawable drawable = (BitmapDrawable) imgEditView.getDrawable();

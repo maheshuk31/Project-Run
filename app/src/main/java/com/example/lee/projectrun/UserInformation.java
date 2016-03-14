@@ -136,6 +136,9 @@ public class UserInformation implements Serializable {
     public void updateIp(String Ip){
         IP = Ip;
     }
+    public void completeRedoTeachingLanguage(String teachingLanguage){
+        TeachingLanguage = teachingLanguage;
+    }
     public String modifyTeaching(String teachingLanguageTarget, String newValue, String newLevel){
         String holder = TeachingLanguage;
         String[] parts = holder.split(",");
@@ -153,6 +156,9 @@ public class UserInformation implements Serializable {
         }
 
         return builder.toString();
+    }
+    public void completeRedoPracticeLanguage(String practiceLanguage){
+        PracticeLanguage = practiceLanguage;
     }
     public String modifyPractice(String practiceLanguageTarget, String newValue, String newLevel){
         String holder = PracticeLanguage;

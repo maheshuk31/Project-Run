@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private EditText txtLogin, txtPassword;
     private String stringUpdateGps = "0";
     private String password, UniqueCode;
-    private String stringIp;
+    private String stringIp = "0";
     private boolean userfill;
     private LocationManager locationManager;
     private LocationListener locationListener;
@@ -175,12 +175,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 super.onPostExecute(s);
                 loading.dismiss();
                 userInformation1 = RetrieveUser(s);
-//                if(stringIp.equals(null)){
-//                    stringIp = "No Ip found";
-//                }
-//                else {
-//                    userInformation1.updateIp(stringIp);
-//                }
+                if(stringIp.equals(null)){
+                    stringIp = "No Ip found";
+                }
+                else {
+                    userInformation1.updateIp(stringIp);
+                }
                 userInformation1.updateGPS(stringUpdateGps);
                 userInformation1.updateStudent(MainActivity.this);
                 Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
