@@ -1,9 +1,6 @@
 package com.example.lee.projectrun;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -39,6 +36,7 @@ public class HomePageActivity extends AppCompatActivity {
                 stringSearch = txtSearchVal.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), SearchResultsActivity.class);
                 intent.putExtra("stringSearch", stringSearch);
+                intent.putExtra("userinfo", userInformation);
                 startActivity(intent);
             }
         });

@@ -187,9 +187,54 @@ public class UserInformation implements Serializable {
     public void updatePersonal(String personalInterests){
         PersonalInterests = personalInterests;
     }
-    public void updateFriends(String friends){
+
+    /**
+     * Boolean response to check if the user has a friend added.
+     * @param FriendsCode
+     * @return
+     */
+    public boolean searchFriendsList(String FriendsCode){
+        String holder = Friends;
+        String[] parts = holder.split(",");
+        for(int x = 0; x<parts.length; x++){
+            if(parts[x].equals(FriendsCode)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public void addFriends(String friends){
         Friends  = Friends + "," + friends;
     }
+
+    /**
+     * Deletion of a friend
+      * @param friendsID UniqueCode of the friend
+     */
+    public void modifyFriends(String friendsID){
+        String test = Friends;
+        String[] output = test.split(",");
+        String holder = "";
+
+
+        for(int i = 0; i<output.length; ++i){
+            if(output[i].equals(friendsID))
+            {
+                output[i].replace(output[i], "");
+            }
+            else {
+                if(holder.equals("")){
+                    holder = output[i];
+                }
+                else{
+                    holder =  holder  + "," + output[i];
+                }
+            }
+
+        }
+        Friends = holder;
+    }
+
     public void updateGPS(String GPS){
         this.GPS = GPS;
     }

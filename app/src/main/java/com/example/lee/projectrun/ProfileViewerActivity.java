@@ -16,8 +16,8 @@ public class ProfileViewerActivity extends AppCompatActivity {
     private TextView txtProfileFname, txtProfileLname, txtProfileEmail, txtProfileGender, txtProfileAge,
             txtProfileTeaching, txtProfilePractice, txtProfilePersonalInterest;
     private ImageView imgProfileUser;
-    private Button btnProfileProfileAddConnection, btnProfileChat, btnProfileLastLocation;
-    private String FirstName, LastName, Email, Age;
+    private Button btnProfileAddConnection,  btnProfileChat, btnProfileLastLocation;
+    private String FirstName, LastName, Email, Age, UniqueCode;
     private String Gender,PracticeLanguage, PracticeLanguageLevel;
     private String TeachingLanguage, TeachingLanguageLevel, PersonalInterest, Image ,Gps;
     private String TeachingLanguageComplete, PracticeLanguageComplete;
@@ -37,11 +37,13 @@ public class ProfileViewerActivity extends AppCompatActivity {
         txtProfilePractice = (TextView) findViewById(R.id.txtProfilePractice);
         txtProfilePersonalInterest = (TextView) findViewById(R.id.txtProfilePersonalInterest);
         imgProfileUser = (ImageView) findViewById(R.id.imgProfileImage);
-        btnProfileProfileAddConnection = (Button) findViewById(R.id.btnProfileAddConnection);
+        btnProfileAddConnection = (Button) findViewById(R.id.btnProfileAddConnection);
         btnProfileChat = (Button) findViewById(R.id.btnProfileChat);
         btnProfileLastLocation = (Button) findViewById(R.id.btnProfileLastLocation);
 
+
         Intent intent = getIntent();
+        userInformation = (UserInformation) intent.getSerializableExtra("userinfo");
         FirstName = intent.getExtras().getString("profileFname");
         LastName = intent.getExtras().getString("profileLname");
         Email = intent.getExtras().getString("profileEmail");
@@ -52,6 +54,7 @@ public class ProfileViewerActivity extends AppCompatActivity {
         PersonalInterest = intent.getExtras().getString("profilePersonalInterest");
         Image = intent.getExtras().getString("profileImage");
         Gps = intent.getExtras().getString("profileGps");
+        UniqueCode = intent.getExtras().getString("profileUnique");
 
 
         byte[] decodedString = Base64.decode(Image, 0);
@@ -68,13 +71,53 @@ public class ProfileViewerActivity extends AppCompatActivity {
         txtProfilePersonalInterest.setText(PersonalInterest);
         imgProfileUser.setImageBitmap(decodedByte);
 
-
-        btnProfileProfileAddConnection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        if (userInformation.searchFriendsList(UniqueCode) == true) {
+            btnProfileAddConnection.setText("Remove Contact");
+            btnProfileAddConnection.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                userInformation.modifyFriends(UniqueCode);
+                    userInformation.updateStudent(ProfileViewerActivity.this);
+                    Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
+                    intent.putExtra("userinfo", userInformation);
+                    intent.putExtra("profileUnique", UniqueCode);
+                    intent.putExtra("profileFname", FirstName);
+                    intent.putExtra("profileLname", LastName);
+                    intent.putExtra("profileEmail", Email);
+                    intent.putExtra("profileAge", Age);
+                    intent.putExtra("profileGender", Gender);
+                    intent.putExtra("profilePracticingLanguage", PracticeLanguage);
+                    intent.putExtra("profileTeachingLanguage", TeachingLanguage);
+                    intent.putExtra("profilePersonalInterest", PersonalInterest);
+                    intent.putExtra("profileImage", Image);
+                    intent.putExtra("profileGps", Gps);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            btnProfileAddConnection.setText("Add Contact");
+            btnProfileAddConnection.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    userInformation.addFriends(UniqueCode);
+                    userInformation.updateStudent(ProfileViewerActivity.this);
+                    Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
+                    intent.putExtra("userinfo", userInformation);
+                    intent.putExtra("profileUnique", UniqueCode);
+                    intent.putExtra("profileFname", FirstName);
+                    intent.putExtra("profileLname", LastName);
+                    intent.putExtra("profileEmail", Email);
+                    intent.putExtra("profileAge", Age);
+                    intent.putExtra("profileGender", Gender);
+                    intent.putExtra("profilePracticingLanguage", PracticeLanguage);
+                    intent.putExtra("profileTeachingLanguage", TeachingLanguage);
+                    intent.putExtra("profilePersonalInterest", PersonalInterest);
+                    intent.putExtra("profileImage", Image);
+                    intent.putExtra("profileGps", Gps);
+                    startActivity(intent);
+                }
+            });
+        }
 
     }
 

@@ -31,6 +31,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     private ImageView imgProfilePic;
     private String Search;
     private String json1;
+    private UserInformation userInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         //expands the intent
         Intent intent = getIntent();
         Search = intent.getExtras().getString("stringSearch");
+        userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
 
         //method to add data to the activity
         search();
@@ -131,6 +133,8 @@ public class SearchResultsActivity extends AppCompatActivity {
                         JSONObject jo = profileSearch.getJSONObject(i);
                         if (jo.getString("UniqueCode").equals(Unique)) {
                             Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
+                            intent.putExtra("profileUnique", jo.getString("UniqueCode"));
+                            intent.putExtra("userinfo", userInformation);
                             intent.putExtra("profileFname", jo.getString("FirstName"));
                             intent.putExtra("profileLname", jo.getString("LastName"));
                             intent.putExtra("profileEmail", jo.getString("Email"));
