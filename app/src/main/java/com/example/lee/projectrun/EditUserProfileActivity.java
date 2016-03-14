@@ -129,32 +129,15 @@ public class EditUserProfileActivity extends AppCompatActivity {
         btnEditConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 userInformation.updateFirstName(txtEditFirstName.getText().toString());
                 userInformation.updateLastName(txtEditLastName.getText().toString());
                 userInformation.updatePassword(txtEditPassword.getText().toString());
                 stringGender = ((RadioButton) findViewById(radioEditGroupGender.getCheckedRadioButtonId())).getText().toString();
                 userInformation.updateGender(stringGender);
                 userInformation.updateAge(txtEditAge.getText().toString());
-                if(stringTeachingLanguage.equals(spinnerEditTeachingLanguage.getSelectedItem().toString())){
-                    //do nothing
-                }else{
-                    userInformation.updateTeaching(stringTeachingLanguage);
-                }
-                if(stringTeachingLanguageLevel.equals(spinnerEditTeachingLanguageLevel.getSelectedItem().toString())){
-                    //do nothing
-                }else{
-                    userInformation.updateTeaching(stringTeachingLanguageLevel);
-                }
-                if(stringPracticeLanguage.equals(spinnerEditPracticeLanguage.getSelectedItem().toString())){
-                    //do nothing
-                }else{
-                    userInformation.updatePractice(stringPracticeLanguage);
-                }
-                if(stringPracticeLanguageLevel.equals(spinnerEditPracticeLanguageLevel.getSelectedItem().toString())){
-                    //do nothing
-                }else{
-                    userInformation.updatePractice(stringPracticeLanguageLevel);
-                }
+                userInformation.modifyTeaching(userInformation.getTeachingLanguage()[0].toString(), stringTeachingLanguage, stringTeachingLanguageLevel);
+                userInformation.modifyPractice(userInformation.getPracticeLanguage()[0].toString(), stringPracticeLanguage, stringPracticeLanguageLevel);
                 userInformation.updatePersonal(txtEditPersonalInterest.getText().toString());
 
                 BitmapDrawable drawable = (BitmapDrawable) imgEditView.getDrawable();

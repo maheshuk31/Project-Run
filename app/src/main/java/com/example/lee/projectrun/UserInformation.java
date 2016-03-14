@@ -136,6 +136,42 @@ public class UserInformation implements Serializable {
     public void updateIp(String Ip){
         IP = Ip;
     }
+    public String modifyTeaching(String teachingLanguageTarget, String newValue, String newLevel){
+        String holder = TeachingLanguage;
+        String[] parts = holder.split(",");
+        for(int i = 0; i> parts.length; i++){
+
+            if(parts[i].equals(teachingLanguageTarget)){
+                parts[i].replace(parts[i], newValue);
+                parts[i+1].replace(parts[i+1], newLevel);
+            }
+
+        }
+        StringBuilder builder = new StringBuilder();
+        for(String str: parts){
+            builder.append(str);
+        }
+
+        return builder.toString();
+    }
+    public String modifyPractice(String practiceLanguageTarget, String newValue, String newLevel){
+        String holder = PracticeLanguage;
+        String[] parts = holder.split(",");
+        for(int i = 0; i> parts.length; i++){
+
+            if(parts[i].equals(practiceLanguageTarget)){
+                parts[i].replace(parts[i], newValue);
+                parts[i+1].replace(parts[i+1], newLevel);
+            }
+
+        }
+        StringBuilder builder = new StringBuilder();
+        for(String str: parts){
+            builder.append(str);
+        }
+
+        return builder.toString();
+    }
     public void updateTeaching(String teachingLanguage){
         TeachingLanguage  = TeachingLanguage + "," + teachingLanguage;
     }

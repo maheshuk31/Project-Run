@@ -175,10 +175,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 super.onPostExecute(s);
                 loading.dismiss();
                 userInformation1 = RetrieveUser(s);
-                if(stringIp.equals(null)){
-                    stringIp = "No Ip found";
-                }
-                userInformation1.updateIp(stringIp);
+//                if(stringIp.equals(null)){
+//                    stringIp = "No Ip found";
+//                }
+//                else {
+//                    userInformation1.updateIp(stringIp);
+//                }
                 userInformation1.updateGPS(stringUpdateGps);
                 userInformation1.updateStudent(MainActivity.this);
                 Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
