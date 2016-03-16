@@ -23,6 +23,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Used to create the Friends Layout for when a user will look at their contacts list of the app
+ */
 public class FriendsListActivity extends AppCompatActivity {
 
     private LinearLayout linLayFriendsListHolder, linLaySecondFriendsPerPerson;
@@ -30,45 +33,44 @@ public class FriendsListActivity extends AppCompatActivity {
     private TextView txtFriendsName;
     private UserInformation userInformation;
     public ArrayList<String> jsonArray;
-    int i;
-
+    private int counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        i = 0;
+        counter = 0;
         setContentView(R.layout.activity_friends_list);
 
         Intent intent = getIntent();
         userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
 
-
         linLayFriendsListHolder = (LinearLayout) findViewById(R.id.linLayFriendsListHolder);
-        searchLanguage();
+        searchFriends();
     }
 
     /**
-     * Goes through each of the users practicing language and finds people associated with them
+     * Goes through each of the users friends list and displays them
      */
-    private void searchLanguage(){
+    private void searchFriends(){
         String[] string = userInformation.getFriends();
         for(int x = 0; x<userInformation.getFriends().length;x++){
-            search(string[x], i);
-            i = i+1;
+            search(string[x], counter);
+            counter = counter+1;
             x++;
         }
     }
 
     /**
-     * Method that goes through each practicing language and gets that users data
-     * @param index index to place the json into an arraylist
+     * Goes through each of the friends associated and gets their data
+     * @param FriendsID POST variable for the php
+     * @param index to place the json into an arraylist
      */
     private void search(final String FriendsID, final int index) {
 
         class GetUsers extends AsyncTask<Void, Void, String> {
             ProgressDialog loading;
-            //yindex was placed to make sure the int was being stored
-            int yindex = index;
+            //StoringIndex was placed to make sure the int was being stored
+            int StoringIndex = index;
 
             @Override
             protected String doInBackground(Void... v) {
@@ -78,13 +80,12 @@ public class FriendsListActivity extends AppCompatActivity {
                 String res = rh.SendPostRequest(Config.URL_Search, params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
-
             }
 
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                findFriends(s, yindex);
+                findFriends(s, StoringIndex);
             }
 
             @Override
@@ -98,13 +99,13 @@ public class FriendsListActivity extends AppCompatActivity {
     }
 
     /**
-     * Add's Markers through the given json object
-     * @param json = json array for the for loop to go through
-     * @param y = array indicator
+     * Adds Friends given the JSON Object
+     * @param json array for the for loop to go through
+     * @param indicator an array indicator
      */
-    private void findFriends(String json, int y) {
+    private void findFriends(String json, int indicator) {
         try {
-            jsonArray.add(y, json);
+            jsonArray.add(indicator, json);
             JSONArray search = new JSONArray(json);
             Log.d("AAA", search.toString());
             for (int i = 0; i < search.length(); i++) {
@@ -114,15 +115,21 @@ public class FriendsListActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
-
-
+    /**
+     * Programmatically creating the layout that will be used to show each of the user's friend's
+     * information on a Linear Layout
+     * @param jo JSON object
+     * @param UniqueCode used to try and match the user's friend with that on the database
+     * @throws JSONException
+     */
     private void addingFriendsLayout(JSONObject jo, final String UniqueCode) throws JSONException {
 
         String name = jo.getString("FirstName") + " " + jo.getString("LastName");
         String image = jo.getString("Image");
+
+        //Creating an TextView of the friends name
         txtFriendsName = new TextView(this);
         txtFriendsName.setText(name);
         txtFriendsName.setTextColor(Color.BLACK);
@@ -163,6 +170,7 @@ public class FriendsListActivity extends AppCompatActivity {
         });
         txtFriendsName.setLayoutParams(lptxtName);
 
+        //Creates a ImageView of the friend#s users image
         imgFriends = new ImageView(this);
         LinearLayout.LayoutParams lpImageHolder = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
         lpImageHolder.weight = 0.3f;
@@ -171,7 +179,7 @@ public class FriendsListActivity extends AppCompatActivity {
         imgFriends.setImageBitmap(decodedByte);
         imgFriends.setLayoutParams(lpImageHolder);
 
-
+        //Creates a second Linear Layout that will hold the image view
         linLaySecondFriendsPerPerson = new LinearLayout(this);
         linLaySecondFriendsPerPerson.setOrientation(LinearLayout.HORIZONTAL);
         linLaySecondFriendsPerPerson.setWeightSum(1f);
@@ -179,10 +187,10 @@ public class FriendsListActivity extends AppCompatActivity {
         LinearLayout.LayoutParams linParamSecond = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLaySecondFriendsPerPerson.setLayoutParams(linParamSecond);
 
+        //Instantiate the layout
         linLayFriendsListHolder.addView(linLaySecondFriendsPerPerson);
         linLaySecondFriendsPerPerson.addView(imgFriends);
         linLaySecondFriendsPerPerson.addView(txtFriendsName);
-
     }
 
 }
