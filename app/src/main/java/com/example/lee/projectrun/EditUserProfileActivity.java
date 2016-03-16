@@ -33,8 +33,10 @@ public class EditUserProfileActivity extends AppCompatActivity {
     private EditText txtEditPersonalInterest;
     private RadioButton radioEditBtnMale, radioEditBtnFemale;
     private RadioGroup radioEditGroupGender;
-    private Spinner spinnerEditTeachingLanguage, spinnerEditTeachingLanguageLevel;
-    private Spinner spinnerEditPracticeLanguage, spinnerEditPracticeLanguageLevel;
+    private Spinner spinnerEditTeachingLanguage1, spinnerEditTeachingLanguageLevel1;
+    private Spinner spinnerEditPracticeLanguage1, spinnerEditPracticeLanguageLevel1;
+    private Spinner spinnerEditTeachingLanguage2, spinnerEditTeachingLanguageLevel2;
+    private Spinner spinnerEditPracticeLanguage2, spinnerEditPracticeLanguageLevel2;
     private Button btnEditImage, btnEditConfirm;
     private ImageView imgEditView;
     private UserInformation userInformation;
@@ -47,8 +49,10 @@ public class EditUserProfileActivity extends AppCompatActivity {
             "Spanish", "Swedish", "Turkish", "Urdu"};
     private String[] arrayEditLanguageLevel = {"Select a Level", "A1", "A2", "B1", "B2", "C1", "C2"};
     private String stringGender, stringImage;
-//    private String stringTeachingLanguage, stringTeachingLanguageLevel;
-//    private String stringPracticeLanguage, stringPracticeLanguageLevel;
+    private String stringOldTeaching1, stringOldTeachingLevel1;
+    private String stringOldTeaching2, stringOldTeachingLevel2;
+    private String stringOldPractice1, stringOldPraticeLevel1;
+    private String stringOldPractice2, stringOldPraticeLevel2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,16 +86,22 @@ public class EditUserProfileActivity extends AppCompatActivity {
         radioEditBtnMale = (RadioButton) findViewById(R.id.radioEditBtnMale);
         radioEditBtnFemale = (RadioButton) findViewById(R.id.radioEditBtnFemale);
         txtEditAge = (EditText) findViewById(R.id.txtEditAge);
-        spinnerEditTeachingLanguage = (Spinner) findViewById(R.id.spinnerEditTeaching1);
-        spinnerEditTeachingLanguageLevel = (Spinner) findViewById(R.id.spinnerEditTeaching1Level);
-        spinnerEditTeachingLanguage.setAdapter(adapterLanguages);
-        spinnerEditTeachingLanguageLevel.setAdapter(adapterSkill);
-        spinnerEditPracticeLanguage = (Spinner) findViewById(R.id.spinnerEditPractice1);
-        spinnerEditPracticeLanguageLevel = (Spinner) findViewById(R.id.spinnerEditPractice1Level);
-        spinnerEditPracticeLanguage.setAdapter(adapterLanguages);
-        spinnerEditPracticeLanguageLevel.setAdapter(adapterSkill);
-
-
+        spinnerEditTeachingLanguage1 = (Spinner) findViewById(R.id.spinnerEditTeaching1);
+        spinnerEditTeachingLanguageLevel1 = (Spinner) findViewById(R.id.spinnerEditTeaching1Level);
+        spinnerEditTeachingLanguage2 = (Spinner) findViewById(R.id.spinnerEditTeaching2);
+        spinnerEditTeachingLanguageLevel2 = (Spinner) findViewById(R.id.spinnerEditTeaching2Level);
+        spinnerEditTeachingLanguage1.setAdapter(adapterLanguages);
+        spinnerEditTeachingLanguageLevel1.setAdapter(adapterSkill);
+        spinnerEditTeachingLanguage2.setAdapter(adapterLanguages);
+        spinnerEditTeachingLanguageLevel2.setAdapter(adapterSkill);
+        spinnerEditPracticeLanguage1 = (Spinner) findViewById(R.id.spinnerEditPractice1);
+        spinnerEditPracticeLanguageLevel1 = (Spinner) findViewById(R.id.spinnerEditPractice1Level);
+        spinnerEditPracticeLanguage2 = (Spinner) findViewById(R.id.spinnerEditPractice2);
+        spinnerEditPracticeLanguageLevel2 = (Spinner) findViewById(R.id.spinnerEditPractice2Level);
+        spinnerEditPracticeLanguage1.setAdapter(adapterLanguages);
+        spinnerEditPracticeLanguageLevel1.setAdapter(adapterSkill);
+        spinnerEditPracticeLanguage2.setAdapter(adapterLanguages);
+        spinnerEditPracticeLanguageLevel2.setAdapter(adapterSkill);
 
         txtEditPersonalInterest = (EditText) findViewById(R.id.txtEditPersonalInterests);
         btnEditConfirm = (Button) findViewById(R.id.btnEditConfirm);
@@ -113,25 +123,62 @@ public class EditUserProfileActivity extends AppCompatActivity {
         }
 
         String[] teachingLanguageArray = userInformation.getTeachingLanguage();
-        String stringTeachingLanguageArray = teachingLanguageArray[0];
-        String stringTeachingLanguageLevelArray = teachingLanguageArray[1];
-        spinnerEditTeachingLanguage.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguage.getAdapter()).getPosition(stringTeachingLanguageArray));
-        spinnerEditTeachingLanguageLevel.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguageLevel.getAdapter()).getPosition(stringTeachingLanguageLevelArray));
+
+
+        try{
+            String stringTeachingLanguageArray1 = teachingLanguageArray[0];
+            spinnerEditTeachingLanguage1.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguage1.getAdapter()).getPosition(stringTeachingLanguageArray1));
+            stringOldTeaching1 = spinnerEditTeachingLanguage1.getSelectedItem().toString();
+        }
+        catch(Exception e){
+            spinnerEditTeachingLanguage1.setSelection(0);
+        }
+
+        try{
+            String stringTeachingLanguageLevelArray1 = teachingLanguageArray[1];
+            spinnerEditTeachingLanguageLevel1.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguageLevel1.getAdapter()).getPosition(stringTeachingLanguageLevelArray1));
+            stringOldTeachingLevel1 = spinnerEditTeachingLanguageLevel1.getSelectedItem().toString();
+        }
+        catch(Exception e){
+            spinnerEditTeachingLanguageLevel1.setSelection(0);
+        }
+
+        try{
+            String stringTeachingLanguageArray2 = teachingLanguageArray[2];
+            spinnerEditTeachingLanguage2.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguage2.getAdapter()).getPosition(stringTeachingLanguageArray2));
+            stringOldTeaching2 = spinnerEditTeachingLanguage2.getSelectedItem().toString();
+        }catch(Exception e){
+            spinnerEditTeachingLanguage2.setSelection(0);
+        }
+
+        try{
+            String stringTeachingLanguageLevelArray2 = teachingLanguageArray[3];
+            spinnerEditTeachingLanguageLevel2.setSelection(((ArrayAdapter<String>) spinnerEditTeachingLanguageLevel2.getAdapter()).getPosition(stringTeachingLanguageLevelArray2));
+            stringOldTeachingLevel2 = spinnerEditTeachingLanguageLevel2.getSelectedItem().toString();
+        }catch(Exception e){
+            spinnerEditTeachingLanguageLevel2.setSelection(0);
+        }
+
 
         String[] practiceLanguageArray = userInformation.getPracticeLanguage();
         String stringPracticeLanguageArray = practiceLanguageArray[0];
         String stringPracticeLanguageLevelArray = practiceLanguageArray[1];
-        spinnerEditPracticeLanguage.setSelection(((ArrayAdapter<String>) spinnerEditPracticeLanguage.getAdapter()).getPosition(stringPracticeLanguageArray));
-        spinnerEditPracticeLanguageLevel.setSelection(((ArrayAdapter<String>) spinnerEditPracticeLanguageLevel.getAdapter()).getPosition(stringPracticeLanguageLevelArray));
+        spinnerEditPracticeLanguage1.setSelection(((ArrayAdapter<String>) spinnerEditPracticeLanguage1.getAdapter()).getPosition(stringPracticeLanguageArray));
+        spinnerEditPracticeLanguageLevel1.setSelection(((ArrayAdapter<String>) spinnerEditPracticeLanguageLevel1.getAdapter()).getPosition(stringPracticeLanguageLevelArray));
 
         btnEditConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String stringTeachingLanguage = spinnerEditTeachingLanguage.getSelectedItem().toString();
-                String stringTeachingLanguageLevel = spinnerEditTeachingLanguageLevel.getSelectedItem().toString();
-                String stringPracticeLanguage = spinnerEditPracticeLanguage.getSelectedItem().toString();
-                String stringPracticeLanguageLevel = spinnerEditPracticeLanguageLevel.getSelectedItem().toString();
+                String stringTeachingLanguage1 = spinnerEditTeachingLanguage1.getSelectedItem().toString();
+                String stringTeachingLanguageLevel1 = spinnerEditTeachingLanguageLevel1.getSelectedItem().toString();
+                String stringTeachingLanguage2 = spinnerEditTeachingLanguage2.getSelectedItem().toString();
+                String stringTeachingLanguageLevel2 = spinnerEditTeachingLanguageLevel2.getSelectedItem().toString();
+
+                String stringPracticeLanguage1 = spinnerEditPracticeLanguage1.getSelectedItem().toString();
+                String stringPracticeLanguageLevel1 = spinnerEditPracticeLanguageLevel1.getSelectedItem().toString();
+                String stringPracticeLanguag2 = spinnerEditPracticeLanguage2.getSelectedItem().toString();
+                String stringPracticeLanguageLevel2 = spinnerEditPracticeLanguageLevel2.getSelectedItem().toString();
 
                 userInformation.updateFirstName(txtEditFirstName.getText().toString());
                 userInformation.updateLastName(txtEditLastName.getText().toString());
@@ -139,9 +186,8 @@ public class EditUserProfileActivity extends AppCompatActivity {
                 stringGender = ((RadioButton) findViewById(radioEditGroupGender.getCheckedRadioButtonId())).getText().toString();
                 userInformation.updateGender(stringGender);
                 userInformation.updateAge(txtEditAge.getText().toString());
-                userInformation.completeRedoTeachingLanguage(userInformation.modifyTeaching(userInformation.getTeachingLanguage()[0].toString(), stringTeachingLanguage, stringTeachingLanguageLevel));
-                userInformation.completeRedoPracticeLanguage(userInformation.modifyPractice(userInformation.getPracticeLanguage()[0].toString(), stringPracticeLanguage, stringPracticeLanguageLevel));
                 userInformation.updatePersonal(txtEditPersonalInterest.getText().toString());
+                userInformation.modifyTeaching(stringOldTeaching1, stringOldTeachingLevel1, stringTeachingLanguage1, stringTeachingLanguageLevel1);
 
                 BitmapDrawable drawable = (BitmapDrawable) imgEditView.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
@@ -160,9 +206,6 @@ public class EditUserProfileActivity extends AppCompatActivity {
 
             }
         });
-
-
-
     }
 
     @Override

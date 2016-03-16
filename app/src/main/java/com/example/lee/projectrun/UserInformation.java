@@ -38,7 +38,7 @@ public class UserInformation implements Serializable {
                            String PracticeLanguage,
                            String PersonalInterests,
                            String Friends,
-                            String GPS,
+                           String GPS,
                            String Stats, String Ip) {
         this.Stats = Stats;
         this.GPS = GPS;
@@ -57,177 +57,202 @@ public class UserInformation implements Serializable {
         this.IP = Ip;
 
         System.out.println(UniqueCode);
-        }
+    }
 
-    public String getGPS(){
+    public String getGPS() {
         return GPS;
     }
-    public String getFirstName(){
+
+    public String getFirstName() {
         return FirstName;
     }
-    public String getUniqueCode(){
+
+    public String getUniqueCode() {
         return UniqueCode;
     }
+
     public String getStats
-            (){
+            () {
         return Stats;
     }
-    public String getImageString(){
+
+    public String getImageString() {
         return Image;
     }
+
     public String getIP() {
         return IP;
     }
-    public String getLastName(){
+
+    public String getLastName() {
         return LastName;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return Email;
     }
-    public String getPassword(){
+
+    public String getPassword() {
         return password;
     }
-    public String getAge(){
+
+    public String getAge() {
         return Age;
     }
-    public String getGender(){
+
+    public String getGender() {
         return Gender;
     }
-    public String[] getTeachingLanguage(){
+
+    public String[] getTeachingLanguage() {
         String holder = TeachingLanguage;
         String[] parts = holder.split(",");
 
         return parts;
     }
-    public String[] getPracticeLanguage(){
+
+    public String[] getPracticeLanguage() {
         String holder = PracticeLanguage;
         String[] parts = holder.split(",");
 
         return parts;
     }
-    public String getPersonalInterests(){
+
+    public String getPersonalInterests() {
         return PersonalInterests;
     }
-    public String[] getFriends(){
+
+    public String[] getFriends() {
         String holder = Friends;
         String[] parts = holder.split(",");
 
         return parts;
     }
-    public void updateFirstName(String firstName){
+
+    public void updateFirstName(String firstName) {
         FirstName = firstName;
     }
-    public void updateLastName(String lastName){
+
+    public void updateLastName(String lastName) {
         LastName = lastName;
     }
-    public void updateImage(String image){
+
+    public void updateImage(String image) {
         this.Image = image;
     }
-    public void updatePassword(String password){
+
+    public void updatePassword(String password) {
         this.password = password;
     }
-    public void updateAge(String age){
+
+    public void updateAge(String age) {
         Age = age;
     }
-    public void updateStats(String Stats){ this.Stats = Stats;}
-    public void updateGender(String gender){
+
+    public void updateStats(String Stats) {
+        this.Stats = Stats;
+    }
+
+    public void updateGender(String gender) {
         Gender = gender;
     }
-    public void updateIp(String Ip){
+
+    public void updateIp(String Ip) {
         IP = Ip;
     }
-    public void completeRedoTeachingLanguage(String teachingLanguage){
+
+    public void completeRedoTeachingLanguage(String teachingLanguage) {
         TeachingLanguage = teachingLanguage;
     }
-    public String modifyTeaching(String teachingLanguageTarget, String newValue, String newLevel){
+
+    public String modifyTeaching(String oldTeaching, String oldLevel, String newTeaching, String newLevel) {
         String holder = TeachingLanguage;
         String[] parts = holder.split(",");
-        for(int i = 0; i> parts.length; i++){
+        String newLanguage = "";
+        for (int i = 0; i < parts.length; ++i) {
 
-            if(parts[i].equals(teachingLanguageTarget)){
-                parts[i].replace(parts[i], newValue);
-                parts[i+1].replace(parts[i+1], newLevel);
+            if (oldTeaching.equals(parts[i])) {
+                newLanguage = newLanguage + parts[i].replace(oldTeaching, newTeaching) + ",";
+                newLanguage = newLanguage + parts[i + 1].replace(oldLevel, newLevel) + ",";
+            } else {
+                newLanguage = newLanguage + parts[i] + ",";
+                newLanguage = newLanguage + parts[i + 1] + ",";
             }
-
+            ++i;
         }
-        StringBuilder builder = new StringBuilder();
-        for(String str: parts){
-            builder.append(str);
-        }
+        return newLanguage;
+    }
 
-        return builder.toString();
-    }
-    public void completeRedoPracticeLanguage(String practiceLanguage){
-        PracticeLanguage = practiceLanguage;
-    }
-    public String modifyPractice(String practiceLanguageTarget, String newValue, String newLevel){
+    public String modifyPractice(String oldPractice, String oldLevel, String newPractice, String newLevel) {
         String holder = PracticeLanguage;
         String[] parts = holder.split(",");
-        for(int i = 0; i> parts.length; i++){
+        String newLanguage = "";
+        for (int i = 0; i < parts.length; ++i) {
 
-            if(parts[i].equals(practiceLanguageTarget)){
-                parts[i].replace(parts[i], newValue);
-                parts[i+1].replace(parts[i+1], newLevel);
+            if (oldPractice.equals(parts[i])) {
+                newLanguage = newLanguage + parts[i].replace(oldPractice, newPractice) + ",";
+                newLanguage = newLanguage + parts[i + 1].replace(oldLevel, newLevel) + ",";
+            } else {
+                newLanguage = newLanguage + parts[i] + ",";
+                newLanguage = newLanguage + parts[i + 1] + ",";
             }
-
+            ++i;
         }
-        StringBuilder builder = new StringBuilder();
-        for(String str: parts){
-            builder.append(str);
-        }
+        return newLanguage;
+    }
 
-        return builder.toString();
+    public void updateTeaching(String teachingLanguage) {
+        TeachingLanguage = TeachingLanguage + "," + teachingLanguage;
     }
-    public void updateTeaching(String teachingLanguage){
-        TeachingLanguage  = TeachingLanguage + "," + teachingLanguage;
+
+    public void updatePractice(String practiceLanguage) {
+        PracticeLanguage = PracticeLanguage + "," + practiceLanguage;
     }
-    public void updatePractice(String practiceLanguage){
-        PracticeLanguage  = PracticeLanguage + "," + practiceLanguage;
-    }
-    public void updatePersonal(String personalInterests){
+
+    public void updatePersonal(String personalInterests) {
         PersonalInterests = personalInterests;
     }
 
     /**
      * Boolean response to check if the user has a friend added.
+     *
      * @param FriendsCode
      * @return
      */
-    public boolean searchFriendsList(String FriendsCode){
+    public boolean searchFriendsList(String FriendsCode) {
         String holder = Friends;
         String[] parts = holder.split(",");
-        for(int x = 0; x<parts.length; x++){
-            if(parts[x].equals(FriendsCode)){
+        for (int x = 0; x < parts.length; x++) {
+            if (parts[x].equals(FriendsCode)) {
                 return true;
             }
         }
         return false;
     }
-    public void addFriends(String friends){
-        Friends  = Friends + "," + friends;
+
+    public void addFriends(String friends) {
+        Friends = Friends + "," + friends;
     }
 
     /**
      * Deletion of a friend
-      * @param friendsID UniqueCode of the friend
+     *
+     * @param friendsID UniqueCode of the friend
      */
-    public void modifyFriends(String friendsID){
+    public void modifyFriends(String friendsID) {
         String test = Friends;
         String[] output = test.split(",");
         String holder = "";
 
 
-        for(int i = 0; i<output.length; ++i){
-            if(output[i].equals(friendsID))
-            {
+        for (int i = 0; i < output.length; ++i) {
+            if (output[i].equals(friendsID)) {
                 output[i].replace(output[i], "");
-            }
-            else {
-                if(holder.equals("")){
+            } else {
+                if (holder.equals("")) {
                     holder = output[i];
-                }
-                else{
-                    holder =  holder  + "," + output[i];
+                } else {
+                    holder = holder + "," + output[i];
                 }
             }
 
@@ -235,18 +260,20 @@ public class UserInformation implements Serializable {
         Friends = holder;
     }
 
-    public void updateGPS(String GPS){
+    public void updateGPS(String GPS) {
         this.GPS = GPS;
     }
 
-    public void updateStudent(final Activity activity){
-        class updateStudent extends AsyncTask<Void,Void,String> {
+    public void updateStudent(final Activity activity) {
+        class updateStudent extends AsyncTask<Void, Void, String> {
             ProgressDialog loading;
-            protected void onPreExecute(){
+
+            protected void onPreExecute() {
                 super.onPreExecute();
                 loading = ProgressDialog.show(activity, "Adding", "Wait", false, false);
             }
-            protected void onPostExecture(String s){
+
+            protected void onPostExecture(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
                 Toast.makeText(activity, s, Toast.LENGTH_LONG).show();
@@ -282,37 +309,36 @@ public class UserInformation implements Serializable {
     }
 
 
+    // private void search(String Search1, final Activity activity) {
+    //     this.Search = Search1;
+    //     class GetUsers extends AsyncTask<Void, Void, String> {
+    //         ProgressDialog loading;
 
- // private void search(String Search1, final Activity activity) {
- //     this.Search = Search1;
- //     class GetUsers extends AsyncTask<Void, Void, String> {
- //         ProgressDialog loading;
+    //         @Override
+    //         protected String doInBackground(Void... v) {
+    //             HashMap<String, String> params = new HashMap<>();
+    //             params.put(Config.Key_Search, Search);
+    //             RequestHandler rh = new RequestHandler();
+    //             String res = rh.SendPostRequest(Config.URL_Search, params);
+    //             Log.d("AAAA", "doInBackground: " + res);
+    //             return res;
 
- //         @Override
- //         protected String doInBackground(Void... v) {
- //             HashMap<String, String> params = new HashMap<>();
- //             params.put(Config.Key_Search, Search);
- //             RequestHandler rh = new RequestHandler();
- //             String res = rh.SendPostRequest(Config.URL_Search, params);
- //             Log.d("AAAA", "doInBackground: " + res);
- //             return res;
+    //         }
 
- //         }
+    //         protected void onPostExecute(String s) {
+    //             super.onPostExecute(s);
+    //             loading.dismiss();
+    //             showResult(s);
+    //         }
 
- //         protected void onPostExecute(String s) {
- //             super.onPostExecute(s);
- //             loading.dismiss();
- //             showResult(s);
- //         }
-
- //         @Override
- //         protected void onPreExecute() {
- //             super.onPreExecute();
- //             loading = ProgressDialog.show(activity, "Fetching...", "Wait...", false, false);
- //         }
- //     }
- //     GetUsers getUsers = new GetUsers();
- //     getUsers.execute();
- // }
+    //         @Override
+    //         protected void onPreExecute() {
+    //             super.onPreExecute();
+    //             loading = ProgressDialog.show(activity, "Fetching...", "Wait...", false, false);
+    //         }
+    //     }
+    //     GetUsers getUsers = new GetUsers();
+    //     getUsers.execute();
+    // }
 
 }

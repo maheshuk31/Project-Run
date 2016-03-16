@@ -206,6 +206,25 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/spinnerEditTeaching2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+
+                <Spinner
+                    android:id="@+id/spinnerEditTeaching2Level"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -243,6 +262,25 @@
 
                 <Spinner
                     android:id="@+id/spinnerEditPractice1Level"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Spinner
+                    android:id="@+id/spinnerEditPractice2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6" />
+
+                <Spinner
+                    android:id="@+id/spinnerEditPractice2Level"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4" />
