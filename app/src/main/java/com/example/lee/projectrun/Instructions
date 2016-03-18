@@ -1,0 +1,28 @@
+
+
+
+
+
+ooVooSdkSampleApp activity was the launcher activity of the sample.
+It does not have a layout of its own, only settings on the video chat along
+with the settings bar and its functions.
+
+
+
+LoginFragment is technically the first activity called out, all the fragments
+can be viewed as actual activities.
+
+
+
+ApplicationSettings and oovoo account has been verified and completed, Token is unique to us, do NOT
+change anything in the class, everything is dynamic and changes with the app running.
+
+
+
+Currently cannot resolve:
+import com.oovoo.sdk.oovoosdksampleshow.R;
+as it is "missing"...
+
+
+
+ - Igor.
