@@ -78,8 +78,7 @@
 				android:id="@+id/custom_preview_view"
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"
-				android:isScrollContainer="false"
-				custom:isCircleShape="true">
+				android:isScrollContainer="false">
 			</com.oovoo.sdk.sample.ui.CustomVideoPanel>
 			
 			<TextView

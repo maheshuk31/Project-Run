@@ -16,8 +16,7 @@
         android:id="@+id/custom_panel_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        custom:isCircleShape="false">
+        android:visibility="invisible">
     </com.oovoo.sdk.sample.ui.CustomVideoPanel>
 	
 	<ImageView

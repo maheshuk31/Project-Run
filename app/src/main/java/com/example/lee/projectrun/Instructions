@@ -1,11 +1,11 @@
 
 
 
-
+*** VIDEO-CHAT ***
 
 ooVooSdkSampleApp activity was the launcher activity of the sample.
-It does not have a layout of its own, only settings on the video chat along
-with the settings bar and its functions.
+It does not have a layout of its own, only settings on the video chat, it contains all the methods
+on firing the application across all classes.
 
 
 
@@ -20,7 +20,8 @@ change anything in the class, everything is dynamic and changes with the app run
 
 
 Currently cannot resolve:
-import com.oovoo.sdk.oovoosdksampleshow.R;
+- import com.oovoo.sdk.oovoosdksampleshow.R;
+- How each fragment is opened from one fragment/activity to another.
 as it is "missing"...
 
 
