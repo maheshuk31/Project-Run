@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 
 public class WaitingFragment extends BaseFragment 
 {

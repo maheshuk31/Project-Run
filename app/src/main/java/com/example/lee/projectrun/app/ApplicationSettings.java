@@ -19,7 +19,7 @@ import java.util.Hashtable;
 public class ApplicationSettings extends Hashtable<String, String>
 {
 
-	private static final String TOKEN = "MDAxMDAxAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACsS5uH%2B1HP4YJkuJEwjSw5TOd3n2wsGyeX6NZnBUiTA5nZrtI7FlxduK08JZyp3EWh5ZNwWF3mKB6uYn0h9ZDHrRRM9VDYcXhrIn3qMsGQ%2BNBG13fJCYYxedZmCrkvMl4%3D"; // Put your application token here
+	private static final String TOKEN = "MDAxMDAxAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAByQqNFCzHrCQAMsAv1gRqS5Zt%2F4c%2BiMJXUwnYKBiU8SyN5Mhh1VO%2F6Kq1Xax4Q0Ui1DrT26h7QC4Vp412b%2BJBJuCe4GH62p3TSbSEwHa%2F6lBXgSqNEjO44upBbsg4%2FCflZMtsZaZmc%2BDaW0Tqcg0%2FL"; // Put your application token here
 	public static final String Token				  = "token";
 	public static final String Username	          = "username";
 	public static final String ResolutionLevel	      = "resolution_level";

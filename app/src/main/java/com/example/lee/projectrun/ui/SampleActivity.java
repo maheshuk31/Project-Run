@@ -1,6 +1,7 @@
 package com.example.lee.projectrun.ui;
 
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -11,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
@@ -29,7 +31,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.oovoo.core.Utils.LogSdk;
 import com.oovoo.sdk.api.ooVooClient;
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 import com.example.lee.projectrun.app.ApplicationSettings;
 import com.example.lee.projectrun.app.ooVooSdkSampleShowApp;
 import com.example.lee.projectrun.app.ooVooSdkSampleShowApp.CallNegotiationListener;
@@ -41,45 +43,45 @@ import com.example.lee.projectrun.ui.fragments.AVChatLoginFragment;
 import com.example.lee.projectrun.ui.fragments.AVChatSessionFragment;
 import com.example.lee.projectrun.ui.fragments.BaseFragment;
 import com.example.lee.projectrun.ui.fragments.CallNegotiationFragment;
+import com.example.lee.projectrun.ui.fragments.SplashScreen;
 import com.example.lee.projectrun.ui.fragments.InformationFragment;
 import com.example.lee.projectrun.ui.fragments.LoginFragment;
 import com.example.lee.projectrun.ui.fragments.OptionFragment;
 import com.example.lee.projectrun.ui.fragments.PushNotificationFragment;
 import com.example.lee.projectrun.ui.fragments.ReautorizeFragment;
 import com.example.lee.projectrun.ui.fragments.SettingsFragment;
-import com.example.lee.projectrun.ui.fragments.SplashScreen;
 import com.example.lee.projectrun.ui.fragments.WaitingFragment;
 
 public class SampleActivity extends Activity implements OperationChangeListener, CallNegotiationListener {
 
- 
-	private static final String TAG	           	= SampleActivity.class.getSimpleName();
-	private static final String STATE_FRAGMENT 	= "current_fragment";
+
+	private static final String	  	TAG	           	= SampleActivity.class.getSimpleName();
+	private static final String 	STATE_FRAGMENT 	= "current_fragment";
 	private static final int 		PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 	private BaseFragment	      	current_fragment	= null;
 	private ooVooSdkSampleShowApp	application	   = null;
-	private MenuItem mSettingsMenuItem = null;
-	private MenuItem mInformationMenuItem = null;
-	private MenuItem mSignalStrengthMenuItem = null;
-	private MenuItem mSecureNetworkMenuItem = null;
+	private MenuItem 				mSettingsMenuItem = null;
+	private MenuItem 				mInformationMenuItem = null;
+	private MenuItem 				mSignalStrengthMenuItem = null;
+	private MenuItem 				mSecureNetworkMenuItem = null;
 	private boolean					mIsAlive = false;
 	private boolean					mNeedShowFragment = false;
-	private AlertDialog callDialogBuilder = null;
-	private BroadcastReceiver mRegistrationBroadcastReceiver = null;
+	private AlertDialog 			callDialogBuilder = null;
+	private BroadcastReceiver 		mRegistrationBroadcastReceiver = null;
 
 
- 
- 
- 
- 
- 
 
- 
- 
- 
- 
- 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -112,10 +114,10 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 			}
 
 			try {
- 
+
 				application.onMainActivityCreated();
 			} catch( Exception e) {
-				Log.e(TAG, "onCreate exception: ", e);
+				Log.e( TAG, "onCreate exception: ", e);
 			}
 		}
 	}
@@ -125,7 +127,7 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 		try {
 			getFragmentManager().putFragment(savedInstanceState, STATE_FRAGMENT, current_fragment);
 		} catch( Exception e) {
-			Log.e(TAG, "onSaveInstanceState exception: ", e);
+			Log.e( TAG, "onSaveInstanceState exception: ", e);
 		}
 		super.onSaveInstanceState(savedInstanceState);
 	}
@@ -159,12 +161,12 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 			}
 		}
 		catch(Exception err){
-			Log.e(TAG, "onResume exception: with ", err);
+			Log.e( TAG, "onResume exception: with ", err);
 		}
 
-				
+
 		mIsAlive = true;
- 
+
 
 		if(mNeedShowFragment){
 			showFragment(current_fragment);
@@ -175,7 +177,7 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 	@Override
 	protected void onPause() {
 		super.onPause();
-				
+
 		mIsAlive = false;
 	}
 
@@ -201,7 +203,7 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 	public boolean onCreateOptionsMenu( Menu menu)
 	{
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate( R.menu.main_menu, menu);
+		inflater.inflate( R.menu.menu_main, menu);
 
 		mSettingsMenuItem = menu.findItem(R.id.menu_settings);
 
@@ -248,7 +250,7 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 				addFragment(settings);
 
 				current_fragment = settings;
-			return true;
+				return true;
 
 			case R.id.menu_information:
 				InformationFragment information  = new InformationFragment();
@@ -260,7 +262,7 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 				addFragment(information);
 
 				current_fragment = information;
-			return true;
+				return true;
 		}
 
 		return super.onOptionsItemSelected( item);
@@ -273,21 +275,21 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 				case Error:
 				{
 					switch (state.forOperation()) {
-					case Authorized:
-						current_fragment = ReautorizeFragment.newInstance(mSettingsMenuItem, state.getDescription());
-						break;
-					case LoggedIn:
-						current_fragment = LoginFragment.newInstance(state.getDescription());
-						break;
-					case AVChatJoined:
-						application.showErrorMessageBox(this, getString(R.string.join_session), state.getDescription());
-						current_fragment = AVChatLoginFragment.newInstance(mSettingsMenuItem);
-						break;
-					default:
-						return;
+						case Authorized:
+							current_fragment = ReautorizeFragment.newInstance(mSettingsMenuItem, state.getDescription());
+							break;
+						case LoggedIn:
+							current_fragment = LoginFragment.newInstance(state.getDescription());
+							break;
+						case AVChatJoined:
+							application.showErrorMessageBox(this, getString(R.string.join_session), state.getDescription());
+							current_fragment = AVChatLoginFragment.newInstance(mSettingsMenuItem);
+							break;
+						default:
+							return;
 					}
 				}
-					break;
+				break;
 				case Processing:
 					current_fragment = WaitingFragment.newInstance(state.getDescription());
 					break;
@@ -302,7 +304,7 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 					break;
 				case AVChatJoined:
 					current_fragment = AVChatSessionFragment.newInstance(mSignalStrengthMenuItem,
-						mSecureNetworkMenuItem, mInformationMenuItem);
+							mSecureNetworkMenuItem, mInformationMenuItem);
 					break;
 				case Authorized:
 					current_fragment = LoginFragment.newInstance(mSettingsMenuItem);
@@ -353,7 +355,7 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 			}
 		}
 		catch(Exception err){
-			LogSdk.e(TAG, "showFragment " + err);
+			LogSdk.e(TAG,"showFragment " + err);
 		}
 	}
 
@@ -369,7 +371,7 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 			}
 		}
 		catch(Exception err){
-			LogSdk.e(TAG, "addFragment " + err);
+			LogSdk.e(TAG,"addFragment " + err);
 		}
 	}
 
@@ -384,7 +386,7 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 			}
 		}
 		catch(Exception err){
-			LogSdk.e(TAG, "removeFragment " + err);
+			LogSdk.e(TAG,"removeFragment " + err);
 		}
 	}
 

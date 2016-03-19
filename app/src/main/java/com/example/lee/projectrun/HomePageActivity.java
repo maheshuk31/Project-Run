@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.lee.projectrun.ui.SampleActivity;
+
 public class HomePageActivity extends AppCompatActivity {
 
-    private Button btnSearch, btnUserProfile, btnGps, btnContacts;
+    private Button btnSearch, btnUserProfile, btnGps, btnContacts, btnVideoChat;
     private EditText txtSearchVal;
     private String stringSearch;
     private UserInformation userInformation;
@@ -28,6 +30,7 @@ public class HomePageActivity extends AppCompatActivity {
         btnUserProfile = (Button) findViewById(R.id.btnUserProfile);
         btnGps = (Button) findViewById(R.id.btnGps);
         btnContacts = (Button) findViewById(R.id.btnContacts);
+        btnVideoChat = (Button) findViewById(R.id.btnVideoChat);
         txtSearchVal = (EditText) findViewById(R.id.txtSearch);
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +73,15 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
+
+        btnVideoChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SampleActivity.class);
+                intent.putExtra("userinfo", userInformation);
+                startActivity(intent);
+            }
+        });
 
 
 

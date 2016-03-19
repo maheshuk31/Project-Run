@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 
 
 public class LoginFragment extends BaseFragment {

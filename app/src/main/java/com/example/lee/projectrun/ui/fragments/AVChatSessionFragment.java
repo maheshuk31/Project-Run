@@ -35,7 +35,7 @@ import com.oovoo.sdk.interfaces.VideoController;
 import com.oovoo.sdk.interfaces.VideoControllerListener.RemoteVideoState;
 import com.oovoo.sdk.interfaces.VideoDevice;
 import com.oovoo.sdk.interfaces.VideoRender;
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 import com.example.lee.projectrun.app.ApplicationSettings;
 import com.example.lee.projectrun.app.ooVooSdkSampleShowApp;
 import com.example.lee.projectrun.app.ooVooSdkSampleShowApp.CallControllerListener;

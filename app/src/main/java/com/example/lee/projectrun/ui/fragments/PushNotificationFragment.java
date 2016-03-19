@@ -20,7 +20,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 import com.example.lee.projectrun.app.ApplicationSettings;
 
 import java.util.ArrayList;

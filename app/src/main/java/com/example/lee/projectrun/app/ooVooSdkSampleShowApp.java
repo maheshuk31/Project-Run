@@ -1,4 +1,4 @@
-package com.example.lee.projectrun.app;
+package  com.example.lee.projectrun.app;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -9,7 +9,6 @@ import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
-import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Display;
@@ -17,6 +16,7 @@ import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.provider.Settings.Secure;
 
 import com.oovoo.core.LoggerListener;
 import com.oovoo.core.Utils.LogSdk;
@@ -40,7 +40,7 @@ import com.oovoo.sdk.interfaces.VideoDevice;
 import com.oovoo.sdk.interfaces.VideoRender;
 import com.oovoo.sdk.interfaces.ooVooSdkResult;
 import com.oovoo.sdk.interfaces.ooVooSdkResultListener;
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 import com.example.lee.projectrun.call.CNMessage;
 import com.example.lee.projectrun.call.PNMessage;
 import com.example.lee.projectrun.ui.CustomVideoPanel;
@@ -68,10 +68,8 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 	public static final String TAG = "ooVooSdkSampleShowApp";
 
 
-	public enum Operation
-	{
+	public enum Operation {
 		Authorized, LoggedIn, Processing, AVChatJoined, AVChatRoom, AVChatCall, PushNotification, AVChatDisconnected, Error;
-
 		private String description = "";
 		private Operation forOperation = null;
 
@@ -115,13 +113,9 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 	private Map<String, Boolean> muted = new HashMap<String, Boolean>();
 
 	@Override
-	public void onCreate()
-	{
+	public void onCreate() {
 		super.onCreate();
-
-		//-----------------------------------------------------------------------------This initializes the developer (us) and our settings--------------------------------------
-		try
-		{
+		try {
 
 			Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 				public void uncaughtException(Thread t, Throwable e) {
@@ -130,14 +124,9 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 				}
 			});
 
-			if (!ooVooClient.isDeviceSupported())
-			{
+			if (!ooVooClient.isDeviceSupported()) {
 				return;
 			}
-
-
-
-
 
 			settings = new ApplicationSettings(this);
 
@@ -149,27 +138,48 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 			sdk.getAVChat().getAudioController().setListener(this);
 			sdk.getAVChat().setSslVerifyPeer(true);
 			sdk.getMessaging().setListener(this);
+			//sdk.getAVChat().registerPlugin(new ooVooPluginFactory());
+//			PerfVerifier verify = new PerfVerifier();
+//			verify.glTestRun();
+//			long vga_average_read = verify.getPerfValue("vga");
+//			LogSdk.d( TAG, "perf test result vga: " + vga_average_read );
+//			if(vga_average_read < verify.getEnableThreshold())
+//			{
+//				LogSdk.d( TAG, "yap support up to vga");
+//			}
+//			else
+//			{
+//				long cif_average_read = verify.getPerfValue("cif");
+//				LogSdk.d( TAG, "perf test result vga: " + cif_average_read );
+//				if(cif_average_read < verify.getEnableThreshold())
+//				{
+//					LogSdk.d( TAG, "yap support up to cif");
+//				}
+//				else
+//				{
+//					LogSdk.d( TAG, "do not suppor yap avatar");
+//				}
+//			}
+
+			//sdk.getAVChat().registerPlugin(new YapFactory("/storage/sdcard0/oosdksampleshow/avatar"));
 
 
+//			AffdexPluginSettings affdexSettings = new AffdexPluginSettings();
+//			affdexSettings.setDetectAllExpressions(true);
+//			affdexSettings.setDetectAllEmotions(true);
+//			File extStore = Environment.getExternalStorageDirectory();
+//			affdexSettings.setClassifierPath(extStore + "/data");
+//			sdk.getAVChat().registerPlugin(new AffdexPluginFactory(affdexSettings, this));
 
 			AudioRouteController audioController = sdk.getAVChat().getAudioController().getAudioRouteController();
 			LogSdk.d(TAG, "Audio controller " + audioController);
 
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 			sdk = null;
 		}
 		operation_handler = new Handler();
 	}
-
-	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
 
 	public Context getContext() {
 		return mContext;
@@ -317,7 +327,7 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 					settings.put(ApplicationSettings.Username, username);
 					settings.save();
 					fireApplicationStateEvent(Operation.LoggedIn);
-					LogSdk.d(TAG, "Application -> messaging service is " + (sdk.getMessaging().isConnected() ? "connected" : "not connected, will try to connect"));
+					LogSdk.d(TAG,"Application -> messaging service is "+(sdk.getMessaging().isConnected() ? "connected" : "not connected, will try to connect"));
 					if(!sdk.getMessaging().isConnected()){
 						sdk.getMessaging().connect();
 						LogSdk.d(TAG, "Application -> messaging service start connecting");
@@ -1022,7 +1032,7 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 						LogSdk.d(TAG, "sendAcknowledgement sent delivered acknowledgement");
 						sdk.getMessaging().sendAcknowledgement(Messaging.MessageAcknowledgeState.Read, message, new ooVooSdkResultListener() {
 							@Override
-							public void onResult(com.oovoo.sdk.interfaces.ooVooSdkResult ooVooSdkResult) {
+							public void onResult(ooVooSdkResult ooVooSdkResult) {
 								if (ooVooSdkResult.getResult() != sdk_error.OK) {
 									LogSdk.e(TAG, "Error on sending read acknowledgement: " + ooVooSdkResult.getDescription());
 								} else {
@@ -1045,7 +1055,7 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 
 	@Override
 	public void onConnectivityStateChange(Messaging.ConnectivityState var1, sdk_error var2, String var3){
-		LogSdk.d(TAG, "onConnectivityStateChange state: " + state + " sdk_error: " + var2 + ", description " + var3);
+		LogSdk.d(TAG, "onConnectivityStateChange state: " + state + " sdk_error: " + var2+", description "+var3);
 	}
 
 	@Override

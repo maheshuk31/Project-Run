@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.oovoo.core.Utils.LogSdk;
 import com.oovoo.core.sdk_error;
 import com.oovoo.sdk.interfaces.VideoControllerListener.RemoteVideoState;
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 import com.example.lee.projectrun.app.ApplicationSettings;
 import com.example.lee.projectrun.app.ooVooSdkSampleShowApp.ParticipantsListener;
 

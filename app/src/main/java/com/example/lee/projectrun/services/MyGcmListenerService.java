@@ -10,7 +10,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GcmListenerService;
 import com.oovoo.core.Utils.LogSdk;
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 import com.example.lee.projectrun.app.ooVooSdkSampleShowApp;
 import com.example.lee.projectrun.ui.SampleActivity;
 

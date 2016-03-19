@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.oovoo.sdk.api.ooVooClient;
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 
 public class SplashScreen extends Fragment {
 	private static final String TAG = "SplashScreen";

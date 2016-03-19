@@ -1,10 +1,31 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.lee.projectrun.MainActivity">
-    <item
-        android:id="@+id/action_settings"
+
+    <item android:id="@+id/menu_settings"
+        android:icon="@drawable/menu_ic_settings"
+        android:title="@string/menu_settings"
+        android:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/menu_information"
+        android:icon="@drawable/menu_ic_info"
+        android:title="@string/menu_information"
+        android:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/menu_secure_network"
+        android:icon="@drawable/menu_ic_lock_unlock"
+        android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/menu_signal_strenth"
+        android:title=""
+        android:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
 </menu>

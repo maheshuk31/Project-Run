@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.oovoo.core.Utils.LogSdk;
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 
 public class ReautorizeFragment extends BaseFragment {
 	private static final String TAG	             = ReautorizeFragment.class.getSimpleName();

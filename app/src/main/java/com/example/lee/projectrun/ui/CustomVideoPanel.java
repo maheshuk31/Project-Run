@@ -19,7 +19,7 @@ import com.oovoo.sdk.api.ooVooClient;
 import com.oovoo.sdk.api.ui.VideoPanel;
 import com.oovoo.sdk.interfaces.VideoFrame;
 import com.oovoo.sdk.interfaces.VideoRender;
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 import com.example.lee.projectrun.ui.gl.GLESHelper;
 import com.example.lee.projectrun.ui.gl.GLESHelper.VideoAnimationListener;
 

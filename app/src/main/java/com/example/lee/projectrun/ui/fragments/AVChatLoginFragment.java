@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.oovoo.core.Utils.LogSdk;
 import com.oovoo.sdk.api.ui.VideoPanel;
 import com.oovoo.sdk.interfaces.VideoController;
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 import com.example.lee.projectrun.app.ApplicationSettings;
 import com.example.lee.projectrun.ui.CustomVideoPanel;
 import com.example.lee.projectrun.ui.VideoPanelPreviewRect;

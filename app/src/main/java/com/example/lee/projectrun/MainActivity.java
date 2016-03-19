@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 startActivity(intent);
             }
         });
+
     }
 
     @Override

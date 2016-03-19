@@ -22,7 +22,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.oovoo.sdk.oovoosdksampleshow.R;
+import com.example.lee.projectrun.R;
 import com.example.lee.projectrun.app.ooVooSdkSampleShowApp.CallNegotiationListener;
 import com.example.lee.projectrun.app.ooVooSdkSampleShowApp.MessageCompletionHandler;
 import com.example.lee.projectrun.call.CNMessage;
