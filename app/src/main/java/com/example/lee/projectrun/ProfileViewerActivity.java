@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,7 +18,7 @@ public class ProfileViewerActivity extends AppCompatActivity {
             txtProfileTeaching, txtProfilePractice, txtProfilePersonalInterest;
     private ImageView imgProfileUser;
     private Button btnProfileAddConnection,  btnProfileChat, btnProfileLastLocation;
-    private String FirstName, LastName, Email, Age, UniqueCode;
+    private String FirstName, LastName, Email, Age, UniqueCode, Friends;
     private String Gender,PracticeLanguage, PracticeLanguageLevel;
     private String TeachingLanguage, TeachingLanguageLevel, PersonalInterest, Image ,Gps;
     private String TeachingLanguageComplete, PracticeLanguageComplete;
@@ -71,7 +72,7 @@ public class ProfileViewerActivity extends AppCompatActivity {
         txtProfilePersonalInterest.setText(PersonalInterest);
         imgProfileUser.setImageBitmap(decodedByte);
 
-        if (userInformation.searchFriendsList(UniqueCode) == true) {
+        if (userInformation.searchFriendsList(UniqueCode)== true) {
             btnProfileAddConnection.setText("Remove Contact");
             btnProfileAddConnection.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,6 +80,7 @@ public class ProfileViewerActivity extends AppCompatActivity {
                 userInformation.modifyFriends(UniqueCode);
                     userInformation.updateStudent(ProfileViewerActivity.this);
                     Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
+                    Log.d("Friends", userInformation.Friends);
                     intent.putExtra("userinfo", userInformation);
                     intent.putExtra("profileUnique", UniqueCode);
                     intent.putExtra("profileFname", FirstName);
@@ -92,6 +94,7 @@ public class ProfileViewerActivity extends AppCompatActivity {
                     intent.putExtra("profileImage", Image);
                     intent.putExtra("profileGps", Gps);
                     startActivity(intent);
+                    finish();
                 }
             });
         } else {
@@ -102,6 +105,7 @@ public class ProfileViewerActivity extends AppCompatActivity {
                     userInformation.addFriends(UniqueCode);
                     userInformation.updateStudent(ProfileViewerActivity.this);
                     Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
+                    Log.d("Friends", userInformation.Friends);
                     intent.putExtra("userinfo", userInformation);
                     intent.putExtra("profileUnique", UniqueCode);
                     intent.putExtra("profileFname", FirstName);
@@ -115,6 +119,7 @@ public class ProfileViewerActivity extends AppCompatActivity {
                     intent.putExtra("profileImage", Image);
                     intent.putExtra("profileGps", Gps);
                     startActivity(intent);
+                    finish();
                 }
             });
         }

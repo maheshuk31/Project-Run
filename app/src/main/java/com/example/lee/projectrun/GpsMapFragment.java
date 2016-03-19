@@ -80,6 +80,7 @@ public class GpsMapFragment extends AppCompatActivity implements
         mFragment.getMapAsync(this);
         Intent intent = getIntent();
         userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
+
     }
 
     //Called when the map is created
@@ -187,68 +188,71 @@ public class GpsMapFragment extends AppCompatActivity implements
      * @throws JSONException - Incase the json breaks
      */
     public void addMarkers(final JSONObject joobject, final String UniqueCode) throws JSONException {
-
         String holder = joobject.getString("GPS");
-        //splits the users teaching lanugages with this
-        String[] parts = holder.split(",");
-        Double lat = Double.parseDouble(parts[0]);
-        Double lng = Double.parseDouble(parts[1]);
+        if(!holder.equals("0")) {
+            //splits the users teaching lanugages with this
+            String[] parts = holder.split(",");
+            Double lat = Double.parseDouble(parts[0]);
+            Double lng = Double.parseDouble(parts[1]);
 
-        //Log.d is to verify the lng is working
-        Log.d(TAG, "Long" + lng);
+            //Log.d is to verify the lng is working
+            Log.d(TAG, "Long" + lng);
 
-        //Makes the coordinate for the marker
-        LatLng latlng2 = new LatLng(lat,lng);
-        MarkerOptions markersO = new MarkerOptions();
-        markersO.position(latlng2);
-        markersO.snippet(joobject.getString("FirstName"));
+            //Makes the coordinate for the marker
+            LatLng latlng2 = new LatLng(lat, lng);
+            MarkerOptions markersO = new MarkerOptions();
+            markersO.position(latlng2);
+            markersO.snippet(joobject.getString("FirstName"));
 
-        //Gets the String for the image and decodes it to a bitmap
-        byte[] decodedString = Base64.decode(joobject.getString("Image"), 0);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            //Gets the String for the image and decodes it to a bitmap
+            byte[] decodedString = Base64.decode(joobject.getString("Image"), 0);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-        //Gives the marker
-        View marker = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_info_window, null);
-        ImageView imgView = (ImageView) marker.findViewById(R.id.imgperson);
-        imgView.setImageBitmap(decodedByte);
-        final MarkerOptions icon = markersO.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker)));
-        markersO.title(joobject.getString("UniqueCode"));
+            //Gives the marker
+            View marker = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_info_window, null);
+            ImageView imgView = (ImageView) marker.findViewById(R.id.imgperson);
+            imgView.setImageBitmap(decodedByte);
+            final MarkerOptions icon = markersO.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker)));
+            markersO.title(joobject.getString("UniqueCode"));
 
-        //Adds a onclick listener
-        mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(final Marker marker) {
+            //Adds a onclick listener
+            mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(final Marker marker) {
 
-                try {
-                    for (int x = 0; x < jsonArray.size(); x++) {
-                        JSONArray profileSearch = new JSONArray(jsonArray.get(x));
-                        for (int i = 0; i < profileSearch.length(); i++) {
-                            JSONObject jo = profileSearch.getJSONObject(i);
-                            if (jo.getString("UniqueCode").equals(marker.getTitle())) {
-                                Log.d("FirstName", jo.getString("FirstName"));
-                                Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
-                                intent.putExtra("profileFname", jo.getString("FirstName"));
-                                intent.putExtra("profileLname", jo.getString("LastName"));
-                                intent.putExtra("profileEmail", jo.getString("Email"));
-                                intent.putExtra("profileAge", jo.getString("Age"));
-                                intent.putExtra("profileGender", jo.getString("Gender"));
-                                intent.putExtra("profilePracticingLanguage", jo.getString("PracticeLanguage"));
-                                intent.putExtra("profileTeachingLanguage", jo.getString("TeachingLanguage"));
-                                intent.putExtra("profilePersonalInterest", jo.getString("PersonalInterests"));
-                                intent.putExtra("profileImage", jo.getString("Image"));
-                                // intent.putExtra("profileGps", jo.getString("GPS"));
-                                startActivity(intent);
+                    try {
+                        for (int x = 0; x < jsonArray.size(); x++) {
+                            JSONArray profileSearch = new JSONArray(jsonArray.get(x));
+                            for (int i = 0; i < profileSearch.length(); i++) {
+                                JSONObject jo = profileSearch.getJSONObject(i);
+                                if (jo.getString("UniqueCode").equals(marker.getTitle())) {
+                                    Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
+                                    intent.putExtra("profileUnique", jo.getString("UniqueCode"));
+                                    intent.putExtra("userinfo", userInformation);
+                                    intent.putExtra("profileFname", jo.getString("FirstName"));
+                                    intent.putExtra("profileLname", jo.getString("LastName"));
+                                    intent.putExtra("profileEmail", jo.getString("Email"));
+                                    intent.putExtra("profileAge", jo.getString("Age"));
+                                    intent.putExtra("profileGender", jo.getString("Gender"));
+                                    intent.putExtra("profilePracticingLanguage", jo.getString("PracticeLanguage"));
+                                    intent.putExtra("profileTeachingLanguage", jo.getString("TeachingLanguage"));
+                                    intent.putExtra("profilePersonalInterest", jo.getString("PersonalInterests"));
+                                    intent.putExtra("profileImage", jo.getString("Image"));
+                                    intent.putExtra("profileGps", jo.getString("GPS"));
+                                    intent.putExtra("Activity", GpsMapFragment.class);
+                                    startActivity(intent);
+                                }
                             }
                         }
-                        }
-                    }catch(JSONException e) {
-                    e.printStackTrace();
-                }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     return true;
-            }
-        });
-        //adds the marker onto the map
-        final Marker searchLocation = mGoogleMap.addMarker(markersO);
+                }
+            });
+            //adds the marker onto the map
+            final Marker searchLocation = mGoogleMap.addMarker(markersO);
+        }
     }
 
     //Generates the bitmap for the icon
@@ -356,5 +360,6 @@ public class GpsMapFragment extends AppCompatActivity implements
         marker.showInfoWindow();
         System.out.println("Info window has been clicked!");
     }
+
 }
 
