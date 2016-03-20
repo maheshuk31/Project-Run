@@ -17,7 +17,7 @@
     <string name="google_app_id">project-run-1240</string>
     <string name="title_activity_friends_list">FriendsListActivity</string>
 
-    <string name="username_label">Username:</string>
+        <string name="username_label">Username:</string>
     <string name="login_title">Log in</string>
     <string name="conference_id_label">Conference ID:</string>
     <string name="display_name_label">Display Name:</string>

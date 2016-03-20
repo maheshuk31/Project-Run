@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.lee.projectrun">
+    package="com.example.lee.projectrun"
+    android:versionCode="1234"
+    android:versionName="2.2.0.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="20" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -20,6 +25,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
+
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission android:name="com.oovoo.sdk.oovoosdksampleshow.gcm.permission.C2D_MESSAGE"
@@ -34,53 +40,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:name = "com.example.lee.projectrun.app.ooVooSdkSampleShowApp"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:name=".app.ooVooSdkSampleShowApp"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:debuggable="true"
-        tools:ignore="HardcodedDebugMode">
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/google_maps_key" />
+        android:debuggable="true">
 
-        <activity
-            android:name="com.example.lee.projectrun.ui.SampleActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTop"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustPan">
-
-
-        </activity>
-        <receiver
-            android:name="com.google.android.gms.gcm.GcmReceiver"
-            android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="com.example.gcm" />
-            </intent-filter>
-        </receiver>
-        <service
-            android:name="com.example.lee.projectrun.services.MyGcmListenerService"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-            </intent-filter>
-        </service>
-        <service
-            android:name="com.example.lee.projectrun.services.MyInstanceIDListenerService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
-            </intent-filter>
-        </service>
-        <service
-            android:name="com.example.lee.projectrun.services.RegistrationIntentService"
-            android:exported="false">
-        </service>
 
         <activity
             android:name=".MainActivity"
@@ -91,6 +56,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name="com.example.lee.projectrun.ui.SampleActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustPan">
 
         </activity>
         <activity
@@ -165,6 +139,35 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.example.gcm" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name="com.example.lee.projectrun.services.MyGcmListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.example.lee.projectrun.services.MyInstanceIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.example.lee.projectrun.services.RegistrationIntentService"
+            android:exported="false">
+        </service>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
-
 </manifest>

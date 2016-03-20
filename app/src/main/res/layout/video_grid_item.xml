@@ -6,18 +6,18 @@
     android:padding="@dimen/grid_item_padding"
     android:orientation="vertical" >
     
-	<com.oovoo.sdk.sample.ui.VideoPanelRect
+	<com.example.lee.projectrun.ui.VideoPanelRect
 	    android:id="@+id/video_panel_view"
 	    android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible">
-	</com.oovoo.sdk.sample.ui.VideoPanelRect>
-    <com.oovoo.sdk.sample.ui.CustomVideoPanel
+	</com.example.lee.projectrun.ui.VideoPanelRect>
+    <com.example.lee.projectrun.ui.CustomVideoPanel
         android:id="@+id/custom_panel_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible">
-    </com.oovoo.sdk.sample.ui.CustomVideoPanel>
+    </com.example.lee.projectrun.ui.CustomVideoPanel>
 	
 	<ImageView
         android:id="@+id/avatar_image_view"
