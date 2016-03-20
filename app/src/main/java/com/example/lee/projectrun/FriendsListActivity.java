@@ -41,6 +41,8 @@ public class FriendsListActivity extends AppCompatActivity {
         counter = 0;
         setContentView(R.layout.activity_friends_list);
 
+        jsonArray = new ArrayList<>();
+
         Intent intent = getIntent();
         userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
 
@@ -52,11 +54,13 @@ public class FriendsListActivity extends AppCompatActivity {
      * Goes through each of the users friends list and displays them
      */
     private void searchFriends(){
-        String[] string = userInformation.getFriends();
-        for(int x = 0; x<userInformation.getFriends().length;x++){
-            search(string[x], counter);
-            counter = counter+1;
-            x++;
+        if(userInformation.getFriends()!=null) {
+            String[] string = userInformation.getFriends();
+            counter = 0;
+            for (int x = 0; x < userInformation.getFriends().length; x++) {
+                search(string[x], x);
+
+            }
         }
     }
 
@@ -75,9 +79,9 @@ public class FriendsListActivity extends AppCompatActivity {
             @Override
             protected String doInBackground(Void... v) {
                 HashMap<String, String> params = new HashMap<>();
-                params.put(Config.URL_FindFriends, FriendsID);
+                params.put("FriendCode", FriendsID);
                 RequestHandler rh = new RequestHandler();
-                String res = rh.SendPostRequest(Config.URL_Search, params);
+                String res = rh.SendPostRequest(Config.URL_FindFriends, params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
             }
@@ -105,11 +109,12 @@ public class FriendsListActivity extends AppCompatActivity {
      */
     private void findFriends(String json, int indicator) {
         try {
+            Log.d("json", json);
             jsonArray.add(indicator, json);
             JSONArray search = new JSONArray(json);
             Log.d("AAA", search.toString());
             for (int i = 0; i < search.length(); i++) {
-                final JSONObject jo = search.getJSONObject(i);
+                JSONObject jo = search.getJSONObject(i);
                 addingFriendsLayout(jo, jo.getString("UniqueCode"));
             }
         } catch (JSONException e) {
@@ -146,8 +151,9 @@ public class FriendsListActivity extends AppCompatActivity {
                         for (int i = 0; i < profileSearch.length(); i++) {
                             JSONObject jo = profileSearch.getJSONObject(i);
                             if (jo.getString("UniqueCode").equals(UniqueCode)) {
-                                Log.d("FirstName", jo.getString("FirstName"));
                                 Intent intent = new Intent(getApplicationContext(), ProfileViewerActivity.class);
+                                intent.putExtra("profileUnique", jo.getString("UniqueCode"));
+                                intent.putExtra("userinfo", userInformation);
                                 intent.putExtra("profileFname", jo.getString("FirstName"));
                                 intent.putExtra("profileLname", jo.getString("LastName"));
                                 intent.putExtra("profileEmail", jo.getString("Email"));
@@ -157,7 +163,7 @@ public class FriendsListActivity extends AppCompatActivity {
                                 intent.putExtra("profileTeachingLanguage", jo.getString("TeachingLanguage"));
                                 intent.putExtra("profilePersonalInterest", jo.getString("PersonalInterests"));
                                 intent.putExtra("profileImage", jo.getString("Image"));
-                                // intent.putExtra("profileGps", jo.getString("GPS"));
+                                intent.putExtra("profileGps", jo.getString("GPS"));
                                 startActivity(intent);
                             }
                         }
