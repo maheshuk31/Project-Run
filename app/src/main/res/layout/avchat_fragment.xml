@@ -26,14 +26,14 @@
 			android:padding="4dip"
 			android:visibility="gone">
 		</com.oovoo.sdk.api.ui.VideoPanel>
-		<com.oovoo.sdk.sample.ui.CustomVideoPanel
+		<com.example.lee.projectrun.ui.CustomVideoPanel
 			android:id="@+id/full_screen_custom_panel_remoteview"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:padding="4dip"
 			android:visibility="gone"
 			custom:isCircleShape="false">
-		</com.oovoo.sdk.sample.ui.CustomVideoPanel>
+		</com.example.lee.projectrun.ui.CustomVideoPanel>
 
 		<ImageView
 			android:id="@+id/full_screen_avatar_image_view"
