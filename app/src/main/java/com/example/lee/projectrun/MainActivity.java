@@ -174,21 +174,27 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                userInformation1 = RetrieveUser(s);
-                if(stringIp.equals(null)){
-                    stringIp = "No Ip found";
+                if(RetrieveUser(s)!=null){
+                    userInformation1 = RetrieveUser(s);
+                    if(stringIp.equals(null)){
+                        stringIp = "No Ip found";
+                    }
+                    else {
+                        userInformation1.updateIp(stringIp);
+                    }
+                    userInformation1.updateGPS(stringUpdateGps);
+                    userInformation1.updateStudent(MainActivity.this);
+                    Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+                    intent.putExtra("userinfo", userInformation1);
+                    Log.d("IP", stringIp);
+                    Log.d("GPS", stringUpdateGps);
+                    System.out.print(userInformation1.getFirstName());
+                    startActivity(intent);
+                    finish();
+                } else {
+                    txtLogin.setError("Incorrect Password Or Login");
                 }
-                else {
-                    userInformation1.updateIp(stringIp);
-                }
-                userInformation1.updateGPS(stringUpdateGps);
-                userInformation1.updateStudent(MainActivity.this);
-                Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
-                intent.putExtra("userinfo", userInformation1);
-                Log.d("IP", stringIp);
-                Log.d("GPS", stringUpdateGps);
-                System.out.print(userInformation1.getFirstName());
-                startActivity(intent);
+
             }
 
             @Override
@@ -213,22 +219,22 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         try {
 
             if (json != null) {
+                Log.d("JSON", json);
                 JSONArray userInfo = new JSONArray(json);
-
+                JSONObject userObject = userInfo.getJSONObject(0);
                 Log.d("AAA", userInfo.toString());
-                if (!userInfo.isNull(0)) {
-                    JSONObject userObject = userInfo.getJSONObject(0);
+                Log.d("RESULT", userObject.getString("UniqueCode"));
+                if (!userObject.getString("UniqueCode").equals("JSON")) {
                     userInformation2 = new UserInformation(userObject.getString("UniqueCode"), userObject.getString("FirstName"), userObject.getString("Image"), userObject.getString("LastName"),
                             userObject.getString("Email"), userObject.getString("password"), userObject.getString("Age"), userObject.getString("Gender"), userObject.getString("TeachingLanguage"),
                             userObject.getString("PracticeLanguage"), userObject.getString("PersonalInterests"), userObject.getString("Friends"), userObject.getString("GPS"), userObject.getString("Stats"),
                             userObject.getString("IP"));
                 } else {
-                    userfill = false;
+                    txtLogin.setError("Incorrect Password Or Login");
                 }
             }
         } catch (JSONException e) {
-            e.printStackTrace();
-        }
+                    }
         return userInformation2;
     }
 
