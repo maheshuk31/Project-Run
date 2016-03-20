@@ -115,18 +115,28 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		try {
 
-			Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-				public void uncaughtException(Thread t, Throwable e) {
+		//-----------------------------------------------------------------------------This initializes the developer (us) and our settings--------------------------------------
+		try
+		{
+
+			Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler()
+			{
+				public void uncaughtException(Thread t, Throwable e)
+				{
 					LogSdk.e(TAG, "UncaughtExceptionHandler threade = " + t + ", error " + e);
 					e.printStackTrace();
 				}
 			});
 
-			if (!ooVooClient.isDeviceSupported()) {
+			if (!ooVooClient.isDeviceSupported())
+			{
 				return;
 			}
+
+
+
+
 
 			settings = new ApplicationSettings(this);
 
@@ -138,48 +148,27 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 			sdk.getAVChat().getAudioController().setListener(this);
 			sdk.getAVChat().setSslVerifyPeer(true);
 			sdk.getMessaging().setListener(this);
-			//sdk.getAVChat().registerPlugin(new ooVooPluginFactory());
-//			PerfVerifier verify = new PerfVerifier();
-//			verify.glTestRun();
-//			long vga_average_read = verify.getPerfValue("vga");
-//			LogSdk.d( TAG, "perf test result vga: " + vga_average_read );
-//			if(vga_average_read < verify.getEnableThreshold())
-//			{
-//				LogSdk.d( TAG, "yap support up to vga");
-//			}
-//			else
-//			{
-//				long cif_average_read = verify.getPerfValue("cif");
-//				LogSdk.d( TAG, "perf test result vga: " + cif_average_read );
-//				if(cif_average_read < verify.getEnableThreshold())
-//				{
-//					LogSdk.d( TAG, "yap support up to cif");
-//				}
-//				else
-//				{
-//					LogSdk.d( TAG, "do not suppor yap avatar");
-//				}
-//			}
-
-			//sdk.getAVChat().registerPlugin(new YapFactory("/storage/sdcard0/oosdksampleshow/avatar"));
 
 
-//			AffdexPluginSettings affdexSettings = new AffdexPluginSettings();
-//			affdexSettings.setDetectAllExpressions(true);
-//			affdexSettings.setDetectAllEmotions(true);
-//			File extStore = Environment.getExternalStorageDirectory();
-//			affdexSettings.setClassifierPath(extStore + "/data");
-//			sdk.getAVChat().registerPlugin(new AffdexPluginFactory(affdexSettings, this));
 
 			AudioRouteController audioController = sdk.getAVChat().getAudioController().getAudioRouteController();
 			LogSdk.d(TAG, "Audio controller " + audioController);
 
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 			sdk = null;
 		}
 		operation_handler = new Handler();
 	}
+
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
 	public Context getContext() {
 		return mContext;
@@ -320,15 +309,18 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 
 		sdk.getAccount().login(username, new ooVooSdkResultListener() {
 			@Override
-			public void onResult(ooVooSdkResult result) {
+			public void onResult(ooVooSdkResult result)
+			{
 
-				if (result.getResult() == sdk_error.OK) {
+				if (result.getResult() == sdk_error.OK)
+				{
 
 					settings.put(ApplicationSettings.Username, username);
 					settings.save();
 					fireApplicationStateEvent(Operation.LoggedIn);
 					LogSdk.d(TAG,"Application -> messaging service is "+(sdk.getMessaging().isConnected() ? "connected" : "not connected, will try to connect"));
-					if(!sdk.getMessaging().isConnected()){
+					if(!sdk.getMessaging().isConnected())
+					{
 						sdk.getMessaging().connect();
 						LogSdk.d(TAG, "Application -> messaging service start connecting");
 					}
@@ -529,7 +521,7 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 	}
 
 	public void room() {
-		fireApplicationStateEvent(Operation.AVChatRoom, Operation.AVChatRoom, "Room");
+		fireApplicationStateEvent(Operation.AVChatRoom, Operation.AVChatRoom, "Room"); // -----------------------------------------------------------------
 	}
 
 	public void makeCall() {
@@ -540,9 +532,18 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 		fireApplicationStateEvent(Operation.PushNotification, Operation.PushNotification, "Push notification");
 	}
 
-	public void onProcessingStarted() {
-		if (Operation.Processing.forOperation() != null) {
-			switch (Operation.Processing.forOperation()) {
+
+
+
+
+
+
+	public void onProcessingStarted()
+	{
+		if (Operation.Processing.forOperation() != null)
+		{
+			switch (Operation.Processing.forOperation())
+			{
 				case AVChatJoined:
 
 				{
@@ -550,11 +551,14 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 							settings.get(ApplicationSettings.AvsSessionId);
 					final String session_dn = settings.get(ApplicationSettings.AvsSessionDisplayName);
 
-					sdk.getAVChat().getAudioController().initAudio(new ooVooSdkResultListener() {
+					sdk.getAVChat().getAudioController().initAudio(new ooVooSdkResultListener()
+					{
 						@Override
-						public void onResult(ooVooSdkResult init_audio_result) {
+						public void onResult(ooVooSdkResult init_audio_result)
+						{
 							LogSdk.d(TAG, "Application - > init audio completion " + init_audio_result);
-							if (init_audio_result.getResult() == sdk_error.OK) {
+							if (init_audio_result.getResult() == sdk_error.OK)
+							{
 								m_isaudioinited = true;
 							}
 						}
@@ -573,6 +577,16 @@ public class ooVooSdkSampleShowApp extends Application implements VideoControlle
 			Operation.Processing.setForOperation(null);
 		}
 	}
+
+
+
+
+
+
+
+
+
+
 
 	@Override
 	public void onConferenceError(sdk_error error) {

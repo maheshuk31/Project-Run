@@ -18,13 +18,12 @@ import com.example.lee.projectrun.R;
 
 
 public class LoginFragment extends BaseFragment {
-	
+
 	private static final int MIN_USERNAME_LENGTH = 6;
 	private static final int USERNAME_LIMIT = 200;
 	private static final int DISPLAY_NAME_LIMIT = 100;
 	private String errorDescription 		= null;
-	private EditText usernameEditText 		= null;
-	private EditText displayNameEditText	= null;
+	private TextView usernameView 		= null;
 	private TextView errorTextView			= null;
 	private MenuItem settingsMenuItem 		= null;
 
@@ -47,7 +46,7 @@ public class LoginFragment extends BaseFragment {
 	{
 		LoginFragment instance = new LoginFragment();
 		instance.setErrorDescription(errorDescription);
-	    return instance;
+		return instance;
 	}
 
 
@@ -63,28 +62,28 @@ public class LoginFragment extends BaseFragment {
 
 
 	@Override
-    public void onResume()
+	public void onResume()
 	{
-	    super.onResume();
+		super.onResume();
 
-	    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-	    getActivity().getWindow().setBackgroundDrawableResource(R.drawable.slqsm);
+		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+		getActivity().getWindow().setBackgroundDrawableResource(R.drawable.slqsm);
 		if (settingsMenuItem != null)
 		{
 			settingsMenuItem.setVisible(true);
 		}
-    }
+	}
 
 
 
 
 
 	@Override
-    public void onPause()
+	public void onPause()
 	{
-        super.onPause();
+		super.onPause();
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 		if (settingsMenuItem != null)
 		{
 			settingsMenuItem.setVisible(false);
@@ -103,21 +102,14 @@ public class LoginFragment extends BaseFragment {
 
 		Button loginButton = (Button) view.findViewById(R.id.login_button);
 
-		usernameEditText = (EditText) view.findViewById(R.id.username_field);
-		String username = settings().get("username");
+		usernameView = (TextView) view.findViewById(R.id.txtViewUserName);
+		String username = "Igor Chimczak";
+		username = username.replace(' ', '_');
 		if (username != null)
 		{
-			usernameEditText.setText(username);
+			usernameView.setText(username);
 		}
 
-		String lastDisplayName = settings().get("avs_session_display_name");
-
-		displayNameEditText = (EditText) view.findViewById(R.id.displayname_field);
-
-		if (lastDisplayName != null)
-		{
-			displayNameEditText.setText(lastDisplayName);
-		}
 
 		loginButton.setOnClickListener(new View.OnClickListener()
 		{
@@ -136,7 +128,8 @@ public class LoginFragment extends BaseFragment {
 		{
 			errorTextView.setVisibility(View.VISIBLE);
 			errorTextView.setText(getActivity().getResources().getString(R.string.no_internet));
-		} else if (errorDescription != null)
+		}
+		else if (errorDescription != null)
 		{
 			errorTextView.setVisibility(View.VISIBLE);
 			errorTextView.setText(errorDescription);
@@ -154,40 +147,15 @@ public class LoginFragment extends BaseFragment {
 
 	public void onLoginClick()
 	{
-		errorTextView.setText("");
-		String username = usernameEditText.getText().toString();
-		if (username.isEmpty())
-		{
-			showErrorMessageBox(getString(R.string.login_title), getString(R.string.enter_username_toast));
 
-			return;
-		}
 
-		if (username.length() < MIN_USERNAME_LENGTH)
-		{
-			showErrorMessageBox(getString(R.string.characters_missing), getString(R.string.min_username_length));
 
-			return;
-		}
-		
-		if (!username.matches("^([a-zA-Z0-9-_%. ])+$") || username.length() > USERNAME_LIMIT)
-		{
-			showErrorMessageBox(getString(R.string.login_title), getString(R.string.wrong_username_id));
-			
-			return;
-		}
 
-		String displayName = displayNameEditText.getText().toString();
 
-		if (!checkDisplayName(displayName))
-		{
-			return;
-		}
-		
 		InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(usernameEditText.getWindowToken(), 0);
-		
-		app().login(usernameEditText.getText().toString(), displayName);
+		imm.hideSoftInputFromWindow(usernameView.getWindowToken(), 0);
+
+		app().login(usernameView.getText().toString(), usernameView.getText().toString());
 	}
 
 
@@ -219,19 +187,19 @@ public class LoginFragment extends BaseFragment {
 
 
 
-	
+
 	public void showErrorMessageBox(String title,String msg)
 	{
-		try {		
-				AlertDialog.Builder popupBuilder = new AlertDialog.Builder(getActivity());
-				TextView myMsg = new TextView(getActivity());
-				myMsg.setText(msg);
-				myMsg.setGravity(Gravity.CENTER);
-				popupBuilder.setTitle(title);
-				popupBuilder.setPositiveButton("OK", null);
-				popupBuilder.setView(myMsg);
+		try {
+			AlertDialog.Builder popupBuilder = new AlertDialog.Builder(getActivity());
+			TextView myMsg = new TextView(getActivity());
+			myMsg.setText(msg);
+			myMsg.setGravity(Gravity.CENTER);
+			popupBuilder.setTitle(title);
+			popupBuilder.setPositiveButton("OK", null);
+			popupBuilder.setView(myMsg);
 
-				popupBuilder.show();
+			popupBuilder.show();
 		}
 		catch( Exception e)
 		{

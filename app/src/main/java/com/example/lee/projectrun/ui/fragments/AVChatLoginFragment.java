@@ -200,7 +200,7 @@ public class AVChatLoginFragment extends BaseFragment {
 	}
 
 	public BaseFragment getBackFragment() {
-		return OptionFragment.newInstance(settingsMenuItem);
+		return LoginFragment.newInstance(settingsMenuItem);
 	}
 
 	public boolean onBackPressed() {

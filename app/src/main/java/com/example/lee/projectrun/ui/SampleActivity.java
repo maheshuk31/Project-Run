@@ -315,7 +315,7 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 						Intent intent = new Intent(this, RegistrationIntentService.class);
 						startService(intent);
 					}
-					current_fragment = OptionFragment.newInstance(mSettingsMenuItem);
+					current_fragment = AVChatLoginFragment.newInstance(mSettingsMenuItem);
 					break;
 				case AVChatDisconnected:
 					if (application.isCallNegotiation()) {
