@@ -118,11 +118,25 @@ public class HomePageActivity extends AppCompatActivity {
         lpBtnYes.weight = 0.2f;
         btnYes.setLayoutParams(lpBtnYes);
 
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         btnNo = new Button(this);
         btnNo.setText("NO");
         LinearLayout.LayoutParams lpBtnNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
         lpBtnNo.weight = 0.2f;
         btnNo.setLayoutParams(lpBtnYes);
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
 
         linNotificationHolder.addView(linMeetingHolder);
         linMeetingHolder.addView(txtMeeting);
