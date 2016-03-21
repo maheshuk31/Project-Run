@@ -125,6 +125,7 @@ public class ProfileViewerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ScheduleMeetingActivity.class);
                 intent.putExtra("userinfo", userInformation);
+                intent.putExtra("userB", UniqueCode);
                 startActivity(intent);
             }
         });

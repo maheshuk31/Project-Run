@@ -12,6 +12,7 @@ public class Config
     public static final String URL_FindFriends = "http://projectrun.x10host.com/FindFriends.php";
     public static final String URL_RetrieveUser = "http://projectrun.x10host.com/RetrieveUser.php";
     public static final String URL_Search = "http://projectrun.x10host.com/Search.php";
+    public static final String URL_AddMeeting = "http://projectrun.x10host.com/newMeeting.php";
 
     // Keys that will be used to send requests to php scripts.
     public static final String Key_ID = "UniqueCode";
@@ -30,6 +31,15 @@ public class Config
     public static final String Key_Image = "Image";
     public static final String Key_GPS = "GPS";
     public static final String Key_Stats = "Stats";
+    public static final String Key_UniqueA = "UserAUniqueCode";
+    public static final String Key_UniqueB = "UserBUniqueCode";
+    public static final String Key_StatusOfAccepted = "StatusOfAccepted";
+    public static final String Key_DateOFMeet = "DateOFMeet";
+    public static final String Key_TimeOfMeet = "TimeOfMeet";
+    public static final String Key_StatusBeen = "StatusBeen";
+    public static final String Key_Location = "Location";
+
+
 
 
     public static boolean permissionrequest = false;

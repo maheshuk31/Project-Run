@@ -125,7 +125,6 @@ public class UserInformation implements Serializable {
     public String[] getFriends() {
         String holder = Friends;
         String[] parts = holder.split(",");
-
         return parts;
     }
 

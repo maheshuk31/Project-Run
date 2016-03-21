@@ -2,12 +2,15 @@ package com.example.lee.projectrun;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,15 +20,16 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class ScheduleMeetingActivity extends AppCompatActivity {
 
     private Spinner spinnerCampuses;
     private static EditText txtSetTime, txtSetDate;
     private Button btnSchConfirm, btnSchCancel;
-    private String[] arrayListCampuses = {"Select a Campus", "Strand", "Guy's", "Waterloo", "St Thomas'",
+    private String[] arrayListCampuses = {"Select a Campus", "Strand", "Guys", "Waterloo", "St Thomas",
             "Denmark Hill", "The Maughan Library", "Franklin-Wilkins Library", "James Clark Maxwell"};
-    private String stringCampus, stringTime, stringDate;
+    private String stringCampus, stringTime, stringDate, userBUnique;
     private UserInformation userInformation;
 
     @Override
@@ -35,6 +39,8 @@ public class ScheduleMeetingActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
+        userBUnique = intent.getExtras().getString("userB");
+
 
         ArrayAdapter<String> adapterLanguages = new ArrayAdapter<>(this,
                 R.layout.support_simple_spinner_dropdown_item, arrayListCampuses);
@@ -71,6 +77,16 @@ public class ScheduleMeetingActivity extends AppCompatActivity {
                     stringCampus = spinnerCampuses.getSelectedItem().toString();
                     stringTime = txtSetTime.getText().toString();
                     stringDate = txtSetDate.getText().toString();
+                    Log.d("User", userInformation.getUniqueCode());
+                    Log.d("Userb", userBUnique);
+                    Log.d("User3", stringDate);
+                    Log.d("User4", stringTime);
+                    Log.d("User4", stringCampus);
+
+
+                    addMeeting();
+
+
                 }
             }
         });
@@ -124,6 +140,34 @@ public class ScheduleMeetingActivity extends AppCompatActivity {
         public void onDateSet(DatePicker view, int year, int month, int day) {
             txtSetDate.setText(day + "/" + (month + 1) + "/" + year);
         }
+    }
+
+    public void addMeeting(){
+
+        class AddMeeting extends AsyncTask<Void,Void,String> {
+            ProgressDialog loading;
+            protected void onPreExecute(){
+                super.onPreExecute();
+            }
+
+            @Override
+            protected String doInBackground(Void... v) {
+                HashMap<String, String> params = new HashMap<>();
+                params.put(Config.Key_UniqueA, userInformation.getUniqueCode());
+                params.put(Config.Key_UniqueB, userBUnique);
+                params.put(Config.Key_StatusOfAccepted, "0");
+                params.put(Config.Key_DateOFMeet, stringDate);
+                params.put(Config.Key_TimeOfMeet, stringTime);
+                params.put(Config.Key_StatusBeen, "0");
+                params.put(Config.Key_Location, stringCampus);
+
+                RequestHandler rh = new RequestHandler();
+                String res = rh.SendPostRequest(Config.URL_AddMeeting, params);
+                return res;
+            }
+        }
+        AddMeeting as = new AddMeeting();
+        as.execute();
     }
 
 
