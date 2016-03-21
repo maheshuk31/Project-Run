@@ -16,7 +16,7 @@ public class ProfileViewerActivity extends AppCompatActivity {
     private TextView txtProfileFname, txtProfileLname, txtProfileEmail, txtProfileGender, txtProfileAge,
             txtProfileTeaching, txtProfilePractice, txtProfilePersonalInterest;
     private ImageView imgProfileUser;
-    private Button btnProfileAddConnection,  btnProfileChat, btnProfileLastLocation;
+    private Button btnProfileAddConnection,  btnProfileChat, btnProfileLastLocation, btnSchedule;
     private String FirstName, LastName, Email, Age, UniqueCode;
     private String Gender,PracticeLanguage, PracticeLanguageLevel;
     private String TeachingLanguage, TeachingLanguageLevel, PersonalInterest, Image ,Gps;
@@ -40,6 +40,7 @@ public class ProfileViewerActivity extends AppCompatActivity {
         btnProfileAddConnection = (Button) findViewById(R.id.btnProfileAddConnection);
         btnProfileChat = (Button) findViewById(R.id.btnProfileChat);
         btnProfileLastLocation = (Button) findViewById(R.id.btnProfileLastLocation);
+        btnSchedule = (Button) findViewById(R.id.btnSchedule);
 
 
         Intent intent = getIntent();
@@ -118,6 +119,15 @@ public class ProfileViewerActivity extends AppCompatActivity {
                 }
             });
         }
+
+        btnSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ScheduleMeetingActivity.class);
+                intent.putExtra("userinfo", userInformation);
+                startActivity(intent);
+            }
+        });
 
     }
 

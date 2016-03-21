@@ -17,7 +17,7 @@
     <string name="google_app_id">project-run-1240</string>
     <string name="title_activity_friends_list">FriendsListActivity</string>
 
-        <string name="username_label">Username:</string>
+    <string name="username_label">Username:</string>
     <string name="login_title">Access Voice Chat</string>
     <string name="conference_id_label">Conference ID:</string>
     <string name="display_name_label">User_Name</string>
@@ -94,4 +94,5 @@
     <string name="no_token_to_unsubscribe">There is no token to unsubscribe</string>
     <string name="characters_missing">Characters missing</string>
     <string name="user_offline">User %s is offline</string>
+    <string name="title_activity_schedule_meeting">ScheduleMeetingActivity</string>
 </resources>
