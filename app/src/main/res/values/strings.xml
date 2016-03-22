@@ -95,4 +95,5 @@
     <string name="characters_missing">Characters missing</string>
     <string name="user_offline">User %s is offline</string>
     <string name="title_activity_schedule_meeting">ScheduleMeetingActivity</string>
+    <string name="title_activity_chat_room">ChatRoomActivity</string>
 </resources>

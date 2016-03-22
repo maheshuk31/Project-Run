@@ -31,6 +31,15 @@ public class Config
     public static final String Key_GPS = "GPS";
     public static final String Key_Stats = "Stats";
 
+    public static final String PUSH_NOTIFICATION = "pushNotification";
+    public static boolean appendNotificationMessages = true;
+
+    public static final int NOTIFICATION_ID = 100;
+    public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
+
+    public static final int PUSH_TYPE_CHATROOM = 1;
+    public static final int PUSH_TYPE_USER = 2;
+
 
     public static boolean permissionrequest = false;
 

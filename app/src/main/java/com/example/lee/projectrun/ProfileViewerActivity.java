@@ -129,6 +129,19 @@ public class ProfileViewerActivity extends AppCompatActivity {
             }
         });
 
+        btnProfileChat.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ChatRoomActivity.class);
+                intent.putExtra("userinfo", userInformation);
+                startActivity(intent);
+
+
+            }
+        });
+
+
     }
 
     //public ProfileViewerActivity(FirstName, LastName, Email, Age, Gender,PracticeLanguage,
