@@ -23,7 +23,7 @@ import org.json.JSONException;
 import java.util.HashMap;
 
 /**
- * Created by Nick, the Saviour of Chat in the year of our lord 2016.
+ * Created by Nick, the Saviour of Chat - in the year of our lord 2016.
  */
 public class ChatActivity extends AppCompatActivity {
 
@@ -199,7 +199,7 @@ public class ChatActivity extends AppCompatActivity {
         try {
             JSONArray search = new JSONArray(json);
             Log.d("AAA", search.toString());
-            messages = search.getJSONObject(0).getString("Messages").split("asdasdadsdasd,");
+            messages = search.getJSONObject(0).getString("Messages").split(",-,");
             generateDefaultText(messages);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -297,20 +297,20 @@ public class ChatActivity extends AppCompatActivity {
 
                         for(int i = 0; i < 60; i++){
                             messagesWhole += messagesTemp[i];
-                            messagesWhole += "asdasdadsdasd,";
+                            messagesWhole += ",-,";
                         }
                     } else {
                         for(int i = 0; i < messages.length; i++){
                             messagesWhole += messages[i];
-                            messagesWhole += "asdasdadsdasd,";
+                            messagesWhole += ",-,";
                         }
                         messagesWhole += userInformation.getUniqueCode();
-                        messagesWhole += "asdasdadsdasd,";
+                        messagesWhole += ",-,";
                         messagesWhole += msgTemp;
                     }
                 } else {
                     messagesWhole += userInformation.getUniqueCode();
-                    messagesWhole += "asdasdadsdasd,";
+                    messagesWhole += ",-,";
                     messagesWhole += msgTemp;
                 }
                 sendMessagesToServer();

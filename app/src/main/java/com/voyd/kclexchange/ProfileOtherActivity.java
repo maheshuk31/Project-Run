@@ -175,8 +175,11 @@ public class ProfileOtherActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickLocateContact(View v){
-
+    public void onClickMeeting(View v){
+        Intent intent = new Intent(getApplicationContext(), MeetingActivity.class);
+        intent.putExtra("userinfo", userInformation);
+        intent.putExtra("userB", UniqueCode);
+        startActivity(intent);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
