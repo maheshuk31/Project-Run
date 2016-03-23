@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RecoveryActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -77,6 +80,35 @@ public class RecoveryActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Checks to see if a String provided matches a correct user ID that has a valid format of
+     * beginning with K and 7 numbers.
+     * @param forgotString
+     * @return
+     */
+    private boolean isValidForgotString(String forgotString) {
+        String userPatternRegex = "^[Kk]{1}[0-9]{7}$";
+
+        Pattern userPattern = Pattern.compile(userPatternRegex);
+        Matcher userMatcher = userPattern.matcher(forgotString);
+
+        return userMatcher.matches();
+    }
+
+    /**
+     * To test any inputted King's ID Username to reset your password
+     * @param forgotStringHolder
+     * @return
+     */
+    public boolean getIsValidForgotString(String forgotStringHolder){
+        if(isValidForgotString(forgotStringHolder)==true){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
 
