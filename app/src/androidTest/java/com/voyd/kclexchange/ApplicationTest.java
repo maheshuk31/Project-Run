@@ -1,4 +1,4 @@
-package com.example.lee.projectrun;
+package com.voyd.kclexchange;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
