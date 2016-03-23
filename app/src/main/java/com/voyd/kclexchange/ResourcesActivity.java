@@ -46,8 +46,7 @@ public class ResourcesActivity extends AppCompatActivity {
         if (id == R.id.action_help) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.setMessage("Tap any of the links to go to the website detailed. The website " +
-                    "will open in a new window so you can explore it separate form the exchange").setTitle("Help");
+            builder.setMessage("Tap any of the links to ").setTitle("Help");
 
             builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {}});
@@ -84,12 +83,12 @@ public class ResourcesActivity extends AppCompatActivity {
     }
 
     public void onClickLink4(View view){
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.kcl.ac.uk/artshums/depts/mlc/lrc/LRCindex.aspx"));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.duolingo.com/"));
         startActivity(browserIntent);
     }
 
     public void onClickLink5(View view){
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://how-to-learn-any-language.com/e/languages/index.html"));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.bbc.co.uk/languages/"));
         startActivity(browserIntent);
     }
 }

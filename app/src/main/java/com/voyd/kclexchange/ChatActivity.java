@@ -375,9 +375,7 @@ public class ChatActivity extends AppCompatActivity {
         if (id == R.id.action_help) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.setMessage("Here you can chat with a speaker, to exchange or to plan a meeting." +
-                    "Although we'd suggest you try to meet in person to get more experience " +
-                    "understanding a variety of accents, genders, and dialects of speach.").setTitle("Help");
+            builder.setMessage("Explain chat").setTitle("Help");
 
             builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {}});

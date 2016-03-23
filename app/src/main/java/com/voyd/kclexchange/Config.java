@@ -6,13 +6,13 @@ package com.voyd.kclexchange;
 public class Config
 {
     // Addresses to the scripts of the CRUD.
-    public static final String URL_CheckLogin= "http://projectrun02.x10host.com/CheckLogin.php";
-    public static final String URL_AddUser = "http://projectrun02.x10host.com/UserCreation.php";
-    public static final String URL_ModifyUser = "http://projectrun02.x10host.com/UserModification.php";
-    public static final String URL_FindFriends = "http://projectrun02.x10host.com/FindFriends.php";
-    public static final String URL_RetrieveUser = "http://projectrun02.x10host.com/RetrieveUser.php";
-    public static final String URL_Search = "http://projectrun02.x10host.com/Search.php";
-    public static final String URL_AddMeeting = "http://projectrun02.x10host.com/newMeeting.php";
+    public static final String URL_CheckLogin= "http://projectrun.x10host.com/CheckLogin.php";
+    public static final String URL_AddUser = "http://projectrun.x10host.com/UserCreation.php";
+    public static final String URL_ModifyUser = "http://projectrun.x10host.com/UserModification.php";
+    public static final String URL_FindFriends = "http://projectrun.x10host.com/FindFriends.php";
+    public static final String URL_RetrieveUser = "http://projectrun.x10host.com/RetrieveUser.php";
+    public static final String URL_Search = "http://projectrun.x10host.com/Search.php";
+    public static final String URL_AddMeeting = "http://projectrun.x10host.com/newMeeting.php";
 
     // Keys that will be used to send requests to php scripts.
     public static final String Key_ID = "UniqueCode";

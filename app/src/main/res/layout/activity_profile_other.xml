@@ -206,7 +206,8 @@
                     android:layout_height="wrap_content"
                     android:text="Score Viewer"
                     android:id="@+id/textView16"
-                    android:layout_marginRight="40dp"/>
+                    android:layout_marginRight="40dp"
+                    android:onClick="onClickVideo"/>
 
                 <TextView
                     android:layout_width="wrap_content"
