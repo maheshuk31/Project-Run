@@ -41,7 +41,8 @@
 				android:layout_marginRight="@dimen/main_margin"
 				android:text="@string/login_title"
 				android:layout_weight="1"
-				android:clickable="true">
+				android:clickable="true"
+                android:background="@drawable/button_rounded">
 				<requestFocus />
 			</Button>
 		</TableRow>

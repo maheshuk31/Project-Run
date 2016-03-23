@@ -67,7 +67,6 @@ public class LoginFragment extends BaseFragment {
 		super.onResume();
 
 		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-		getActivity().getWindow().setBackgroundDrawableResource(R.drawable.slqsm);
 		if (settingsMenuItem != null)
 		{
 			settingsMenuItem.setVisible(true);

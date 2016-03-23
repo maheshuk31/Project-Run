@@ -27,7 +27,10 @@
         android:layout_marginBottom="15dp"
         android:hint="K Number"
         android:background="@drawable/bg_sharp"
-        android:padding="6dp"/>
+        android:padding="6dp"
+        android:maxLength="8"
+        android:maxLines="1"
+        />
 
     <EditText
         android:layout_width="220dp"
@@ -38,6 +41,7 @@
         android:layout_marginBottom="25dp"
         android:background="@drawable/bg_sharp"
         android:padding="6dp"
+        android:maxLines="1"
         />
 
     <Button

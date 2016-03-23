@@ -42,7 +42,6 @@ public class AVChatLoginFragment extends BaseFragment {
 	@Override
     public void onResume() {
 	    super.onResume();
-		getActivity().getWindow().setBackgroundDrawableResource(R.drawable.slqsm);
     }
 
 	@Override

@@ -3,8 +3,7 @@
     android:id="@+id/layoutContainer"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/slqsm"
-    android:orientation="horizontal" >
+              android:orientation="horizontal" >
 
     <RelativeLayout
         android:layout_width="0dip"
@@ -49,7 +48,8 @@
                 android:id="@+id/reauthorize_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Authorize again" >
+                android:text="Authorize again"
+                android:background="@drawable/button_rounded">
             </Button>
 
             

@@ -83,10 +83,8 @@ public class SampleActivity extends Activity implements OperationChangeListener,
 
 		Intent intent = getIntent();
 		userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
-		String FirstName = userInformation.getFirstName();
-		String SecondName = userInformation.getLastName();
-		Username = FirstName + "_" + SecondName;
-
+		String Name = userInformation.getFirstName();
+		Username = Name.replace(" ", "_");
 
 
 		if (savedInstanceState != null) {
