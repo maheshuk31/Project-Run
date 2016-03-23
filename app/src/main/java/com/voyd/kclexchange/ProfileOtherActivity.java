@@ -188,7 +188,12 @@ public class ProfileOtherActivity extends AppCompatActivity {
         if (id == R.id.action_help) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.setMessage("Explain profile importance. Reiterate CEFR").setTitle("Help");
+            builder.setMessage("So this is a speaker profile, where you can see a person's basic " +
+                    "information, languages, and choose to interact with them. You can press the add" +
+                    "button to add them as a quick-contact, where they'll be added to you home page" +
+                    "for easy access. You can also tap the chat button and talk to them to exchange" +
+                    "or plan a meeting. There's also the meeting scheduler, which can be used to set" +
+                    "a time, campus, and date to help remember a meeting.").setTitle("Help");
 
             builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {}});

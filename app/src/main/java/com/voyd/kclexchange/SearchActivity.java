@@ -227,7 +227,8 @@ public class SearchActivity extends AppCompatActivity {
         if (id == R.id.action_help) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.setMessage("Here's your results, fam. Hot and fresh ").setTitle("Help");
+            builder.setMessage("Tap any of the speakers to see their profiles, and remember to see" +
+                    "if you can swipe down to find even more opportunities!").setTitle("Help");
 
             builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {}});

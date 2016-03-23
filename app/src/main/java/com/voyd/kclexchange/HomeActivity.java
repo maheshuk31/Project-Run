@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,10 +36,11 @@ public class HomeActivity extends AppCompatActivity {
     private UserInformation userInformation;
     private EditText txtSearch;
     private String stringSearch;
-    private LinearLayout linLayFriendsListHolder;
+    private LinearLayout linLayFriendsListHolder, linMeetingHolder, linNotificationHolder;
     public ArrayList<String> jsonArray;
     private ImageView imgFriends;
-    private TextView txtFriendsName;
+    private TextView txtFriendsName, txtMeeting;
+    private Button btnYes, btnNo;
 
     @Override
     public void onRestart() {
@@ -205,6 +207,58 @@ public class HomeActivity extends AppCompatActivity {
         linLayTemp.addView(txtFriendsName);
     }
 
+    private void addingNotificationLayout(String meeting){
+
+        linMeetingHolder = new LinearLayout(this);
+        linMeetingHolder.setOrientation(LinearLayout.HORIZONTAL);
+        linMeetingHolder.setWeightSum(1f);
+        LinearLayout.LayoutParams linParamMeetingHolder = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        linMeetingHolder.setLayoutParams(linParamMeetingHolder);
+
+
+        txtMeeting = new TextView(this);
+        txtMeeting.setText(meeting);
+        LinearLayout.LayoutParams lpTxtMeeting = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lpTxtMeeting.weight = 0.6f;
+        txtMeeting.setTextColor(Color.BLACK);
+        txtMeeting.setLayoutParams(lpTxtMeeting);
+
+        btnYes = new Button(this);
+        btnYes.setText("YES");
+        LinearLayout.LayoutParams lpBtnYes = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lpBtnYes.weight = 0.2f;
+        btnYes.setLayoutParams(lpBtnYes);
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnNo = new Button(this);
+        btnNo.setText("NO");
+        LinearLayout.LayoutParams lpBtnNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lpBtnNo.weight = 0.2f;
+        btnNo.setLayoutParams(lpBtnYes);
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        linNotificationHolder.addView(linMeetingHolder);
+        linMeetingHolder.addView(txtMeeting);
+        linMeetingHolder.addView(btnYes);
+        linMeetingHolder.addView(btnNo);
+
+
+    }
+
     //----------------------------------------------------------------
 
     @Override
@@ -220,13 +274,12 @@ public class HomeActivity extends AppCompatActivity {
         if (id == R.id.action_help) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.setMessage("Curabitizzle et diam quizzle nisi pot my shizz. Suspendisse " +
-                    "potenti. Morbi odio. Pot neque. Bizzle orci. Yippiyo maurizzle crazy, " +
-                    "interdizzle a, check out this sit amizzle, cool izzle, i'm in the shizzle. " +
-                    "Pellentesque gravida. Vestibulizzle cool mi, shizznit crackalackin, go to " +
-                    "hizzle sizzle, things sempizzle, velit. Cras izzle ipsizzle. Sure volutpat " +
-                    "felis vizzle orci. Crizzle dope shut the shizzle up in shizznit brizzle " +
-                    "ornare.").setTitle("Help");
+            builder.setMessage("Welcome to KCLexchange! Start off by typing a language or a " +
+                    "friend's name into the search box - or use the options below to view your " +
+                    "profile, see nearby speakers available for exchange, and explore language" +
+                    "resources to help you on your way. Any notifications like upcoming meetings" +
+                    "or chat messages will be displayed on this page, as well as anybody you add" +
+                    "as a quick-contact.").setTitle("Help");
 
             builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {}});

@@ -46,7 +46,8 @@ public class ResourcesActivity extends AppCompatActivity {
         if (id == R.id.action_help) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.setMessage("Tap any of the links to ").setTitle("Help");
+            builder.setMessage("Tap any of the links to go to the website detailed. The website " +
+                    "will open in a new window so you can explore it separate form the exchange").setTitle("Help");
 
             builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {}});

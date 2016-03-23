@@ -159,7 +159,9 @@ public class ProfileOwnActivity extends AppCompatActivity {
         if (id == R.id.action_help) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.setMessage("Explain profile importance. Reiterate CEFR").setTitle("Help");
+            builder.setMessage("So this is your profile. It gives you an idea of how other speakers" +
+                    "see you on KCLexchange, and allows you to edit your details when you tap the" +
+                    "pencil under your picture.").setTitle("Help");
 
             builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {}});
