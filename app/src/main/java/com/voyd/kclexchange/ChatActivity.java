@@ -113,9 +113,9 @@ public class ChatActivity extends AppCompatActivity {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("Combine", CombinedUnique1);
                 params.put("Combine2", CombinedUnique2);
-                params.put("Message", "");
+                params.put("StatusTo", "NotActive");
                 RequestHandler rh = new RequestHandler();
-                String res = rh.SendPostRequest("http://projectrun.x10host.com/MessageSpecificSearch.php", params);
+                String res = rh.SendPostRequest(Config.URL_Msgsearch, params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
             }
@@ -164,7 +164,7 @@ public class ChatActivity extends AppCompatActivity {
                 params.put("Combine2", CombinedUnique2);
                 params.put("Message", "");
                 RequestHandler rh = new RequestHandler();
-                String res = rh.SendPostRequest("http://projectrun.x10host.com/MessageSpecificSearch.php", params);
+                String res = rh.SendPostRequest(Config.URL_Msgsearch, params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
             }
@@ -301,9 +301,8 @@ public class ChatActivity extends AppCompatActivity {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("Combine", CombinedUnique1);
                 params.put("Combine2", CombinedUnique2);
-                params.put("Message", "");
                 RequestHandler rh = new RequestHandler();
-                String res = rh.SendPostRequest("http://projectrun.x10host.com/MessageSpecificSearch.php", params);
+                String res = rh.SendPostRequest(Config.URL_Msgsearch, params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
             }
@@ -345,8 +344,6 @@ public class ChatActivity extends AppCompatActivity {
                 linLayMessages.addView(txtTemp);
                 txtTemp.setPadding(paddingPx, paddingPx,paddingPx,paddingPx);
                 txtInput.setText("");
-
-
                 messagesWhole = "";
                 if(messages!=null){
                     if(messages.length == 60){
@@ -377,7 +374,7 @@ public class ChatActivity extends AppCompatActivity {
                     messagesWhole += ",-,";
                     messagesWhole += msgTemp;
                 }
-                sendMessagesToServer();
+                sendMessagesToServer(messagesWhole);
                 btnSend.setEnabled(true);
                 btnSend.setBackgroundResource(R.drawable.button_rounded);
             }
@@ -395,7 +392,7 @@ public class ChatActivity extends AppCompatActivity {
     /**
      * Method that retrieves previous messages
      */
-    private void sendMessagesToServer() {
+    private void sendMessagesToServer(final String messageWhole) {
         class GetUsers extends AsyncTask<Void, Void, String> {
 
             @Override
@@ -404,8 +401,11 @@ public class ChatActivity extends AppCompatActivity {
                 params.put("Combine", CombinedUnique1);
                 params.put("Combine2", CombinedUnique2);
                 params.put("Message", messagesWhole);
+                params.put("Status", userInformation.getUniqueCode());
+                params.put("StatusTo", otherUnique);
+                params.put("Unread", otherUnique);
                 RequestHandler rh = new RequestHandler();
-                String res = rh.SendPostRequest("http://projectrun.x10host.com/MessageCreate.php", params);
+                String res = rh.SendPostRequest(Config.URL_Msgsubmit, params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
             }
@@ -438,6 +438,7 @@ public class ChatActivity extends AppCompatActivity {
 
         if (id == R.id.action_help) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
 
             builder.setMessage("Here you can chat with a speaker, to exchange or to plan a meeting." +
                     "Although we'd suggest you try to meet in person to get more experience " +
