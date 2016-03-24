@@ -185,7 +185,7 @@ public class SearchActivity extends AppCompatActivity {
 
         //Creates a ImageView for the that users image
         imgProfilePic = new ImageView(this);
-        LinearLayout.LayoutParams lpImageHolder = new LinearLayout.LayoutParams(400, 500);
+        LinearLayout.LayoutParams lpImageHolder = new LinearLayout.LayoutParams(250, 250);
         lpImageHolder.weight = 0.7f;
         imgProfilePic.setLayoutParams(lpImageHolder);
         byte[] decodedString = Base64.decode(Image, 0);
@@ -202,6 +202,7 @@ public class SearchActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         linParamSecond.setMargins(0, 0, 0, 20);
         linLaySecondSearchResultsPerPerson.setLayoutParams(linParamSecond);
+        linLaySecondSearchResultsPerPerson.setPadding(10,10,10,10);
 
         //Creates a LinearLayout to hold the name and the image
         linLayThirdSearchResultsNameImageHolder = new LinearLayout(this);

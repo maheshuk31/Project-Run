@@ -41,7 +41,7 @@ public class MeetingActivity extends AppCompatActivity {
     private String stringCampus, stringTime, stringDate, userBUnique;
     private UserInformation userInformation;
     Toolbar toolbar;
-    TextView txtIntro;
+    TextView txtIntroName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +69,8 @@ public class MeetingActivity extends AppCompatActivity {
         txtSetTime = (EditText) findViewById(R.id.txtSetTime);
         txtSetDate = (EditText) findViewById(R.id.txtSetDate);
         btnSchConfirm = (Button) findViewById(R.id.btnSchConfirm);
-        txtIntro = (TextView) findViewById(R.id.txtIntro);
-        txtIntro.setText(txtIntro.getText().toString()+ " " + userBUnique);
+        txtIntroName = (TextView) findViewById(R.id.txtIntroName);
+        txtIntroName.setText(intent.getExtras().getString("userBname"));
 
 
         txtSetTime.setOnClickListener(new View.OnClickListener() {
@@ -178,6 +178,11 @@ public class MeetingActivity extends AppCompatActivity {
                 RequestHandler rh = new RequestHandler();
                 String res = rh.SendPostRequest(Config.URL_AddMeeting, params);
                 return res;
+            }
+
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                onBackPressed();
             }
         }
         AddMeeting as = new AddMeeting();

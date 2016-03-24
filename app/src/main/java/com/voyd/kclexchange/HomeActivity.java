@@ -196,7 +196,6 @@ public class HomeActivity extends AppCompatActivity {
         //Creates a ImageView of the friend's users image
         imgFriends = new ImageView(this);
         LinearLayout.LayoutParams lpImageHolder = new LinearLayout.LayoutParams(130, 130);
-        lpImageHolder.setMargins(0,4,0,4);
         byte[] decodedString = Base64.decode(image, 0);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         imgFriends.setImageBitmap(decodedByte);
@@ -204,7 +203,7 @@ public class HomeActivity extends AppCompatActivity {
         //Formats the second Linear Layout that will hold the image and text
         linLayTemp.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams linParamTemp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linParamTemp.setMargins(0, 0, 6, 0);
+        linParamTemp.setMargins(0, 0, 6, 6);
         linLayTemp.setLayoutParams(linParamTemp);
         //Instantiate the layout
         linLayFriendsListHolder.addView(linLayTemp);

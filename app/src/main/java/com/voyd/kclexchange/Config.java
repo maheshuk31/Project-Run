@@ -13,6 +13,8 @@ public class Config
     public static final String URL_RetrieveUser = "http://projectrun.x10host.com/RetrieveUser.php";
     public static final String URL_Search = "http://projectrun.x10host.com/Search.php";
     public static final String URL_AddMeeting = "http://projectrun.x10host.com/newMeeting.php";
+    public static final String URL_Msgsearch = "http://projectrun.x10host.com/MessageSpecificSearch.php";
+    public static final String URL_Msgsubmit = "http://projectrun.x10host.com/MessageCreate.php";
 
     // Keys that will be used to send requests to php scripts.
     public static final String Key_ID = "UniqueCode";

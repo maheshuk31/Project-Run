@@ -181,6 +181,7 @@ public class ProfileOtherActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MeetingActivity.class);
         intent.putExtra("userinfo", userInformation);
         intent.putExtra("userB", UniqueCode);
+        intent.putExtra("userBname", Name);
         startActivity(intent);
     }
 

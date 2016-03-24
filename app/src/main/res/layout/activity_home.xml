@@ -127,25 +127,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:id="@+id/scrollView2"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="22dp"
                 android:layout_marginLeft="22dp"
                 android:scrollIndicators="bottom"
                 android:fadeScrollbars="false"
                 android:background="@drawable/bg_rounded"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp">
+                >
 
                 <LinearLayout
                     android:id="@+id/linLayFriends"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:paddingLeft="22dp"
-                    android:paddingRight="22dp">
+                    android:paddingRight="22dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
 
                 </LinearLayout>
             </ScrollView>

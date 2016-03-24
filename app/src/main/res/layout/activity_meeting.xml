@@ -24,21 +24,34 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arrange a meeting"
+            android:text="Arrange a meeting with "
             android:id="@+id/txtIntro"
+            android:layout_gravity="center_horizontal"
+            android:singleLine="true"
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="somebody"
+            android:id="@+id/txtIntroName"
             android:layout_gravity="center_horizontal"
             android:singleLine="true"
             android:textSize="18dp"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginRight="20dp"/>
 
         <Spinner
             android:id="@+id/spinnerCampuses"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"/>
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/bg_sharp"
+            />
 
         <EditText
             android:id="@+id/txtSetTime"
@@ -60,7 +73,8 @@
             android:inputType="date"
             android:background="@drawable/bg_sharp"
             android:padding="6dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="16dp"
+            android:focusableInTouchMode="false"/>
 
         <LinearLayout
             android:id="@+id/scheduleLin2"
