@@ -91,6 +91,17 @@
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:text="Video"
+                    android:id="@+id/btnVideo"
+                    android:layout_weight="3"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_rounded"
+                    android:layout_marginLeft="5dp"
+                    android:onClick="onClickVideo"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:text="Resources"
                     android:id="@+id/button5"
                     android:layout_weight="3"

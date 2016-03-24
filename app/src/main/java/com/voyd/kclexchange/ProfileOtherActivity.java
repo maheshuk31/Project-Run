@@ -185,13 +185,6 @@ public class ProfileOtherActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickVideo(View v){
-        Intent intent = new Intent(getApplicationContext(), SampleActivity.class);
-        intent.putExtra("userinfo", userInformation);
-        intent.putExtra("userB", UniqueCode);
-        startActivity(intent);
-    }
-
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

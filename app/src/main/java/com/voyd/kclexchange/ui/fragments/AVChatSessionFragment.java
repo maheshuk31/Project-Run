@@ -174,7 +174,6 @@ public class AVChatSessionFragment extends BaseFragment implements ParticipantsL
             }
         });
 
-        cameraBttn = (Button) callbar.findViewById(R.id.cameraButton);
 
 
         endOfCall = (Button) callbar.findViewById(R.id.endOfCallButton);
@@ -609,25 +608,7 @@ public class AVChatSessionFragment extends BaseFragment implements ParticipantsL
 
 
     private void updateRouteButtonImage(AudioRoute new_route) {
-        try {
-            Button button = (Button) callbar.findViewById(R.id.audioRoutes);
-            switch (new_route.getRouteId()) {
-                case AudioRoute.Earpiece:
-                    button.setBackgroundResource(R.drawable.earpiece_selector);
-                    break;
-                case AudioRoute.Speaker:
-                    button.setBackgroundResource(R.drawable.speakers_selector);
-                    break;
-                case AudioRoute.Headphone:
-                    button.setBackgroundResource(R.drawable.headphone_selector);
-                    break;
-                case AudioRoute.Bluetooth:
-                    button.setBackgroundResource(R.drawable.bluetooth_selector);
-                    break;
-            }
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
+
 
     }
 

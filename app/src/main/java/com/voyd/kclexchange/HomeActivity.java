@@ -1,6 +1,5 @@
 package com.voyd.kclexchange;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.voyd.kclexchange.ui.SampleActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView txtFriendsName, txtMeeting;
     private Button btnYes, btnNo;
     private ArrayList<String> uniqueCodes;
+    private String CombinedUnique1, CombinedUnique2;
 
     @Override
     public void onRestart() {
@@ -355,7 +357,7 @@ public class HomeActivity extends AppCompatActivity {
         Integer x = Integer.parseInt(Unique.substring(1));
 
         btnYes = new Button(this);
-        btnYes.setText("YES");
+        btnYes.setText("Accept");
         btnYes.setId(x);
         LinearLayout.LayoutParams lpBtnYes = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
         lpBtnYes.weight = 0.2f;
@@ -378,11 +380,16 @@ public class HomeActivity extends AppCompatActivity {
                                     intent.putExtra("profileFname", jo.getString("FirstName"));
                                     intent.putExtra("profileImage", jo.getString("Image"));
                                     intent.putExtra("userinfo", userInformation);
+                                    fillMessageRoom(jo.getString("UniqueCode"));
                                     startActivity(intent);
                                 } else {
                                     Log.d("ButtonUnique", jo.getString("UniqueCode"));
                                     final String s = "1";
                                     UpdateStatus(s, "0", jo.getString("UniqueCode"));
+
+                                    userInformation.setStat("meetings", userInformation.getStat("meetings") + 1);
+                                    userInformation.setStat("points", userInformation.getStat("points") + 10);
+                                    userInformation.updateStudentNoDialog(HomeActivity.this);
 
 
                                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
@@ -400,7 +407,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         btnNo = new Button(this);
-        btnNo.setText("NO");
+        btnNo.setText("Ignore");
         LinearLayout.LayoutParams lpBtnNo = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
         lpBtnNo.weight = 0.2f;
         btnNo.setLayoutParams(lpBtnYes);
@@ -415,22 +422,17 @@ public class HomeActivity extends AppCompatActivity {
                         for (int i = 0; i < profileSearch.length(); i++) {
                             JSONObject jo = profileSearch.getJSONObject(i);
                             String u = jo.getString("UniqueCode");
-                            Integer z = Integer.parseInt(u.substring(1));
                             if (jo.getString("UniqueCode").equals(UniqueCode)) {
-                                if(chatORMeet.equals("has requested to chat")) {
-                                    Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-                                    intent.putExtra("profileUnique", UniqueCode);
-                                    intent.putExtra("profileFname", jo.getString("FirstName"));
-                                    intent.putExtra("profileImage", jo.getString("Image"));
-                                    intent.putExtra("userinfo", userInformation);
-                                    startActivity(intent);
+                                if (chatORMeet.equals("has sent you a message")) {
+                                    Log.d("IAMHERE", jo.getString("FirstName"));
+                                    fillMessageRoom(jo.getString("UniqueCode"));
 
-                                    Intent intent1 = new Intent(getApplicationContext(), HomeActivity.class);
-                                    intent1.putExtra("userinfo", userInformation);
-                                    intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent1);
+                                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                    intent.putExtra("userinfo", userInformation);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
                                 } else {
-                                    UpdateStatus("2", "0",jo.getString("UniqueCode"));
+                                    UpdateStatus("2", "0", jo.getString("UniqueCode"));
 
                                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                                     intent.putExtra("userinfo", userInformation);
@@ -452,6 +454,36 @@ public class HomeActivity extends AppCompatActivity {
         linMeetingHolder.addView(btnNo);
 
 
+    }
+
+    /**
+     * Method that retrieves previous messages
+     */
+    private void fillMessageRoom(final String otherUnique) {
+
+        CombinedUnique1 = otherUnique + userInformation.getUniqueCode();
+        CombinedUnique2 = userInformation.getUniqueCode() + otherUnique;
+        class GetUsers extends AsyncTask<Void, Void, String> {
+
+            @Override
+            protected String doInBackground(Void... v) {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Combine", CombinedUnique1);
+                params.put("Combine2", CombinedUnique2);
+                params.put("StatusTo", "NotActive");
+                RequestHandler rh = new RequestHandler();
+                String res = rh.SendPostRequest(Config.URL_Msgsearch, params);
+                Log.d("AAAA", "doInBackground: " + res);
+                return res;
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+        }
+        GetUsers getUsers = new GetUsers();
+        getUsers.execute();
     }
 
     //----------------------------------------------------------------
@@ -647,6 +679,12 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onClickMap(View view) {
         Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+        intent.putExtra("userinfo", userInformation);
+        startActivity(intent);
+    }
+
+    public void onClickVideo(View v){
+        Intent intent = new Intent(getApplicationContext(), SampleActivity.class);
         intent.putExtra("userinfo", userInformation);
         startActivity(intent);
     }

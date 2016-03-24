@@ -36,8 +36,8 @@ public class MeetingActivity extends AppCompatActivity {
     private Spinner spinnerCampuses;
     private static EditText txtSetTime, txtSetDate;
     private Button btnSchConfirm;
-    private String[] arrayListCampuses = {"Select a Campus", "Strand", "Guys", "Waterloo", "St Thomas",
-            "Denmark Hill", "The Maughan Library", "Franklin-Wilkins Library", "James Clark Maxwell"};
+    private String[] arrayListCampuses = {"Select a Campus", "Video Chat", "Strand", "Guys", "Waterloo",
+            "St Thomas", "Denmark Hill", "The Maughan Library", "Franklin-Wilkins Library", "James Clark Maxwell"};
     private String stringCampus, stringTime, stringDate, userBUnique;
     private UserInformation userInformation;
     Toolbar toolbar;

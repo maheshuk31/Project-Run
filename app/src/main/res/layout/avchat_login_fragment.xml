@@ -117,43 +117,35 @@
 		<Button
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="New Button"
-			android:id="@+id/button"
+			android:text="Room"
+			android:id="@+id/button100"
 			android:layout_row="1"
 			android:layout_column="0" />
 
 		<Button
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="New Button"
-			android:id="@+id/button2"
+			android:text="Room2"
+			android:id="@+id/button101"
 			android:layout_row="1"
 			android:layout_column="1" />
 
-		<TextView
+		<Button
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:text="Medium Text"
-			android:id="@+id/textView"
-			android:layout_row="0"
-			android:layout_column="1" />
+			android:text="Room3"
+			android:id="@+id/button102"
+			android:layout_row="2"
+			android:layout_column="0" />
 
 		<Button
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="New Button"
-			android:id="@+id/button3"
+			android:text="Room4"
+			android:id="@+id/button103"
 			android:layout_row="2"
 			android:layout_column="1" />
 
-		<Button
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="New Button"
-			android:id="@+id/button4"
-			android:layout_row="3"
-			android:layout_column="1" />
 	</GridLayout>
 
 	<LinearLayout

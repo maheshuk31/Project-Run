@@ -162,9 +162,8 @@ public class ChatActivity extends AppCompatActivity {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("Combine", CombinedUnique1);
                 params.put("Combine2", CombinedUnique2);
-                params.put("Message", "");
                 RequestHandler rh = new RequestHandler();
-                String res = rh.SendPostRequest(Config.URL_Msgsearch, params);
+                String res = rh.SendPostRequest(Config.URL_Msgsearch123, params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
             }
@@ -284,6 +283,8 @@ public class ChatActivity extends AppCompatActivity {
             btnSend.setBackgroundResource(R.drawable.button_rounded_inactive);
             txtTemp = new TextView(this);
             fillMessageRoom12();
+            userInformation.setStat("messages", userInformation.getStat("messages") + 1);
+            userInformation.updateStudentNoDialog(ChatActivity.this);
         }
 
 
@@ -302,7 +303,7 @@ public class ChatActivity extends AppCompatActivity {
                 params.put("Combine", CombinedUnique1);
                 params.put("Combine2", CombinedUnique2);
                 RequestHandler rh = new RequestHandler();
-                String res = rh.SendPostRequest(Config.URL_Msgsearch, params);
+                String res = rh.SendPostRequest(Config.URL_Msgsearch123, params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
             }
@@ -403,7 +404,7 @@ public class ChatActivity extends AppCompatActivity {
                 params.put("Message", messagesWhole);
                 params.put("Status", userInformation.getUniqueCode());
                 params.put("StatusTo", otherUnique);
-                params.put("Unread", otherUnique);
+                params.put("Read", otherUnique);
                 RequestHandler rh = new RequestHandler();
                 String res = rh.SendPostRequest(Config.URL_Msgsubmit, params);
                 Log.d("AAAA", "doInBackground: " + res);
@@ -438,7 +439,6 @@ public class ChatActivity extends AppCompatActivity {
 
         if (id == R.id.action_help) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
 
             builder.setMessage("Here you can chat with a speaker, to exchange or to plan a meeting." +
                     "Although we'd suggest you try to meet in person to get more experience " +

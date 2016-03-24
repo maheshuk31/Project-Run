@@ -68,7 +68,7 @@ public class VerificationActivity extends AppCompatActivity {
                         Log.d("ip", ip);
 
                     addStudent();
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),  LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -90,8 +90,6 @@ public class VerificationActivity extends AppCompatActivity {
             }
             /*protected void onPostExecute(String s){
                 super.onPostExecute(s);
-                loading.dismiss();
-                Toast.makeText(VerificationActivity.this, s, Toast.LENGTH_LONG).show();
             }*/
 
             @Override
@@ -111,6 +109,7 @@ public class VerificationActivity extends AppCompatActivity {
                 params.put(Config.Key_GPS, gps);
                 params.put(Config.Key_Password, password);
                 params.put(Config.Key_Friends, "");
+                params.put(Config.Key_Stats, "points,0,meetings,0,messages,0,help,0");
 
                 RequestHandler rh = new RequestHandler();
                 String res = rh.SendPostRequest(Config.URL_AddUser, params);

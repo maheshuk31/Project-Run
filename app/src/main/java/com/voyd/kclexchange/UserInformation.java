@@ -41,6 +41,10 @@ public class UserInformation implements Serializable {
                            String GPS,
                            String Stats, String Ip) {
         this.Stats = Stats;
+        //stats structure:
+        //name index      0          2           4                      6
+        //name          points    meetings    messages                 help
+        //stores         int        int         int       bitmap with 0/1 for each help button
         this.GPS = GPS;
         this.UniqueCode = UniqueCode;
         this.FirstName = FirstName;
@@ -69,9 +73,17 @@ public class UserInformation implements Serializable {
         return UniqueCode;
     }
 
-    public String getStats(){
-        return Stats;
+    public int getStat(String stat){
+        String[] splitStats = Stats.split(",");
+
+        if(stat.equals("points")){ return Integer.parseInt(splitStats[1]);}
+        if(stat.equals("meetings")){ return Integer.parseInt(splitStats[3]);}
+        if(stat.equals("messages")){ return Integer.parseInt(splitStats[5]);}
+        if(stat.equals("help")){ return Integer.parseInt(splitStats[7]);}
+
+        return 0;
     }
+
     public String getImageString(){
         return Image;
     }
@@ -129,7 +141,21 @@ public class UserInformation implements Serializable {
     public void updateAge(String age){
         Age = age;
     }
-    public void updateStats(String Stats){ this.Stats = Stats;}
+
+    public void setStat(String stat, int value){
+        String[] splitStats = Stats.split(",");
+
+        if(stat.equals("points")){ splitStats[1] = Integer.toString(value);}
+        if(stat.equals("meetings")){ splitStats[3] = Integer.toString(value);}
+        if(stat.equals("messages")){ splitStats[5] = Integer.toString(value);}
+        if(stat.equals("help")){ splitStats[7] = Integer.toString(value);}
+
+        Stats = "";
+        for(int i = 0; i<8; i++){
+            Stats += "," + splitStats[i];
+        }
+        Stats = Stats.substring(1);
+    }
     public void updateGender(String gender){
         Gender = gender;
     }
@@ -239,6 +265,46 @@ public class UserInformation implements Serializable {
                 super.onPostExecute(s);
                 if(!activity.isFinishing() && loading != null)
                     loading.dismiss();
+                //Toast.makeText(activity, s, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected String doInBackground(Void... v) {
+
+                HashMap<String, String> params = new HashMap<>();
+                params.put(Config.Key_Name, FirstName);
+                params.put(Config.Key_ID, UniqueCode);
+                params.put(Config.Key_Email, Email);
+                params.put(Config.Key_Age, Age);
+                params.put(Config.Key_LName, LastName);
+                params.put(Config.Key_Gender, Gender);
+                params.put(Config.Key_PersonalInterests, PersonalInterests);
+                params.put(Config.Key_IP, IP);
+                params.put(Config.Key_Image, Image);
+                params.put(Config.Key_Password, password);
+                params.put(Config.Key_Friends, Friends);
+                params.put(Config.Key_TeachingLanguage, TeachingLanguage);
+                params.put(Config.Key_PracticeLanguage, PracticeLanguage);
+                params.put(Config.Key_GPS, GPS);
+                params.put(Config.Key_Stats, Stats);
+
+                RequestHandler rh = new RequestHandler();
+                String res = rh.SendPostRequest(Config.URL_ModifyUser, params);
+                return res;
+            }
+        }
+        updateStudent us = new updateStudent();
+        us.execute();
+    }
+
+    public void updateStudentNoDialog(final Activity activity){
+        class updateStudent extends AsyncTask<Void,Void,String> {
+
+            protected void onPreExecute(){
+                super.onPreExecute();
+            }
+            protected void onPostExecute(String s){
+                super.onPostExecute(s);
                 //Toast.makeText(activity, s, Toast.LENGTH_LONG).show();
             }
 

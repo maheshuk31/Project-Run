@@ -266,8 +266,6 @@ public class RegisterActivity extends AppCompatActivity implements LocationListe
      */
     private void emailSend() {
 
-        //NOTE: verification may be changed to temporary password assignment, so play it loose
-
         stringName = txtName.getText().toString().trim();
         stringEmail = (txtRegisterKingsID.getText().toString().trim())+"@kcl.ac.uk";
         stringCodeHolder = setCodeHolder(4);

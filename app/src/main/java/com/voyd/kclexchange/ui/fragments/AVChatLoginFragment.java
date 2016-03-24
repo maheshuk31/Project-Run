@@ -30,6 +30,7 @@ public class AVChatLoginFragment extends BaseFragment {
 	private EditText sessionIdEditText	= null;
 	private MenuItem settingsMenuItem = null;
 	private VideoPanelPreviewRect previewRect = null;
+	private String Join1, Join2, Join3, Join4;
 
 	public AVChatLoginFragment(){}
 
@@ -60,6 +61,7 @@ public class AVChatLoginFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
 
 		View view = inflater.inflate(R.layout.avchat_login_fragment, container, false);
 		VideoPanel panel = (VideoPanel) view.findViewById(R.id.preview_view);
@@ -110,6 +112,41 @@ public class AVChatLoginFragment extends BaseFragment {
 				join();
 			}
 		});
+		final Button join1 = (Button) view.findViewById(R.id.button100);
+		join1.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+;
+				join1(join1.getText().toString());
+			}
+		});
+		final Button join2 = (Button) view.findViewById(R.id.button101);
+		join2.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				join1(join2.getText().toString());
+			}
+		});
+
+		final Button join3 = (Button) view.findViewById(R.id.button102);
+		join3.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				join1(join3.getText().toString());
+			}
+		});
+
+		final Button join4 = (Button) view.findViewById(R.id.button103);
+		join4.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				join1(join4.getText().toString());
+			}
+		});
 
 		return view;
 	}
@@ -149,6 +186,25 @@ public class AVChatLoginFragment extends BaseFragment {
 	private void join()
 	{
 		String sessionId = sessionIdEditText.getText().toString();
+
+		if (!checkSessionId(sessionId)) {
+			return;
+		}
+
+		InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(sessionIdEditText.getWindowToken(), 0);
+
+		if (!app().isOnline()) {
+			showErrorMessageBox("Network Error", getString(R.string.no_internet));
+			return;
+		}
+
+		app().join(sessionId, false);
+	}
+
+	private void join1(String s)
+	{
+		String sessionId = s;
 
 		if (!checkSessionId(sessionId)) {
 			return;
