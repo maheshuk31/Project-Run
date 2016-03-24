@@ -460,7 +460,16 @@ public class EditProfileActivity extends AppCompatActivity{
         if (id == R.id.action_help) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.setMessage("Explain roughly the levels in the CEFR").setTitle("Help");
+            builder.setMessage("In KCLexchange, your CEFR proficiency level helps you find people " +
+                    "you feel comfortable practicing with, and lets you choose whether you want to " +
+                    "challenge yourself with a higher level exchange, or practice the basics with " +
+                    "a lower one. The Common European Frame of Reference for languages goes like this:\n" +
+                    "A1 - Can understand and use familiar everyday expressions and very basic phrases\n" +
+                    "A2 - Can understand sentences and frequently used expressions\n" +
+                    "B1 - Can understand the main points of clear standard input on familiar matters\n" +
+                    "B2 - Can understand the main ideas of complex text on both concrete and abstract topics\n" +
+                    "C1 - Can understand a wide range of demanding, longer clauses\n" +
+                    "C2 - Can understand with ease virtually everything heard or read").setTitle("Help");
 
             builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {}});

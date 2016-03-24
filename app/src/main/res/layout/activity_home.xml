@@ -120,13 +120,6 @@
                     android:layout_gravity="center"
                     android:gravity="center">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="No notifications right now"
-                        android:id="@+id/textView2"
-                        android:gravity="center_horizontal"/>
-
                 </LinearLayout>
             </ScrollView>
 
@@ -154,12 +147,6 @@
                     android:paddingLeft="22dp"
                     android:paddingRight="22dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="No quick-contacts, you lonely toad"
-                        android:id="@+id/textView4"
-                        android:gravity="center_horizontal"/>
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

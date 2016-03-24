@@ -60,7 +60,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Description of the link and filler and taking up space as well as creating useless words, and all the time not going anywhere"
+                        android:text="See the difficulty, popularity, and uses of every major world language - as well as the culture and travel opportunities they can give"
                         android:id="@+id/textView9"
                         android:textSize="14dp"
                         android:textIsSelectable="false"/>
@@ -107,7 +107,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Description of the link and filler and taking up space as well as creating useless words, and all the time not going anywhere"
+                        android:text="Discover Kings&apos; language modules, which can be taken for a variety of languages for free along with most courses"
                         android:id="@+id/textView8"
                         android:textSize="14dp"
                         android:textIsSelectable="false"/>
@@ -153,7 +153,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Description of the link and filler and taking up space as well as creating useless words, and all the time not going anywhere"
+                        android:text="Find out about Kings&apos; Language Resources Center, which gives language help to any students, at any level"
                         android:id="@+id/textView11"
                         android:textSize="14dp"
                         android:textIsSelectable="false"/>
@@ -199,7 +199,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Description of the link and filler and taking up space as well as creating useless words, and all the time not going anywhere"
+                        android:text="An easy to use learning website and app, which runs through leveled speaking, listening, and writing tasks for major languages"
                         android:id="@+id/textView13"
                         android:textSize="14dp"
                         android:textIsSelectable="false"/>
@@ -245,7 +245,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Description of the link and filler and taking up space as well as creating useless words, and all the time not going anywhere"
+                        android:text="A nice website for general for language resources, including activities, media, news, and starter guides"
                         android:id="@+id/textView15"
                         android:textSize="14dp"
                         android:textIsSelectable="false"/>

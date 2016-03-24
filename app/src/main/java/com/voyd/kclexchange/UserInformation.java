@@ -192,7 +192,11 @@ public class UserInformation implements Serializable {
             }
 
         }
+
         Friends = holder;
+
+        if(Friends.substring(0,1).equals(","))
+            Friends = Friends.substring(1);
     }
 
     public void updateGPS(String GPS){

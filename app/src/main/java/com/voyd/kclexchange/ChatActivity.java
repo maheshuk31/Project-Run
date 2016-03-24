@@ -3,6 +3,7 @@ package com.voyd.kclexchange;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,8 @@ public class ChatActivity extends AppCompatActivity {
     TextView txtTemp;
     String CurrentMessage;
     Button btnSend;
+    String otherName;
+    String Name;
 
     private UserInformation userInformation;
 
@@ -61,6 +64,8 @@ public class ChatActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userInformation = (UserInformation) intent.getSerializableExtra("userinfo");
         otherUnique = intent.getExtras().getString("profileUnique");
+        otherName = intent.getExtras().getString("profileFname");
+        Name = userInformation.getFirstName();
 
         CombinedUnique1 = otherUnique + userInformation.getUniqueCode();
         CombinedUnique2 = userInformation.getUniqueCode() + otherUnique;
@@ -78,7 +83,8 @@ public class ChatActivity extends AppCompatActivity {
                             public void run() {
 
                                 if (linLayMessages.getChildCount() != 0) {
-                                    fillMessageRoom();
+                                    if(btnSend.isEnabled())
+                                        fillMessageRoom();
                                 } else {
                                     defaultfill();
                                 }
@@ -109,7 +115,7 @@ public class ChatActivity extends AppCompatActivity {
                 params.put("Combine2", CombinedUnique2);
                 params.put("Message", "");
                 RequestHandler rh = new RequestHandler();
-                String res = rh.SendPostRequest("http://projectrun02.x10host.com/MessageSpecificSearch.php", params);
+                String res = rh.SendPostRequest("http://projectrun.x10host.com/MessageSpecificSearch.php", params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
             }
@@ -158,7 +164,7 @@ public class ChatActivity extends AppCompatActivity {
                 params.put("Combine2", CombinedUnique2);
                 params.put("Message", "");
                 RequestHandler rh = new RequestHandler();
-                String res = rh.SendPostRequest("http://projectrun02.x10host.com/MessageSpecificSearch.php", params);
+                String res = rh.SendPostRequest("http://projectrun.x10host.com/MessageSpecificSearch.php", params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
             }
@@ -217,8 +223,27 @@ public class ChatActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
                 params.weight = 1.0f;
                 params.gravity = Gravity.RIGHT;
+                params.setMargins(40, 4, 10, 4);
+
+                int paddingDP = 10;
+                float density = getApplicationContext().getResources().getDisplayMetrics().density;
+                int paddingPx = (int)(paddingDP * density);
+
+                TextView txtTempName = new TextView(getApplicationContext());
+                LinearLayout.LayoutParams paramsName = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
+                paramsName.weight = 1.0f;
+                paramsName.gravity = Gravity.RIGHT;
+                txtTempName.setText(Name);
+                txtTempName.setTextColor(Color.DKGRAY);
+                txtTempName.setLayoutParams(paramsName);
+                linLayMessages.addView(txtTempName);
+
+                txtTemp.setBackgroundResource(R.drawable.bg_rounded);
+                txtTemp.setTextSize(18);
                 txtTemp.setLayoutParams(params);
+                txtTemp.setGravity(Gravity.RIGHT);
                 linLayMessages.addView(txtTemp);
+                txtTemp.setPadding(paddingPx, paddingPx, paddingPx, paddingPx);
             } else {
                 String msgTemp = messages[i+1];
                 TextView txtTemp = new TextView(this);
@@ -226,8 +251,26 @@ public class ChatActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
                 params.weight = 1.0f;
                 params.gravity = Gravity.LEFT;
+                params.setMargins(10,4,40,4);
+
+                int paddingDP = 10;
+                float density = getApplicationContext().getResources().getDisplayMetrics().density;
+                int paddingPx = (int)(paddingDP * density);
+
+                TextView txtTempName = new TextView(getApplicationContext());
+                LinearLayout.LayoutParams paramsName = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
+                paramsName.weight = 1.0f;
+                paramsName.gravity = Gravity.LEFT;
+                txtTempName.setText(otherName);
+                txtTempName.setTextColor(Color.DKGRAY);
+                txtTempName.setLayoutParams(paramsName);
+                linLayMessages.addView(txtTempName);
+
+                txtTemp.setBackgroundResource(R.drawable.bg_rounded);
+                txtTemp.setTextSize(18);
                 txtTemp.setLayoutParams(params);
                 linLayMessages.addView(txtTemp);
+                txtTemp.setPadding(paddingPx, paddingPx, paddingPx, paddingPx);
             }
 
             i++;
@@ -260,7 +303,7 @@ public class ChatActivity extends AppCompatActivity {
                 params.put("Combine2", CombinedUnique2);
                 params.put("Message", "");
                 RequestHandler rh = new RequestHandler();
-                String res = rh.SendPostRequest("http://projectrun02.x10host.com/MessageSpecificSearch.php", params);
+                String res = rh.SendPostRequest("http://projectrun.x10host.com/MessageSpecificSearch.php", params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
             }
@@ -279,9 +322,30 @@ public class ChatActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
                 params.weight = 1.0f;
                 params.gravity = Gravity.RIGHT;
+                params.setMargins(40, 4, 10, 4);
+
+                int paddingDP = 10;
+                float density = getApplicationContext().getResources().getDisplayMetrics().density;
+                int paddingPx = (int)(paddingDP * density);
+
+                txtTemp.setBackgroundResource(R.drawable.bg_rounded);
+                txtTemp.setTextSize(18);
                 txtTemp.setLayoutParams(params);
+                txtTemp.setGravity(Gravity.RIGHT);
+
+                TextView txtTempName = new TextView(getApplicationContext());
+                LinearLayout.LayoutParams paramsName = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
+                paramsName.weight = 1.0f;
+                paramsName.gravity = Gravity.RIGHT;
+                txtTempName.setText(Name);
+                txtTempName.setTextColor(Color.DKGRAY);
+                txtTempName.setLayoutParams(paramsName);
+                linLayMessages.addView(txtTempName);
+
                 linLayMessages.addView(txtTemp);
+                txtTemp.setPadding(paddingPx, paddingPx,paddingPx,paddingPx);
                 txtInput.setText("");
+
 
                 messagesWhole = "";
                 if(messages!=null){
@@ -341,7 +405,7 @@ public class ChatActivity extends AppCompatActivity {
                 params.put("Combine2", CombinedUnique2);
                 params.put("Message", messagesWhole);
                 RequestHandler rh = new RequestHandler();
-                String res = rh.SendPostRequest("http://projectrun02.x10host.com/MessageCreate.php", params);
+                String res = rh.SendPostRequest("http://projectrun.x10host.com/MessageCreate.php", params);
                 Log.d("AAAA", "doInBackground: " + res);
                 return res;
             }
@@ -375,7 +439,9 @@ public class ChatActivity extends AppCompatActivity {
         if (id == R.id.action_help) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.setMessage("Explain chat").setTitle("Help");
+            builder.setMessage("Here you can chat with a speaker, to exchange or to plan a meeting." +
+                    "Although we'd suggest you try to meet in person to get more experience " +
+                    "understanding a variety of accents, genders, and dialects of speech.").setTitle("Help");
 
             builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {}});

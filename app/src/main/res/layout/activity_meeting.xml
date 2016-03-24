@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.lee.projectrun.ScheduleMeetingActivity"
-    tools:showIn="@layout/activity_meeting">
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/toolbar"/>
+
 
     <LinearLayout
         android:id="@+id/scheduleLin1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="22dp"
+        android:paddingRight="22dp"
+        android:paddingTop="22dp">
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arrange a meeting"
+            android:id="@+id/txtIntro"
+            android:layout_gravity="center_horizontal"
+            android:singleLine="true"
+            android:textSize="18dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"/>
 
         <Spinner
             android:id="@+id/spinnerCampuses"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"/>
 
         <EditText
             android:id="@+id/txtSetTime"
@@ -26,36 +46,38 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="time"
-            android:hint="Choose your time"/>
+            android:hint="Choose your time"
+            android:background="@drawable/bg_sharp"
+            android:padding="6dp"
+            android:layout_marginBottom="6dp"/>
 
         <EditText
             android:id="@+id/txtSetDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Choose your date"
             android:inputType="date"
-            android:hint="Choose your date"/>
+            android:background="@drawable/bg_sharp"
+            android:padding="6dp"
+            android:layout_marginBottom="10dp"/>
 
         <LinearLayout
             android:id="@+id/scheduleLin2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            >
+            android:gravity="center_horizontal">
 
             <Button
                 android:id="@+id/btnSchConfirm"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Confirm" />
+                android:layout_height="40dp"
+                android:text="Confirm"
+                android:background="@drawable/button_rounded"/>
 
-            <Button
-                android:id="@+id/btnSchCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cancel" />
         </LinearLayout>
 
 
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

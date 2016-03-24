@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -77,11 +78,16 @@ public class HomeActivity extends AppCompatActivity {
      * Goes through each of the users friends list and displays them
      */
     private void searchFriends(){
-        if(userInformation.getFriends()!=null) {
+        if(userInformation.getFriends()[0]!="") {
             String[] string = userInformation.getFriends();
             for (int x = 0; x < userInformation.getFriends().length; x++) {
                 search(string[x], x);
             }
+        } else {
+            TextView txtEmpty = new TextView(this);
+            txtEmpty.setText("No quick-contacts added");
+            txtEmpty.setGravity(Gravity.CENTER_HORIZONTAL);
+            linLayFriendsListHolder.addView(txtEmpty);
         }
     }
     /**
@@ -189,7 +195,8 @@ public class HomeActivity extends AppCompatActivity {
         txtFriendsName.setLayoutParams(lptxtName);
         //Creates a ImageView of the friend's users image
         imgFriends = new ImageView(this);
-        LinearLayout.LayoutParams lpImageHolder = new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpImageHolder = new LinearLayout.LayoutParams(130, 130);
+        lpImageHolder.setMargins(0,4,0,4);
         byte[] decodedString = Base64.decode(image, 0);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         imgFriends.setImageBitmap(decodedByte);
@@ -197,7 +204,7 @@ public class HomeActivity extends AppCompatActivity {
         //Formats the second Linear Layout that will hold the image and text
         linLayTemp.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams linParamTemp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linParamTemp.setMargins(0,0,6,0);
+        linParamTemp.setMargins(0, 0, 6, 0);
         linLayTemp.setLayoutParams(linParamTemp);
         //Instantiate the layout
         linLayFriendsListHolder.addView(linLayTemp);
@@ -220,13 +227,12 @@ public class HomeActivity extends AppCompatActivity {
         if (id == R.id.action_help) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.setMessage("Curabitizzle et diam quizzle nisi pot my shizz. Suspendisse " +
-                    "potenti. Morbi odio. Pot neque. Bizzle orci. Yippiyo maurizzle crazy, " +
-                    "interdizzle a, check out this sit amizzle, cool izzle, i'm in the shizzle. " +
-                    "Pellentesque gravida. Vestibulizzle cool mi, shizznit crackalackin, go to " +
-                    "hizzle sizzle, things sempizzle, velit. Cras izzle ipsizzle. Sure volutpat " +
-                    "felis vizzle orci. Crizzle dope shut the shizzle up in shizznit brizzle " +
-                    "ornare.").setTitle("Help");
+            builder.setMessage("Welcome to KCLexchange! Start off by typing a language or a " +
+                    "friend's name into the search box - or use the options below to view your " +
+                    "profile, see nearby speakers available for exchange, and explore language" +
+                    "resources to help you on your way. Any notifications like upcoming meetings" +
+                    "or chat messages will be displayed on this page, as well as anybody you add" +
+                    "as a quick-contact.").setTitle("Help");
 
             builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {}});
@@ -269,5 +275,24 @@ public class HomeActivity extends AppCompatActivity {
         intent.putExtra("stringSearch", stringSearch);
         intent.putExtra("userinfo", userInformation);
         startActivity(intent);
+
+        TextView txtMeeting = new TextView(this);
+        txtMeeting.setText("beef");
+        txtMeeting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            this.finishAffinity();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 }

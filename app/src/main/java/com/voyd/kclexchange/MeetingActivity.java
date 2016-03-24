@@ -4,20 +4,29 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -26,16 +35,26 @@ public class MeetingActivity extends AppCompatActivity {
 
     private Spinner spinnerCampuses;
     private static EditText txtSetTime, txtSetDate;
-    private Button btnSchConfirm, btnSchCancel;
+    private Button btnSchConfirm;
     private String[] arrayListCampuses = {"Select a Campus", "Strand", "Guys", "Waterloo", "St Thomas",
             "Denmark Hill", "The Maughan Library", "Franklin-Wilkins Library", "James Clark Maxwell"};
     private String stringCampus, stringTime, stringDate, userBUnique;
     private UserInformation userInformation;
+    Toolbar toolbar;
+    TextView txtIntro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting);
+
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.back);
+        TextView barTitle = (TextView) findViewById(R.id.bar_title);
+        barTitle.setText("Arrange Meeting");
 
         Intent intent = getIntent();
         userInformation = (UserInformation)intent.getSerializableExtra("userinfo");
@@ -50,7 +69,9 @@ public class MeetingActivity extends AppCompatActivity {
         txtSetTime = (EditText) findViewById(R.id.txtSetTime);
         txtSetDate = (EditText) findViewById(R.id.txtSetDate);
         btnSchConfirm = (Button) findViewById(R.id.btnSchConfirm);
-        btnSchCancel = (Button) findViewById(R.id.btnSchCancel);
+        txtIntro = (TextView) findViewById(R.id.txtIntro);
+        txtIntro.setText(txtIntro.getText().toString()+ " " + userBUnique);
+
 
         txtSetTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,13 +109,6 @@ public class MeetingActivity extends AppCompatActivity {
 
 
                 }
-            }
-        });
-
-        btnSchCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
     }
@@ -170,8 +184,38 @@ public class MeetingActivity extends AppCompatActivity {
         as.execute();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_help, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
+        if (id == R.id.action_help) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+            builder.setMessage("Use this page to propose meetings to other speakers on campuses." +
+                    "Try to talk to people first to see when they're available.").setTitle("Help");
 
+            builder.setPositiveButton("Got it", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {}});
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            TextView textDialog = (TextView)dialog.findViewById(android.R.id.message);
+            textDialog.setGravity(Gravity.CENTER);
+
+            return true;
+        }
+
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
